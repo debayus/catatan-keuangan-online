@@ -8,7 +8,7 @@
 PRODUCT_NAME = catatan_keuangan_online
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.mahas.catatankeuanganonline.catatanKeuanganOnline
+PRODUCT_BUNDLE_IDENTIFIER = com.mahas.catatankeuanganonline
 
 // The copyright displayed in application information
 PRODUCT_COPYRIGHT = Copyright © 2022 com.mahas.catatankeuanganonline. All rights reserved.

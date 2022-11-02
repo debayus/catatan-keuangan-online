@@ -10,6 +10,11 @@ dependencies:
   get: 4.6.5
   flutter: 
     sdk: flutter
+  firebase_core: ^2.1.1
+  firebase_auth: ^4.1.0
+  google_sign_in: ^5.4.2
+  sign_in_with_apple: ^4.1.0
+  crypto: ^3.0.2
 
 dev_dependencies: 
   flutter_lints: 2.0.1

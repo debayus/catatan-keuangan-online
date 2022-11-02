@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import '../../../controllers/auth_controller.dart';
 
-class HomeController extends GetxController {
+class LoginController extends GetxController {
   var authCon = Get.find<AuthController>();
 }
