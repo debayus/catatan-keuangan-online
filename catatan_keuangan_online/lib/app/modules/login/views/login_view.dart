@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/login_controller.dart';
@@ -18,9 +20,12 @@ class LoginView extends GetView<LoginController> {
               onPressed: controller.authCon.signInWithGoogle,
               child: const Text("Google Login"),
             ),
-            ElevatedButton(
-              onPressed: controller.authCon.signInWithApple,
-              child: const Text("Apple Login"),
+            Visibility(
+              visible: Platform.isIOS,
+              child: ElevatedButton(
+                onPressed: controller.authCon.signInWithApple,
+                child: const Text("Apple Login"),
+              ),
             ),
           ],
         ),
