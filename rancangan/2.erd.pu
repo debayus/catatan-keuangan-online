@@ -3,20 +3,21 @@
 hide circle
 skinparam linetype ortho
 
-entity "User" as user {
+entity "user" as user {
     *id : int <<auto>>
     --
     id_firebase : varchar(200)
     nama : varchar(100)
+    email : varchar(100)
 }
 
-entity "Perusahaan" as perusahaan {
+entity "perusahaan" as perusahaan {
     *id : int <<auto>>
     --
-    *id_user : int <<FK>>
+    id_user : int <<FK>>
 }
 
-entity "PerusahaanUser" as perusahaanUser {
+entity "perusahaan_user" as perusahaan_user {
     *id : int <<auto>>
     --
     id_perusahaan : int <<FK>>
@@ -25,58 +26,39 @@ entity "PerusahaanUser" as perusahaanUser {
     super_user : bool
 }
 
-entity "Rekening" as rekening {
+entity "rekening" as rekening {
     *id : int <<auto>>
     --
     id_perusahaan : int <<FK>>
     nama : varchar(100)
     icon : varchar(100)
-    saldo : decimal(15,2)
+    saldo : decimal(19, 4)
 }
 
-entity "JenisPengeluaran" as jenisPengeluaran {
+entity "jenis_pengeluaran_pemasukan" as jenis_pengeluaran_pemasukan {
     *id : int <<auto>>
     --
     id_perusahaan : int <<FK>>
     nama : varchar(100)
     icon : varchar(100)
+    pengeluaran : bool
 }
 
-entity "JenisPemasukan" as jenisPemasukan {
-    *id : int <<auto>>
-    --
-    id_perusahaan : int <<FK>>
-    nama : varchar(100)
-    icon : varchar(100)
-}
-
-entity "Pengeluaran" as pengeluaran {
+entity "pengeluaran_pemasukan" as pengeluaran_pemasukan {
     *id : int <<auto>>
     --
     id_perusahaan : int <<FK>>
     id_user_create : int <<FK>>
     id_perusahaan_user : int <<FK>>
-    id_jenis_pengeluaran : int <<FK>>
+    id_jenis_pengeluaran_pemasukan : int <<FK>>
     id_rekening : int <<FK>>
     tanggal : datetime
-    nilai : decimal(15,2)
+    nilai : decimal(19, 4)
     catatan : varchar(500)
+    pengeluaran : bool
 }
 
-entity "Pemasukan" as pemasukan {
-    *id : int <<auto>>
-    --
-    id_perusahaan : int <<FK>>
-    id_user_create : int <<FK>>
-    id_perusahaan_user : int <<FK>>
-    id_jenis_pemasukan : int <<FK>>
-    id_rekening : int <<FK>>
-    tanggal : datetime
-    nilai : decimal(15,2)
-    catatan : varchar(500)
-}
-
-entity "HutangPiutang" as hutangPiutang {
+entity "hutang_piutang" as hutang_piutang {
     *id : int <<auto>>
     --
     id_perusahaan : int <<FK>>
@@ -84,12 +66,12 @@ entity "HutangPiutang" as hutangPiutang {
     id_rekening : int <<FK>>
     tanggal : datetime
     tanggal_tempo : datetime
-    nilai : decimal(15,2)
+    nilai : decimal(19, 4)
     catatan : varchar(500)
     hitang : bool
 }
 
-entity "HutangPiutangPembayaran" as hutangPiutangPembayaran {
+entity "hutang_piutang_pembayaran" as hutang_piutang_pembayaran {
     *id : int <<auto>>
     --
     id_perusahaan : int <<FK>>
@@ -97,32 +79,28 @@ entity "HutangPiutangPembayaran" as hutangPiutangPembayaran {
     id_user_create : int <<FK>>
     id_rekening : int <<FK>>
     tanggal : datetime
-    nilai : decimal(15,2)
+    nilai : decimal(19, 4)
     catatan : varchar(500)
+    hitang : bool
 }
 
 user ||--o| perusahaan
-perusahaanUser }o--|| perusahaan
-perusahaanUser |o--|| user
+perusahaan_user }o--|| perusahaan
+perusahaan_user |o--|| user
 rekening }o--|| perusahaan
-jenisPengeluaran }o--|| perusahaan
-jenisPemasukan }o--|| perusahaan
-pengeluaran }o--|| perusahaan
-pengeluaran }o--|| user
-pengeluaran }o--|| user
-pengeluaran }o--|| jenisPengeluaran
-pengeluaran }o--|| rekening
-pemasukan }o--|| perusahaan
-pemasukan }o--|| user
-pemasukan }o--|| user
-pemasukan }o--|| jenisPemasukan
-pemasukan }o--|| rekening
-hutangPiutang }o--|| perusahaan
-hutangPiutang }o--|| user
-hutangPiutang }o--|| rekening
-hutangPiutangPembayaran }o--|| perusahaan
-hutangPiutangPembayaran }o--|| hutangPiutang
-hutangPiutangPembayaran }o--|| user
-hutangPiutangPembayaran }o--|| rekening
+jenis_pengeluaran_pemasukan }o--|| perusahaan
+jenis_pengeluaran_pemasukan }o--|| perusahaan
+pengeluaran_pemasukan }o--|| perusahaan
+pengeluaran_pemasukan }o--|| user
+pengeluaran_pemasukan }o--|| user
+pengeluaran_pemasukan }o--|| jenis_pengeluaran_pemasukan
+pengeluaran_pemasukan }o--|| rekening
+hutang_piutang }o--|| perusahaan
+hutang_piutang }o--|| user
+hutang_piutang }o--|| rekening
+hutang_piutang_pembayaran }o--|| perusahaan
+hutang_piutang_pembayaran }o--|| hutang_piutang
+hutang_piutang_pembayaran }o--|| user
+hutang_piutang_pembayaran }o--|| rekening
 
 @enduml
