@@ -36,6 +36,6 @@ class AuthController extends Controller
 
             DB::commit();
         }
-        return response()->json(['success' => 'success'], 200);
+        return response()->json(['success' => true], 200);
     }
 }
