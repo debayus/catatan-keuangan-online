@@ -32,14 +32,19 @@ class FirebaseAuth
             if (!empty($user)){
                 $perusahaan = Perusahaan::where('id_user', '=', $user->id)->first();
                 if (empty($perusahaan)){
-                    $perusahaanUser = PerusahaanUser::where(function ($query) use($firebase_user) {
-                        $query
-                        ->where('id_user', '=', $firebase_user->uid)
-                        ->orWhere('email', '=', $firebase_user->email);
-                    })->first();
-                    if (empty($perusahaan)){
-                        $perusahaan = Perusahaan::find($perusahaanUser->id_perusahaan);
+                    $perusahaanUser = PerusahaanUser::where('id_user', '=', $firebase_user->uid)->first();
+                    if (empty($perusahaanUser)){
+                        $perusahaanUser = PerusahaanUser::where('email', '=', $firebase_user->email)->first();
+                        if(!empty($perusahaanUser)){
+                            $perusahaanUser->id_user = $user->id;
+                        }
                     }
+                    if (empty($perusahaanUser)){
+                        $perusahaan = Perusahaan::find($perusahaanUser->id_perusahaan);
+                        $request->perusahaan = $perusahaanUser->super_user;
+                    }
+                }else{
+                    $request->super_user = true;
                 }
                 $request->perusahaan = $perusahaan;
             }

@@ -21,6 +21,7 @@ Route::group(['middleware' => ['firebase.auth']], function(){
 
     Route::get('/auth', [AuthController::class, 'index']);
     Route::post('/auth', [AuthController::class, 'store']);
+    Route::delete('/auth', [AuthController::class, 'destroy']);
 
 });
 

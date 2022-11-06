@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Perusahaan;
+use App\Models\PerusahaanUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -12,7 +13,9 @@ class AuthController extends Controller
     public function index(Request $request)
     {
         return response()->json([
-            'perusahaan' => $request->perusahaan
+            'perusahaan' => $request->perusahaan->nama,
+            'nama' => $request->user->nama,
+            'super_user' => $request->super_user
         ]);
     }
 
@@ -36,6 +39,37 @@ class AuthController extends Controller
 
             DB::commit();
         }
+        return response()->json(['success' => true], 200);
+    }
+
+    public function destroy(Request $request)
+    {
+        DB::beginTransaction();
+
+        if (empty($request->perusahaan)){
+            if ($request->perusahaan->id_user == $request->user->id){
+
+                // all delete perusahaanUsers
+                PerusahaanUser::where('id_perusahaan', '=', $request->perusahaan->id)->delete();
+
+            }else{
+
+                // delete perusahaanUser
+                PerusahaanUser::where('id_perusahaan', '=', $request->perusahaan->id)
+                ->where('id_user', '=', $request->user->id)
+                ->delete();
+
+            }
+        }
+
+        // update user
+        $user = User::find($request->user->id);
+        $user->email = null;
+        $user->id_firebase = null;
+        $user->save();
+
+        DB::commit();
+
         return response()->json(['success' => true], 200);
     }
 }
