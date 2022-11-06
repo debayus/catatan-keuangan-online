@@ -1,0 +1,31 @@
+@startuml cko
+
+left to right direction
+skinparam packageStyle rectangle
+
+actor "User" as ac1
+
+rectangle "Catatan Keuangan Online" {
+
+  ' usecase 
+  usecase "Mendaftar" as todo1
+  usecase "Mengelola User" as todo2
+  usecase "Mengelola Kas" as todo3
+  usecase "Mencatat Pengeluaran" as todo4
+  usecase "Mencatat Pemasukan" as todo5
+  usecase "Mencatat Hutang" as todo6
+  usecase "Mencatat Piutang" as todo7
+  usecase "Melihat Laporan" as todo8
+  
+  ' action
+  ac1 -- todo1
+  ac1 -- todo2
+  ac1 -- todo3
+  ac1 -- todo4
+  ac1 -- todo5
+  ac1 -- todo6
+  ac1 -- todo7
+  ac1 -- todo8
+}
+
+@enduml

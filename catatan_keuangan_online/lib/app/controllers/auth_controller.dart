@@ -1,43 +1,53 @@
 import 'dart:convert';
 import 'dart:math';
+import 'package:catatan_keuangan_online/app/mahas/mahas_config.dart';
 import 'package:catatan_keuangan_online/app/routes/app_pages.dart';
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
-import '../../main.dart';
+import '../mahas/services/mahas_service.dart';
 
 class AuthController extends GetxController {
+  final googleSign = GoogleSignIn();
   static AuthController instance = Get.find();
   late Rx<User?> firebaseUser;
-  late Rx<GoogleSignInAccount?> googleSignInAccount;
 
   @override
   void onReady() {
     super.onReady();
     firebaseUser = Rx<User?>(auth.currentUser);
-    googleSignInAccount = Rx<GoogleSignInAccount?>(googleSign.currentUser);
-    firebaseUser.bindStream(auth.userChanges());
+    firebaseUser.bindStream(auth.authStateChanges());
     ever(firebaseUser, _setInitialScreen);
-    googleSignInAccount.bindStream(googleSign.onCurrentUserChanged);
-    ever(googleSignInAccount, _setInitialScreenGoogle);
   }
 
-  _setInitialScreen(User? user) {
+  void _setInitialScreen(User? user) {
     if (user == null) {
-      Get.offAllNamed(Routes.LOGIN);
-    } else if (Get.currentRoute != Routes.HOME) {
-      Get.offAllNamed(Routes.HOME);
+      _toLigin();
+    } else {
+      _toHome();
     }
   }
 
-  _setInitialScreenGoogle(GoogleSignInAccount? googleSignInAccount) {
-    if (googleSignInAccount == null) {
-      Get.offAllNamed(Routes.LOGIN);
-    } else if (Get.currentRoute != Routes.HOME) {
-      Get.offAllNamed(Routes.HOME);
-    }
+  void _toLigin() {
+    Get.offAllNamed(Routes.LOGIN);
+    MahasConfig.profile = null;
+  }
+
+  void _toHome() async {
+    Get.offAllNamed(Routes.REGISTER);
+    // var r = await HttpApi.get('/api/profile');
+    // if (r.success) {
+    //   MahasConfig.profile = ProfileModel.fromJson(r.body);
+    //   if (Get.currentRoute != Routes.HOME) {
+    //     Get.offAllNamed(Routes.HOME);
+    //   }
+    // } else {
+    //   if (Get.currentRoute != Routes.ERROR) {
+    //     Get.offAllNamed(Routes.ERROR);
+    //   }
+    // }
   }
 
   void signInWithGoogle() async {
@@ -75,7 +85,7 @@ class AuthController extends GetxController {
     return digest.toString();
   }
 
-  void signInWithApple() async {
+  Future signInWithApple() async {
     try {
       final rawNonce = _generateNonce();
       final nonce = _sha256ofString(rawNonce);

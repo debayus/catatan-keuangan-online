@@ -17,6 +17,7 @@ dependencies:
   crypto: ^3.0.2
   firebase_remote_config: ^3.0.3
   firebase_analytics: ^10.0.3
+  http: ^0.13.5
 
 dev_dependencies: 
   flutter_lints: 2.0.1

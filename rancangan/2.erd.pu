@@ -1,0 +1,128 @@
+@startuml sample
+
+hide circle
+skinparam linetype ortho
+
+entity "User" as user {
+    *id : int <<auto>>
+    --
+    id_firebase : varchar(200)
+    nama : varchar(100)
+}
+
+entity "Perusahaan" as perusahaan {
+    *id : int <<auto>>
+    --
+    *id_user : int <<FK>>
+}
+
+entity "PerusahaanUser" as perusahaanUser {
+    *id : int <<auto>>
+    --
+    id_perusahaan : int <<FK>>
+    id_user : int : NULL
+    email : varchar(200) : NULL
+    super_user : bool
+}
+
+entity "Rekening" as rekening {
+    *id : int <<auto>>
+    --
+    id_perusahaan : int <<FK>>
+    nama : varchar(100)
+    icon : varchar(100)
+    saldo : decimal(15,2)
+}
+
+entity "JenisPengeluaran" as jenisPengeluaran {
+    *id : int <<auto>>
+    --
+    id_perusahaan : int <<FK>>
+    nama : varchar(100)
+    icon : varchar(100)
+}
+
+entity "JenisPemasukan" as jenisPemasukan {
+    *id : int <<auto>>
+    --
+    id_perusahaan : int <<FK>>
+    nama : varchar(100)
+    icon : varchar(100)
+}
+
+entity "Pengeluaran" as pengeluaran {
+    *id : int <<auto>>
+    --
+    id_perusahaan : int <<FK>>
+    id_user_create : int <<FK>>
+    id_perusahaan_user : int <<FK>>
+    id_jenis_pengeluaran : int <<FK>>
+    id_rekening : int <<FK>>
+    tanggal : datetime
+    nilai : decimal(15,2)
+    catatan : varchar(500)
+}
+
+entity "Pemasukan" as pemasukan {
+    *id : int <<auto>>
+    --
+    id_perusahaan : int <<FK>>
+    id_user_create : int <<FK>>
+    id_perusahaan_user : int <<FK>>
+    id_jenis_pemasukan : int <<FK>>
+    id_rekening : int <<FK>>
+    tanggal : datetime
+    nilai : decimal(15,2)
+    catatan : varchar(500)
+}
+
+entity "HutangPiutang" as hutangPiutang {
+    *id : int <<auto>>
+    --
+    id_perusahaan : int <<FK>>
+    id_user_create : int <<FK>>
+    id_rekening : int <<FK>>
+    tanggal : datetime
+    tanggal_tempo : datetime
+    nilai : decimal(15,2)
+    catatan : varchar(500)
+    hitang : bool
+}
+
+entity "HutangPiutangPembayaran" as hutangPiutangPembayaran {
+    *id : int <<auto>>
+    --
+    id_perusahaan : int <<FK>>
+    id_hutang_piutang : int <<FK>>
+    id_user_create : int <<FK>>
+    id_rekening : int <<FK>>
+    tanggal : datetime
+    nilai : decimal(15,2)
+    catatan : varchar(500)
+}
+
+user ||--o| perusahaan
+perusahaanUser }o--|| perusahaan
+perusahaanUser |o--|| user
+rekening }o--|| perusahaan
+jenisPengeluaran }o--|| perusahaan
+jenisPemasukan }o--|| perusahaan
+pengeluaran }o--|| perusahaan
+pengeluaran }o--|| user
+pengeluaran }o--|| user
+pengeluaran }o--|| jenisPengeluaran
+pengeluaran }o--|| rekening
+pemasukan }o--|| perusahaan
+pemasukan }o--|| user
+pemasukan }o--|| user
+pemasukan }o--|| jenisPemasukan
+pemasukan }o--|| rekening
+hutangPiutang }o--|| perusahaan
+hutangPiutang }o--|| user
+hutangPiutang }o--|| rekening
+hutangPiutangPembayaran }o--|| perusahaan
+hutangPiutangPembayaran }o--|| hutangPiutang
+hutangPiutangPembayaran }o--|| user
+hutangPiutangPembayaran }o--|| rekening
+
+@enduml
