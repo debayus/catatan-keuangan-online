@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TestController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +18,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['firebase.auth']], function(){
     Route::get('/test', [TestController::class, 'index']);
+
+    Route::get('/auth', [AuthController::class, 'index']);
+    Route::post('/auth', [AuthController::class, 'store']);
+
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
