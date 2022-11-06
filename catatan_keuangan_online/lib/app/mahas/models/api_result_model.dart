@@ -12,6 +12,13 @@ class ApiResultModel {
         message = "Internal Server Error";
       } else if (body is String) {
         message = body;
+        if (message!.indexOf('<!DOCTYPE html>') == 0) {
+          var start = message!.indexOf('<title>') + '<title>'.length;
+          var end = message!.indexOf('</title>');
+          message = message!.substring(start, end);
+        } else {}
+      } else {
+        message = body.toString();
       }
     }
   }

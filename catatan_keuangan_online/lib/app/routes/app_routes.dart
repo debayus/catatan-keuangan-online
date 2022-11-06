@@ -13,6 +13,7 @@ abstract class Routes {
   static const GRAFIK = _Paths.GRAFIK;
   static const HUTANG_PIUTANG = _Paths.HUTANG_PIUTANG;
   static const PENGATURAN = _Paths.PENGATURAN;
+  static const SPLASH_SCREEN = _Paths.SPLASH_SCREEN;
 }
 
 abstract class _Paths {
@@ -25,4 +26,5 @@ abstract class _Paths {
   static const GRAFIK = '/grafik';
   static const HUTANG_PIUTANG = '/hutang-piutang';
   static const PENGATURAN = '/pengaturan';
+  static const SPLASH_SCREEN = '/splash-screen';
 }

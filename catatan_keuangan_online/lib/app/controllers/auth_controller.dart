@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:math';
 import 'package:catatan_keuangan_online/app/mahas/mahas_config.dart';
+import 'package:catatan_keuangan_online/app/mahas/models/profile_model.dart';
+import 'package:catatan_keuangan_online/app/mahas/services/http_api.dart';
 import 'package:catatan_keuangan_online/app/routes/app_pages.dart';
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -36,32 +38,34 @@ class AuthController extends GetxController {
   }
 
   void _toHome() async {
-    Get.offAllNamed(Routes.REGISTER);
-    // var r = await HttpApi.get('/api/profile');
-    // if (r.success) {
-    //   MahasConfig.profile = ProfileModel.fromJson(r.body);
-    //   if (Get.currentRoute != Routes.HOME) {
-    //     Get.offAllNamed(Routes.HOME);
-    //   }
-    // } else {
-    //   if (Get.currentRoute != Routes.ERROR) {
-    //     Get.offAllNamed(Routes.ERROR);
-    //   }
-    // }
+    var r = await HttpApi.get('/api/auth');
+    if (r.success) {
+      MahasConfig.profile = ProfileModel.fromJson(r.body);
+      if (Get.currentRoute != Routes.HOME) {
+        Get.offAllNamed(Routes.HOME);
+      }
+    } else {
+      if (Get.currentRoute != Routes.REGISTER) {
+        Get.offAllNamed(Routes.REGISTER);
+      }
+    }
+  }
+
+  Future<UserCredential?> _signInWithCredentialGoogle() async {
+    GoogleSignInAccount? googleSignInAccount = await googleSign.signIn();
+    if (googleSignInAccount == null) return null;
+    GoogleSignInAuthentication googleSignInAuthentication =
+        await googleSignInAccount.authentication;
+    AuthCredential credential = GoogleAuthProvider.credential(
+      accessToken: googleSignInAuthentication.accessToken,
+      idToken: googleSignInAuthentication.idToken,
+    );
+    return await auth.signInWithCredential(credential);
   }
 
   void signInWithGoogle() async {
     try {
-      GoogleSignInAccount? googleSignInAccount = await googleSign.signIn();
-      if (googleSignInAccount != null) {
-        GoogleSignInAuthentication googleSignInAuthentication =
-            await googleSignInAccount.authentication;
-        AuthCredential credential = GoogleAuthProvider.credential(
-          accessToken: googleSignInAuthentication.accessToken,
-          idToken: googleSignInAuthentication.idToken,
-        );
-        await auth.signInWithCredential(credential);
-      }
+      await _signInWithCredentialGoogle();
     } catch (e) {
       Get.snackbar(
         "Error",
@@ -114,5 +118,16 @@ class AuthController extends GetxController {
 
   void signOut() async {
     await auth.signOut();
+  }
+
+  Future<void> deleteAccount() async {
+    var userCredential = await _signInWithCredentialGoogle();
+    var r = await HttpApi.delete('/api/auth');
+    if (r.success) {
+    } else {
+      Get.defaultDialog(title: 'Error', middleText: r.message!);
+    }
+    await userCredential?.user?.delete();
+    auth.signOut();
   }
 }

@@ -1,11 +1,9 @@
 import 'dart:convert';
 
 class ProfileModel {
-  int? id;
+  String? perusahaan;
   String? nama;
-  bool superUser = false;
-  bool kelolaPengeluaran = false;
-  bool kelolaPemasukan = false;
+  bool? superUser;
 
   static ProfileModel fromJson(String jsonString) {
     final data = json.decode(jsonString);
@@ -15,11 +13,9 @@ class ProfileModel {
   static ProfileModel fromDynamic(dynamic dynamicData) {
     final model = ProfileModel();
 
-    model.id = dynamicData['id'];
+    model.perusahaan = dynamicData['perusahaan'];
     model.nama = dynamicData['nama'];
-    model.superUser = dynamicData['superUser'];
-    model.kelolaPengeluaran = dynamicData['kelolaPengeluaran'];
-    model.kelolaPemasukan = dynamicData['kelolaPemasukan'];
+    model.superUser = dynamicData['super_user'];
     return model;
   }
 }

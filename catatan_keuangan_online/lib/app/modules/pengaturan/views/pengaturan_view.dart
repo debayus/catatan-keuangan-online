@@ -13,14 +13,22 @@ class PengaturanView extends GetView<PengaturanController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('PengaturanView'),
+        title: const Text('Pengaturan'),
         centerTitle: true,
       ),
-      body: const Center(
-        child: Text(
-          'PengaturanView is working',
-          style: TextStyle(fontSize: 20),
-        ),
+      body: Column(
+        children: [
+          const Center(
+            child: Text(
+              'PengaturanView is working',
+              style: TextStyle(fontSize: 20),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: controller.hapusAkunOnPress,
+            child: const Text("Hapus Akun"),
+          ),
+        ],
       ),
     );
   }
