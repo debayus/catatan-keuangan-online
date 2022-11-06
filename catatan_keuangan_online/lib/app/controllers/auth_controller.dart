@@ -7,6 +7,7 @@ import 'package:catatan_keuangan_online/app/routes/app_pages.dart';
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import '../mahas/services/mahas_service.dart';
@@ -15,6 +16,7 @@ class AuthController extends GetxController {
   final googleSign = GoogleSignIn();
   static AuthController instance = Get.find();
   late Rx<User?> firebaseUser;
+  var isLoading = false.obs;
 
   @override
   void onReady() {
@@ -64,8 +66,12 @@ class AuthController extends GetxController {
   }
 
   void signInWithGoogle() async {
+    if (isLoading.isTrue) return;
+    isLoading.value = true;
     try {
       await _signInWithCredentialGoogle();
+      final box = GetStorage();
+      box.write('apple_login', null);
     } catch (e) {
       Get.snackbar(
         "Error",
@@ -73,6 +79,7 @@ class AuthController extends GetxController {
         snackPosition: SnackPosition.BOTTOM,
       );
     }
+    isLoading.value = false;
   }
 
   String _generateNonce([int length = 32]) {
@@ -89,22 +96,30 @@ class AuthController extends GetxController {
     return digest.toString();
   }
 
+  Future<UserCredential?> _signInWithCredentialApple() async {
+    final rawNonce = _generateNonce();
+    final nonce = _sha256ofString(rawNonce);
+    final appleCredential = await SignInWithApple.getAppleIDCredential(
+      scopes: [
+        AppleIDAuthorizationScopes.email,
+        AppleIDAuthorizationScopes.fullName,
+      ],
+      nonce: nonce,
+    );
+    final oauthCredential = OAuthProvider("apple.com").credential(
+      idToken: appleCredential.identityToken,
+      rawNonce: rawNonce,
+    );
+    return await auth.signInWithCredential(oauthCredential);
+  }
+
   Future signInWithApple() async {
+    if (isLoading.isTrue) return;
+    isLoading.value = true;
     try {
-      final rawNonce = _generateNonce();
-      final nonce = _sha256ofString(rawNonce);
-      final appleCredential = await SignInWithApple.getAppleIDCredential(
-        scopes: [
-          AppleIDAuthorizationScopes.email,
-          AppleIDAuthorizationScopes.fullName,
-        ],
-        nonce: nonce,
-      );
-      final oauthCredential = OAuthProvider("apple.com").credential(
-        idToken: appleCredential.identityToken,
-        rawNonce: rawNonce,
-      );
-      await FirebaseAuth.instance.signInWithCredential(oauthCredential);
+      await _signInWithCredentialApple();
+      final box = GetStorage();
+      box.write('apple_login', true);
     } on SignInWithAppleAuthorizationException catch (e) {
       if (e.code != AuthorizationErrorCode.canceled) {
         Get.snackbar(
@@ -114,6 +129,7 @@ class AuthController extends GetxController {
         );
       }
     }
+    isLoading.value = false;
   }
 
   void signOut() async {
@@ -121,13 +137,37 @@ class AuthController extends GetxController {
   }
 
   Future<void> deleteAccount() async {
-    var userCredential = await _signInWithCredentialGoogle();
-    var r = await HttpApi.delete('/api/auth');
-    if (r.success) {
-    } else {
-      Get.defaultDialog(title: 'Error', middleText: r.message!);
+    final box = GetStorage();
+    UserCredential? userCredential;
+    try {
+      if (box.read('apple_login') == true) {
+        userCredential = await _signInWithCredentialApple();
+      } else {
+        userCredential = await _signInWithCredentialGoogle();
+      }
+      if (userCredential?.user != null) {
+        var r = await HttpApi.delete('/api/auth');
+        if (r.success) {
+        } else {
+          Get.defaultDialog(title: 'Error', middleText: r.message!);
+        }
+        await userCredential!.user!.delete();
+      }
+      auth.signOut();
+    } on SignInWithAppleAuthorizationException catch (e) {
+      if (e.code != AuthorizationErrorCode.canceled) {
+        Get.snackbar(
+          "Error",
+          e.message,
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      }
+    } catch (e) {
+      Get.snackbar(
+        "Error",
+        e.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+      );
     }
-    await userCredential?.user?.delete();
-    auth.signOut();
   }
 }

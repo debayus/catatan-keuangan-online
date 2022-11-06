@@ -1,13 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:catatan_keuangan_online/app/mahas/services/mahas_service.dart';
 import '../mahas_config.dart';
 import '../models/api_result_model.dart';
 import 'package:http/http.dart' as http;
 
 class HttpApi {
   static Future<String?> _token() async {
-    return await FirebaseAuth.instance.currentUser!.getIdToken(true);
+    return await auth.currentUser!.getIdToken(true);
   }
 
   static String getUrl(String url) {

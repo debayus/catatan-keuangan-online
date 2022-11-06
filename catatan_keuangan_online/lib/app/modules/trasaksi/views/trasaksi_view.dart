@@ -15,7 +15,7 @@ class TrasaksiView extends GetView<TrasaksiController> {
         body: Center(
           child: ElevatedButton(
             onPressed: controller.showMessage,
-            child: const Text("Save"),
+            child: const Text("sign Out"),
           ),
         ),
       ),

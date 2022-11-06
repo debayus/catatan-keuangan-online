@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import '../../controllers/auth_controller.dart';
 import '../mahas_config.dart';
 
@@ -28,5 +29,6 @@ class MahasService {
     if (MahasConfig.urlApi.isEmpty) {
       MahasConfig.urlApi = remoteConfig.getString('api');
     }
+    await GetStorage.init();
   }
 }
