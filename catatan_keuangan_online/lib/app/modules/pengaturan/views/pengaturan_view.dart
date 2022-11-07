@@ -15,20 +15,20 @@ class PengaturanView extends GetView<PengaturanController> {
       appBar: AppBar(
         title: const Text('Pengaturan'),
         centerTitle: true,
+        automaticallyImplyLeading: false,
       ),
-      body: Column(
-        children: [
-          const Center(
-            child: Text(
-              'PengaturanView is working',
-              style: TextStyle(fontSize: 20),
-            ),
-          ),
-          ElevatedButton(
-            onPressed: controller.hapusAkunOnPress,
-            child: const Text("Hapus Akun"),
-          ),
-        ],
+      body: ListView.separated(
+        itemBuilder: (context, i) => ListTile(
+          title: Text(controller.menus[i].title),
+          leading: Icon(controller.menus[i].icon),
+          onTap: controller.menus[i].onTab,
+        ),
+        itemCount: controller.menus.length,
+        separatorBuilder: (context, index) {
+          return const Divider(
+            height: 0,
+          );
+        },
       ),
     );
   }

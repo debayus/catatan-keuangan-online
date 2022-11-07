@@ -13,8 +13,9 @@ class HutangPiutangView extends GetView<HutangPiutangController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('HutangPiutangView'),
+        title: const Text('Hutang Piutang'),
         centerTitle: true,
+        automaticallyImplyLeading: false,
       ),
       body: const Center(
         child: Text(

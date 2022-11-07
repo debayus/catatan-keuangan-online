@@ -13,7 +13,8 @@ class GrafikView extends GetView<GrafikController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('GrafikView'),
+        title: const Text('Grafik'),
+        automaticallyImplyLeading: false,
         centerTitle: true,
       ),
       body: const Center(

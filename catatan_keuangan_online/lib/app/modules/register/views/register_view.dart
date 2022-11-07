@@ -13,7 +13,8 @@ class RegisterView extends GetView<RegisterController> {
     return SafeArea(
       child: Scaffold(
         body: Container(
-          padding: const EdgeInsets.all(20),
+          padding:
+              const EdgeInsets.only(bottom: 10, left: 20, right: 20, top: 20),
           decoration: MahasThemes.decoration,
           child: Column(
             children: [
@@ -51,12 +52,9 @@ class RegisterView extends GetView<RegisterController> {
                 ),
               ),
               const Padding(padding: EdgeInsets.all(2.5)),
-              InkWell(
-                onTap: controller.kembaliOnTab,
-                child: Container(
-                  padding: const EdgeInsets.all(10),
-                  child: const Text("Kembali"),
-                ),
+              TextButton(
+                onPressed: controller.kembaliOnPress,
+                child: const Text("Kembali"),
               ),
             ],
           ),

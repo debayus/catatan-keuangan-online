@@ -1,3 +1,4 @@
+import 'package:catatan_keuangan_online/app/mahas/components/mahas_colors.dart';
 import 'package:catatan_keuangan_online/app/modules/grafik/views/grafik_view.dart';
 import 'package:catatan_keuangan_online/app/modules/hutang_piutang/views/hutang_piutang_view.dart';
 import 'package:catatan_keuangan_online/app/modules/pengaturan/views/pengaturan_view.dart';
@@ -33,7 +34,7 @@ class HomeView extends GetView<HomeController> {
             items: controller.menus
                 .map(
                   (e) => BottomNavigationBarItem(
-                    backgroundColor: Colors.black,
+                    backgroundColor: MahasColors.blue,
                     icon: Icon(e['icon'], size: 25),
                     label: e['label'],
                   ),
