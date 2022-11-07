@@ -6,6 +6,7 @@ import 'package:catatan_keuangan_online/app/mahas/services/http_api.dart';
 import 'package:catatan_keuangan_online/app/routes/app_pages.dart';
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -16,7 +17,6 @@ class AuthController extends GetxController {
   final googleSign = GoogleSignIn();
   static AuthController instance = Get.find();
   late Rx<User?> firebaseUser;
-  var isLoading = false.obs;
 
   @override
   void onReady() {
@@ -51,6 +51,9 @@ class AuthController extends GetxController {
         Get.offAllNamed(Routes.REGISTER);
       }
     }
+    if (EasyLoading.isShow) {
+      EasyLoading.dismiss();
+    }
   }
 
   Future<UserCredential?> _signInWithCredentialGoogle() async {
@@ -66,8 +69,8 @@ class AuthController extends GetxController {
   }
 
   void signInWithGoogle() async {
-    if (isLoading.isTrue) return;
-    isLoading.value = true;
+    if (EasyLoading.isShow) return;
+    await EasyLoading.show();
     try {
       await _signInWithCredentialGoogle();
       final box = GetStorage();
@@ -78,8 +81,8 @@ class AuthController extends GetxController {
         e.toString(),
         snackPosition: SnackPosition.BOTTOM,
       );
+      await EasyLoading.dismiss();
     }
-    isLoading.value = false;
   }
 
   String _generateNonce([int length = 32]) {
@@ -114,8 +117,8 @@ class AuthController extends GetxController {
   }
 
   Future signInWithApple() async {
-    if (isLoading.isTrue) return;
-    isLoading.value = true;
+    if (EasyLoading.isShow) return;
+    await EasyLoading.show();
     try {
       await _signInWithCredentialApple();
       final box = GetStorage();
@@ -128,8 +131,8 @@ class AuthController extends GetxController {
           snackPosition: SnackPosition.BOTTOM,
         );
       }
+      await EasyLoading.dismiss();
     }
-    isLoading.value = false;
   }
 
   void signOut() async {

@@ -1,3 +1,4 @@
+import 'package:catatan_keuangan_online/app/controllers/auth_controller.dart';
 import 'package:catatan_keuangan_online/app/mahas/services/http_api.dart';
 import 'package:catatan_keuangan_online/app/routes/app_pages.dart';
 import 'package:get/get.dart';
@@ -15,5 +16,9 @@ class RegisterController extends GetxController {
       Get.defaultDialog(title: 'Error', middleText: r.message!);
     }
     isLoading.value = false;
+  }
+
+  void kembaliOnTab() {
+    Get.find<AuthController>().signOut();
   }
 }
