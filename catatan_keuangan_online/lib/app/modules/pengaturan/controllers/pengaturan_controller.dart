@@ -1,7 +1,6 @@
 import 'package:catatan_keuangan_online/app/controllers/auth_controller.dart';
 import 'package:catatan_keuangan_online/app/mahas/components/mahas_colors.dart';
 import 'package:catatan_keuangan_online/app/mahas/services/helper.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
