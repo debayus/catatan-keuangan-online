@@ -13,7 +13,7 @@ class XsampleListView extends GetView<XsampleListController> {
         title: const Text('XsampleListView'),
         centerTitle: true,
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'XsampleListView is working',
           style: TextStyle(fontSize: 20),

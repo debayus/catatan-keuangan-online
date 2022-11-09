@@ -75,7 +75,8 @@ class InputBoxComponent extends StatelessWidget {
                 child: Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
+                    borderRadius:
+                        BorderRadius.circular(MahasThemes.borderRadius),
                     color:
                         Colors.black.withOpacity(editable ?? false ? .01 : .05),
                     border: errorMessage != null

@@ -1,164 +1,163 @@
-// import 'package:flutter/material.dart';
-// import 'package:generalledger/app/mahas/components/inputs/input_box_component.dart';
-// import 'package:generalledger/app/mahas/icons/font_awesome5_icons.dart';
-// import 'package:generalledger/app/mahas/my_config.dart';
-// import 'package:generalledger/app/mahas/services/helper.dart';
+import 'package:catatan_keuangan_online/app/mahas/services/mahas_format.dart';
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-// class InputDatetimeController {
-//   late bool _required;
-//   late InputDatetimeType _type;
-//   late BuildContext _context;
-//   late Function(VoidCallback fn) setState;
-//   bool _isInit = false;
+import 'input_box_component.dart';
 
-//   DateTime? _date;
-//   TimeOfDay? _time;
-//   String? _errorMessage;
+class InputDatetimeController {
+  late bool _required;
+  late InputDatetimeType _type;
+  late BuildContext _context;
+  late Function(VoidCallback fn) setState;
+  bool _isInit = false;
 
-//   Function()? onChanged;
+  DateTime? _date;
+  TimeOfDay? _time;
+  String? _errorMessage;
 
-//   set value(dynamic val) {
-//     if (val is DateTime) {
-//       _date = val;
-//     } else if (val is TimeOfDay) {
-//       _time = val;
-//     }
-//     if (_isInit) {
-//       setState(() {});
-//     }
-//   }
+  Function()? onChanged;
 
-//   dynamic get value {
-//     if (_type == InputDatetimeType.date) {
-//       return _date;
-//     } else {
-//       return _time;
-//     }
-//   }
+  set value(dynamic val) {
+    if (val is DateTime) {
+      _date = val;
+    } else if (val is TimeOfDay) {
+      _time = val;
+    }
+    if (_isInit) {
+      setState(() {});
+    }
+  }
 
-//   bool get isValid {
-//     setState(() {
-//       _errorMessage = null;
-//     });
+  dynamic get value {
+    if (_type == InputDatetimeType.date) {
+      return _date;
+    } else {
+      return _time;
+    }
+  }
 
-//     if (_required &&
-//         ((_type == InputDatetimeType.date && _date == null) ||
-//             (_type == InputDatetimeType.time && _time == null))) {
-//       setState(() {
-//         _errorMessage = 'The field is required';
-//       });
-//       return false;
-//     }
-//     return true;
-//   }
+  bool get isValid {
+    setState(() {
+      _errorMessage = null;
+    });
 
-//   void _onTab(bool editable) async {
-//     if (!editable) return;
-//     if (_type == InputDatetimeType.date) {
-//       final DateTime? picked = await showDatePicker(
-//         context: _context,
-//         initialDate: _date ?? DateTime.now(),
-//         firstDate: DateTime(1900),
-//         lastDate: DateTime(3000),
-//       );
-//       if (picked != null && _date != picked) {
-//         setState(() {
-//           _date = picked;
-//         });
-//       }
-//     } else {
-//       final TimeOfDay? picked = await showTimePicker(
-//         context: _context,
-//         initialTime: _time ?? TimeOfDay.now(),
-//       );
-//       if (picked != null && _time != picked) {
-//         setState(() {
-//           _time = picked;
-//         });
-//       }
-//     }
-//     if (onChanged != null) {
-//       onChanged!();
-//     }
-//   }
+    if (_required &&
+        ((_type == InputDatetimeType.date && _date == null) ||
+            (_type == InputDatetimeType.time && _time == null))) {
+      setState(() {
+        _errorMessage = 'The field is required';
+      });
+      return false;
+    }
+    return true;
+  }
 
-//   void _init(
-//     Function(VoidCallback fn) setStateX,
-//     BuildContext contextX,
-//     bool requiredX,
-//     InputDatetimeType typeX,
-//   ) {
-//     setState = setStateX;
-//     _context = contextX;
-//     _required = requiredX;
-//     _type = typeX;
-//     _isInit = true;
-//   }
+  void _onTab(bool editable) async {
+    if (!editable) return;
+    if (_type == InputDatetimeType.date) {
+      final DateTime? picked = await showDatePicker(
+        context: _context,
+        initialDate: _date ?? DateTime.now(),
+        firstDate: DateTime(1900),
+        lastDate: DateTime(3000),
+      );
+      if (picked != null && _date != picked) {
+        setState(() {
+          _date = picked;
+        });
+      }
+    } else {
+      final TimeOfDay? picked = await showTimePicker(
+        context: _context,
+        initialTime: _time ?? TimeOfDay.now(),
+      );
+      if (picked != null && _time != picked) {
+        setState(() {
+          _time = picked;
+        });
+      }
+    }
+    if (onChanged != null) {
+      onChanged!();
+    }
+  }
 
-//   void _clearOnTab() {
-//     setState(() {
-//       _date = null;
-//       _time = null;
-//     });
-//   }
-// }
+  void _init(
+    Function(VoidCallback fn) setStateX,
+    BuildContext contextX,
+    bool requiredX,
+    InputDatetimeType typeX,
+  ) {
+    setState = setStateX;
+    _context = contextX;
+    _required = requiredX;
+    _type = typeX;
+    _isInit = true;
+  }
 
-// enum InputDatetimeType {
-//   date,
-//   time,
-// }
+  void _clearOnTab() {
+    setState(() {
+      _date = null;
+      _time = null;
+    });
+  }
+}
 
-// class InputDatetimeComponent extends StatefulWidget {
-//   final String? label;
-//   final bool editable;
-//   final double? marginBottom;
-//   final bool required;
-//   final InputDatetimeController controller;
-//   final InputDatetimeType type;
+enum InputDatetimeType {
+  date,
+  time,
+}
 
-//   const InputDatetimeComponent({
-//     Key? key,
-//     this.label,
-//     this.marginBottom,
-//     required this.controller,
-//     this.editable = true,
-//     this.required = false,
-//     this.type = InputDatetimeType.date,
-//   }) : super(key: key);
+class InputDatetimeComponent extends StatefulWidget {
+  final String? label;
+  final bool editable;
+  final double? marginBottom;
+  final bool required;
+  final InputDatetimeController controller;
+  final InputDatetimeType type;
 
-//   @override
-//   State<InputDatetimeComponent> createState() => _InputDatetimeComponentState();
-// }
+  const InputDatetimeComponent({
+    Key? key,
+    this.label,
+    this.marginBottom,
+    required this.controller,
+    this.editable = true,
+    this.required = false,
+    this.type = InputDatetimeType.date,
+  }) : super(key: key);
 
-// class _InputDatetimeComponentState extends State<InputDatetimeComponent> {
-//   @override
-//   void initState() {
-//     widget.controller._init(setState, context, widget.required, widget.type);
-//     super.initState();
-//   }
+  @override
+  State<InputDatetimeComponent> createState() => _InputDatetimeComponentState();
+}
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return InputBoxComponent(
-//       label: widget.label,
-//       editable: widget.editable,
-//       isRequired: widget.required,
-//       icon: widget.controller._type == InputDatetimeType.date
-//           ? FontAwesomeIcons.calendar
-//           : FontAwesomeIcons.clock,
-//       alowClear: widget.editable &&
-//           ((widget.controller._type == InputDatetimeType.date &&
-//                   widget.controller._date != null) ||
-//               (widget.controller._type == InputDatetimeType.time &&
-//                   widget.controller._time != null)),
-//       errorMessage: widget.controller._errorMessage,
-//       clearOnTab: widget.controller._clearOnTab,
-//       marginBottom: widget.marginBottom,
-//       onTap: () => widget.controller._onTab(widget.editable),
-//       childText: widget.controller._type == InputDatetimeType.date
-//           ? Helper.dateToString(widget.controller._date,
-//               format: MyConfig.dateFormat)
-//           : widget.controller._time?.format(context) ?? '',
-//     );
-//   }
-// }
+class _InputDatetimeComponentState extends State<InputDatetimeComponent> {
+  @override
+  void initState() {
+    widget.controller._init(setState, context, widget.required, widget.type);
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return InputBoxComponent(
+      label: widget.label,
+      editable: widget.editable,
+      isRequired: widget.required,
+      icon: widget.controller._type == InputDatetimeType.date
+          ? FontAwesomeIcons.calendar
+          : FontAwesomeIcons.clock,
+      alowClear: widget.editable &&
+          ((widget.controller._type == InputDatetimeType.date &&
+                  widget.controller._date != null) ||
+              (widget.controller._type == InputDatetimeType.time &&
+                  widget.controller._time != null)),
+      errorMessage: widget.controller._errorMessage,
+      clearOnTab: widget.controller._clearOnTab,
+      marginBottom: widget.marginBottom,
+      onTap: () => widget.controller._onTab(widget.editable),
+      childText: widget.controller._type == InputDatetimeType.date
+          ? MahasFormat.displayDate(widget.controller._date)
+          : widget.controller._time?.format(context) ?? '',
+    );
+  }
+}

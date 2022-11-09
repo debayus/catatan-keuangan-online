@@ -13,7 +13,7 @@ class XsampleDetailView extends GetView<XsampleDetailController> {
         title: const Text('XsampleDetailView'),
         centerTitle: true,
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'XsampleDetailView is working',
           style: TextStyle(fontSize: 20),

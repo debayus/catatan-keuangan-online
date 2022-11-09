@@ -13,7 +13,7 @@ class XsampleSetupView extends GetView<XsampleSetupController> {
         title: const Text('XsampleSetupView'),
         centerTitle: true,
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'XsampleSetupView is working',
           style: TextStyle(fontSize: 20),
