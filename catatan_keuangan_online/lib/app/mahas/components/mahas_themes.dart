@@ -45,4 +45,21 @@ class MahasThemes {
     fontSize: 18,
     fontWeight: FontWeight.bold,
   );
+
+  static InputDecoration? textFiendDecoration({
+    hintText,
+  }) {
+    return InputDecoration(
+      border: const OutlineInputBorder(),
+      hintText: hintText,
+    );
+  }
+
+  static TextStyle title = const TextStyle(
+    fontWeight: FontWeight.bold,
+  );
+
+  static TextStyle muted = TextStyle(
+    color: Colors.black.withOpacity(.3),
+  );
 }

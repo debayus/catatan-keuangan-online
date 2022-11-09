@@ -63,4 +63,29 @@ class Helper {
       ),
     );
   }
+
+  static Future dialogWarning(String? message) async {
+    await Get.dialog(
+      AlertDialog(
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(
+              FontAwesomeIcons.triangleExclamation,
+              color: MahasColors.yellow,
+              size: 40,
+            ),
+            const Padding(padding: EdgeInsets.all(7)),
+            Text(
+              message ?? "-",
+              maxLines: 2,
+              style: const TextStyle(
+                color: MahasColors.yellow,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
