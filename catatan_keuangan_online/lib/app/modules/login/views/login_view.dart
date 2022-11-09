@@ -1,9 +1,8 @@
 import 'dart:io';
-
-import 'package:catatan_keuangan_online/app/mahas/components/login_button.dart';
 import 'package:catatan_keuangan_online/app/mahas/components/mahas_themes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../mahas/components/others/login_button.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
@@ -55,6 +54,9 @@ class LoginView extends GetView<LoginController> {
                 flex: 2,
                 child: Container(),
               ),
+              TextButton(
+                  onPressed: controller.sampleOnPress,
+                  child: const Text("Sample")),
               const Text("v.1.0"),
             ],
           ),

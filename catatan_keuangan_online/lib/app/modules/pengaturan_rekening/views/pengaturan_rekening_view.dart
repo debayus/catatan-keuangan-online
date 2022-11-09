@@ -1,9 +1,7 @@
-import 'package:catatan_keuangan_online/app/mahas/components/shimmer_component.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import 'package:get/get.dart';
-
+import '../../../mahas/components/others/shimmer_component.dart';
 import '../controllers/pengaturan_rekening_controller.dart';
 
 class PengaturanRekeningView extends GetView<PengaturanRekeningController> {

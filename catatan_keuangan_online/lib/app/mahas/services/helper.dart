@@ -3,6 +3,7 @@ import 'package:catatan_keuangan_online/app/mahas/components/mahas_themes.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:uuid/uuid.dart';
 
 class Helper {
   static Future<bool?> dialogQuestion({
@@ -87,5 +88,28 @@ class Helper {
         ),
       ),
     );
+  }
+
+  static void backOnPress({
+    dynamic result,
+    required String page,
+    bool questionBack = true,
+    bool editable = false,
+    dynamic parametes,
+  }) async {
+    if (questionBack && editable) {
+      final r = await Helper.dialogQuestion(
+        message: 'Anda yakin ingin kembali ?',
+        textConfirm: 'Ya',
+      );
+      if (r != true) return;
+    }
+    Get.back(result: result);
+  }
+
+  static String idGenerator() {
+    const uuid = Uuid();
+    var r = uuid.v4();
+    return r;
   }
 }

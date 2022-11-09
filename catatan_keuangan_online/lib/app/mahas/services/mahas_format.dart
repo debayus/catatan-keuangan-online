@@ -1,6 +1,6 @@
 import 'package:intl/intl.dart';
 
-class MahasDateFormat {
+class MahasFormat {
   static String displayDate(DateTime? date) {
     if (date == null) return "-";
     var dateFormat = DateFormat("dd MMMM yyyy");
@@ -14,5 +14,17 @@ class MahasDateFormat {
     } catch (ex) {
       return null;
     }
+  }
+
+  static String toCurrency(double? value) {
+    if (value == null) return "";
+    var numberFormat = NumberFormat('#,###');
+    return numberFormat.format(value);
+  }
+
+  static double currencyToString(String? value) {
+    if (value == null) return 0;
+    value = value.replaceAll(',', '');
+    return double.parse(value);
   }
 }

@@ -20,6 +20,14 @@ abstract class Routes {
       _Paths.PENGATURAN_JENIS_PENGELUARAN;
   static const PENGATURAN_REKENING_SETUP = _Paths.PENGATURAN_REKENING_SETUP;
   static const PENGATURAN_ICON = _Paths.PENGATURAN_ICON;
+  static const XSAMPLE = _Paths.XSAMPLE;
+  static const XSAMPLE_CHECKBOX_RADIO = _Paths.XSAMPLE_CHECKBOX_RADIO;
+  static const XSAMPLE_DATE_TIME = _Paths.XSAMPLE_DATE_TIME;
+  static const XSAMPLE_DETAIL = _Paths.XSAMPLE_DETAIL;
+  static const XSAMPLE_DROPDOWN = _Paths.XSAMPLE_DROPDOWN;
+  static const XSAMPLE_INPUT = _Paths.XSAMPLE_INPUT;
+  static const XSAMPLE_LIST = _Paths.XSAMPLE_LIST;
+  static const XSAMPLE_SETUP = _Paths.XSAMPLE_SETUP;
 }
 
 abstract class _Paths {
@@ -38,4 +46,12 @@ abstract class _Paths {
   static const PENGATURAN_JENIS_PENGELUARAN = '/pengaturan-jenis-pengeluaran';
   static const PENGATURAN_REKENING_SETUP = '/pengaturan-rekening-setup';
   static const PENGATURAN_ICON = '/pengaturan-icon';
+  static const XSAMPLE = '/xsample';
+  static const XSAMPLE_CHECKBOX_RADIO = '/xsample-checkbox-radio';
+  static const XSAMPLE_DATE_TIME = '/xsample-date-time';
+  static const XSAMPLE_DETAIL = '/xsample-detail';
+  static const XSAMPLE_DROPDOWN = '/xsample-dropdown';
+  static const XSAMPLE_INPUT = '/xsample-input';
+  static const XSAMPLE_LIST = '/xsample-list';
+  static const XSAMPLE_SETUP = '/xsample-setup';
 }

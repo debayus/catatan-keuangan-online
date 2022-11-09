@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
-import 'mahas_colors.dart';
+
+import '../mahas_colors.dart';
 
 class ShimmerComponent extends StatelessWidget {
   final int count;

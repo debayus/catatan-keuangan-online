@@ -28,6 +28,22 @@ import '../modules/splash_screen/bindings/splash_screen_binding.dart';
 import '../modules/splash_screen/views/splash_screen_view.dart';
 import '../modules/trasaksi/bindings/trasaksi_binding.dart';
 import '../modules/trasaksi/views/trasaksi_view.dart';
+import '../modules/xsample/bindings/xsample_binding.dart';
+import '../modules/xsample/views/xsample_view.dart';
+import '../modules/xsample_checkbox_radio/bindings/xsample_checkbox_radio_binding.dart';
+import '../modules/xsample_checkbox_radio/views/xsample_checkbox_radio_view.dart';
+import '../modules/xsample_date_time/bindings/xsample_date_time_binding.dart';
+import '../modules/xsample_date_time/views/xsample_date_time_view.dart';
+import '../modules/xsample_detail/bindings/xsample_detail_binding.dart';
+import '../modules/xsample_detail/views/xsample_detail_view.dart';
+import '../modules/xsample_dropdown/bindings/xsample_dropdown_binding.dart';
+import '../modules/xsample_dropdown/views/xsample_dropdown_view.dart';
+import '../modules/xsample_input/bindings/xsample_input_binding.dart';
+import '../modules/xsample_input/views/xsample_input_view.dart';
+import '../modules/xsample_list/bindings/xsample_list_binding.dart';
+import '../modules/xsample_list/views/xsample_list_view.dart';
+import '../modules/xsample_setup/bindings/xsample_setup_binding.dart';
+import '../modules/xsample_setup/views/xsample_setup_view.dart';
 
 // ignore_for_file: constant_identifier_names
 
@@ -108,6 +124,46 @@ class AppPages {
       name: _Paths.PENGATURAN_ICON,
       page: () => const PengaturanIconView(),
       binding: PengaturanIconBinding(),
+    ),
+    GetPage(
+      name: _Paths.XSAMPLE,
+      page: () => const XsampleView(),
+      binding: XsampleBinding(),
+    ),
+    GetPage(
+      name: _Paths.XSAMPLE_CHECKBOX_RADIO,
+      page: () => const XsampleCheckboxRadioView(),
+      binding: XsampleCheckboxRadioBinding(),
+    ),
+    GetPage(
+      name: _Paths.XSAMPLE_DATE_TIME,
+      page: () => const XsampleDateTimeView(),
+      binding: XsampleDateTimeBinding(),
+    ),
+    GetPage(
+      name: _Paths.XSAMPLE_DETAIL,
+      page: () => const XsampleDetailView(),
+      binding: XsampleDetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.XSAMPLE_DROPDOWN,
+      page: () => const XsampleDropdownView(),
+      binding: XsampleDropdownBinding(),
+    ),
+    GetPage(
+      name: _Paths.XSAMPLE_INPUT,
+      page: () => const XsampleInputView(),
+      binding: XsampleInputBinding(),
+    ),
+    GetPage(
+      name: _Paths.XSAMPLE_LIST,
+      page: () => const XsampleListView(),
+      binding: XsampleListBinding(),
+    ),
+    GetPage(
+      name: _Paths.XSAMPLE_SETUP,
+      page: () => const XsampleSetupView(),
+      binding: XsampleSetupBinding(),
     ),
   ];
 }
