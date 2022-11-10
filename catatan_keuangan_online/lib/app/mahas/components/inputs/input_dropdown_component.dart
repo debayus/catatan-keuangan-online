@@ -100,6 +100,7 @@ class InputDropdownComponent extends StatefulWidget {
   final bool required;
   final bool editable;
   final InputDropdownController controller;
+  final Radius? borderRadius;
 
   const InputDropdownComponent({
     Key? key,
@@ -108,6 +109,7 @@ class InputDropdownComponent extends StatefulWidget {
     this.editable = true,
     required this.controller,
     this.required = false,
+    this.borderRadius,
   }) : super(key: key);
 
   @override
@@ -133,17 +135,17 @@ class _InputDropdownComponentState extends State<InputDropdownComponent> {
       fillColor: Colors.black.withOpacity(.01),
       isDense: true,
       border: OutlineInputBorder(
-        borderRadius:
-            BorderRadius.all(Radius.circular(MahasThemes.borderRadius)),
+        borderRadius: BorderRadius.all(
+            widget.borderRadius ?? Radius.circular(MahasThemes.borderRadius)),
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius:
-            BorderRadius.all(Radius.circular(MahasThemes.borderRadius)),
+        borderRadius: BorderRadius.all(
+            widget.borderRadius ?? Radius.circular(MahasThemes.borderRadius)),
         borderSide: const BorderSide(color: Colors.black, width: .1),
       ),
       enabledBorder: OutlineInputBorder(
-        borderRadius:
-            BorderRadius.all(Radius.circular(MahasThemes.borderRadius)),
+        borderRadius: BorderRadius.all(
+            widget.borderRadius ?? Radius.circular(MahasThemes.borderRadius)),
         borderSide: const BorderSide(color: Colors.black, width: .1),
       ),
       prefixStyle: TextStyle(

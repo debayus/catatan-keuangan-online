@@ -8,19 +8,18 @@ import '../../services/http_api.dart';
 import '../others/shimmer_component.dart';
 
 class SetupPageController<T> extends ChangeNotifier {
-  final Function(dynamic id)? urlApiGet;
-  final Function()? urlApiPost;
-  final Function(dynamic id)? urlApiPut;
-  final Function(dynamic id)? urlApiDelete;
-  final Function(dynamic e)? itemKey;
-  final Function(dynamic e)? itemIdAfterPost;
+  final String Function(dynamic id)? urlApiGet;
+  final String Function()? urlApiPost;
+  final String Function(dynamic id)? urlApiPut;
+  final String Function(dynamic id)? urlApiDelete;
+  final dynamic Function(dynamic e) itemKey;
+  final dynamic Function(dynamic e) itemIdAfterSubmit;
   late Function(VoidCallback fn) setState;
 
   final bool withQuestionBack;
   bool allowDelete;
   bool allowEdit;
   final bool isFormData;
-  final String? pageBack;
   final dynamic pageBackParametes;
   bool editable = false;
 
@@ -45,13 +44,12 @@ class SetupPageController<T> extends ChangeNotifier {
     this.urlApiPost,
     this.urlApiPut,
     this.urlApiDelete,
-    this.itemKey,
+    required this.itemKey,
     this.allowDelete = true,
     this.allowEdit = true,
     this.withQuestionBack = true,
-    this.pageBack,
     this.pageBackParametes,
-    this.itemIdAfterPost,
+    required this.itemIdAfterSubmit,
     this.onBeforeSubmit,
     this.bodyApi,
     this.isFormData = false,
@@ -75,15 +73,13 @@ class SetupPageController<T> extends ChangeNotifier {
     if (initState != null) {
       await initState!();
     }
-    dynamic idX = itemKey != null ? itemKey!(Get.parameters) : null;
+    dynamic idX = itemKey(Get.parameters);
     if (onInit != null) {
       await onInit!();
     }
     if (idX != null) {
-      // detail state
       await _getModelFromApi(idX);
     } else {
-      // create state
       editable = true;
     }
     setState(() {
@@ -112,7 +108,6 @@ class SetupPageController<T> extends ChangeNotifier {
   void _back() {
     Helper.backOnPress(
       result: _backRefresh,
-      page: pageBack!,
       editable: editable,
       questionBack: withQuestionBack,
       parametes: pageBackParametes,
@@ -120,20 +115,8 @@ class SetupPageController<T> extends ChangeNotifier {
   }
 
   Future<bool> _onWillPop() async {
-    if (!withQuestionBack) return true;
-    if (editable) {
-      final r = await Helper.dialogQuestion(
-        message: 'Are you sure you want to come back ?',
-        textConfirm: 'Yes',
-      );
-      if (r != true) return false;
-    }
-    if (_backRefresh) {
-      _back();
-      return false;
-    } else {
-      return true;
-    }
+    _back();
+    return false;
   }
 
   void _popupMenuButtonOnSelected(String v) async {
@@ -146,7 +129,7 @@ class SetupPageController<T> extends ChangeNotifier {
       setState(() {});
     } else if (v == 'Delete') {
       final r = await Helper.dialogQuestion(
-        message: 'Are you sure to delete this item ?',
+        message: 'Yakin akan menghapus data ini?',
         icon: FontAwesomeIcons.trash,
         textConfirm: 'Delete',
       );
@@ -174,10 +157,10 @@ class SetupPageController<T> extends ChangeNotifier {
         if (!onBeforeSubmit!()) return;
       }
       final model = bodyApi != null ? bodyApi!(_id) : null;
+
       if (urlApiPost != null || urlApiPut != null) {
         await EasyLoading.show();
-        ApiResultModel r;
-        r = _id == null
+        ApiResultModel r = _id == null
             ? await HttpApi.post(
                 urlApiPost!(),
                 body: model,
@@ -192,12 +175,7 @@ class SetupPageController<T> extends ChangeNotifier {
             onSuccessSubmit!(r);
           } else {
             _backRefresh = true;
-            if (itemIdAfterPost != null) {
-              _id = itemIdAfterPost!(r.body);
-            } else {
-              _id ??= r.body.runtimeType == int ? r.body : null;
-              _id ??= itemKey!(r.body);
-            }
+            _id ??= itemIdAfterSubmit(r.body);
             await _getModelFromApi(_id);
             editable = false;
           }
@@ -259,11 +237,6 @@ class _SetupPageComponentState extends State<SetupPageComponent> {
                           : widget.title,
                     ),
                 centerTitle: true,
-                leading: widget.controller.pageBack != null
-                    ? BackButton(
-                        onPressed: widget.controller._back,
-                      )
-                    : null,
                 actions: widget.controller._id == null ||
                         (!widget.controller.allowEdit &&
                             !widget.controller.allowDelete)
@@ -299,17 +272,16 @@ class _SetupPageComponentState extends State<SetupPageComponent> {
                       ],
               ),
         body: Container(
+          margin: const EdgeInsets.all(10),
           child: widget.controller._isLoading
               ? const ShimmerComponent()
               : SingleChildScrollView(
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Container(
-                        margin: const EdgeInsets.all(10),
-                        child: Column(
-                          crossAxisAlignment: widget.crossAxisAlignmentChildren,
-                          children: widget.children(),
-                        ),
+                      Column(
+                        crossAxisAlignment: widget.crossAxisAlignmentChildren,
+                        children: widget.children(),
                       ),
                       Visibility(
                         visible: widget.controller.editable,

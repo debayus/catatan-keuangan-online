@@ -138,17 +138,17 @@ class _InputTextState extends State<InputTextComponent> {
       hintText: widget.placeHolder,
       isDense: true,
       border: OutlineInputBorder(
-        borderRadius:
-            BorderRadius.all(Radius.circular(MahasThemes.borderRadius)),
+        borderRadius: BorderRadius.all(
+            widget.borderRadius ?? Radius.circular(MahasThemes.borderRadius)),
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius:
-            BorderRadius.all(Radius.circular(MahasThemes.borderRadius)),
+        borderRadius: BorderRadius.all(
+            widget.borderRadius ?? Radius.circular(MahasThemes.borderRadius)),
         borderSide: const BorderSide(color: Colors.black, width: .1),
       ),
       enabledBorder: OutlineInputBorder(
-        borderRadius:
-            BorderRadius.all(Radius.circular(MahasThemes.borderRadius)),
+        borderRadius: BorderRadius.all(
+            widget.borderRadius ?? Radius.circular(MahasThemes.borderRadius)),
         borderSide: const BorderSide(color: Colors.black, width: .1),
       ),
       prefixText: widget.prefixText,

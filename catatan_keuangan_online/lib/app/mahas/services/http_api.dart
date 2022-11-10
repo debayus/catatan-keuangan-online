@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 
 class HttpApi {
   static Future<String?> _token() async {
-    return await auth.currentUser!.getIdToken(true);
+    return await auth.currentUser?.getIdToken(true);
   }
 
   static String getUrl(String url) {

@@ -92,7 +92,6 @@ class Helper {
 
   static void backOnPress({
     dynamic result,
-    required String page,
     bool questionBack = true,
     bool editable = false,
     dynamic parametes,
