@@ -9,7 +9,7 @@ class CurrencyInputFormatter extends TextInputFormatter {
     if (newValue.selection.baseOffset == 0) {
       return newValue;
     }
-    double value = MahasFormat.currencyToString(newValue.text);
+    double value = MahasFormat.currencyToDouble(newValue.text);
     String newText = MahasFormat.toCurrency(value);
     return newValue.copyWith(
       text: newText,

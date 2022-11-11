@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class MahasFormat {
@@ -50,9 +51,16 @@ class MahasFormat {
     return numberFormat.format(value);
   }
 
-  static double currencyToString(String? value) {
+  static double currencyToDouble(String? value) {
     if (value == null) return 0;
     value = value.replaceAll(',', '');
     return double.parse(value);
+  }
+
+  static double? dynamicToDouble(dynamic value) {
+    if (value == null) return null;
+    if (value is double) return value;
+    if (value is int) return value.toDouble();
+    return double.tryParse(value);
   }
 }

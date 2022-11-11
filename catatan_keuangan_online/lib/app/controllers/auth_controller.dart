@@ -11,7 +11,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
-import '../mahas/services/mahas_service.dart';
+import '../mahas/mahas_service.dart';
 
 class AuthController extends GetxController {
   final googleSign = GoogleSignIn();

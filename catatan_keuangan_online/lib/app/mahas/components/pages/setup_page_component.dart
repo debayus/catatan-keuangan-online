@@ -169,7 +169,6 @@ class SetupPageController<T> extends ChangeNotifier {
                 urlApiPut!(_id),
                 body: model,
               );
-        await EasyLoading.dismiss();
         if (r.success) {
           if (onSuccessSubmit != null) {
             onSuccessSubmit!(r);
@@ -182,6 +181,7 @@ class SetupPageController<T> extends ChangeNotifier {
         } else {
           Helper.dialogWarning(r.message ?? "");
         }
+        await EasyLoading.dismiss();
       }
     }
   }
@@ -191,7 +191,6 @@ class SetupPageComponent extends StatefulWidget {
   final SetupPageController controller;
   final bool childrenPadding;
   final String title;
-  final Widget? titleWidget;
   final Function children;
   final bool showAppBar;
   final dynamic crossAxisAlignmentChildren;
@@ -200,10 +199,9 @@ class SetupPageComponent extends StatefulWidget {
 
   const SetupPageComponent({
     Key? key,
-    this.title = "",
+    required this.title,
     required this.controller,
     this.childrenPadding = true,
-    this.titleWidget,
     required this.children,
     this.childrenAfterButton,
     this.crossAxisAlignmentChildren = CrossAxisAlignment.center,
@@ -230,12 +228,7 @@ class _SetupPageComponentState extends State<SetupPageComponent> {
         appBar: !widget.showAppBar
             ? null
             : AppBar(
-                title: widget.titleWidget ??
-                    Text(
-                      widget.titleFunction != null
-                          ? widget.titleFunction!()
-                          : widget.title,
-                    ),
+                title: Text(widget.title),
                 centerTitle: true,
                 actions: widget.controller._id == null ||
                         (!widget.controller.allowEdit &&

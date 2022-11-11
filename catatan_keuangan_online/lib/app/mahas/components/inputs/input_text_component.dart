@@ -18,7 +18,6 @@ class InputTextController extends ChangeNotifier {
   });
 
   bool _required = false;
-  double? _moneyValue;
   bool _showPassword = false;
   final InputTextType type;
 
@@ -66,7 +65,7 @@ class InputTextController extends ChangeNotifier {
     if (type == InputTextType.number) {
       return num.tryParse(_con.text);
     } else if (type == InputTextType.money) {
-      return _moneyValue;
+      return MahasFormat.currencyToDouble(_con.text);
     } else {
       return _con.text;
     }
@@ -76,7 +75,6 @@ class InputTextController extends ChangeNotifier {
     if (type == InputTextType.money) {
       value = value is int ? value.toDouble() : value;
       _con.text = value == null ? "" : MahasFormat.toCurrency(value);
-      _moneyValue = value;
     } else {
       _con.text = value == null ? "" : "$value";
     }
@@ -193,8 +191,8 @@ class _InputTextState extends State<InputTextComponent> {
             ]
           : widget.controller.type == InputTextType.money
               ? [
-                  CurrencyInputFormatter(),
                   CurrencyInputFormatter.allow,
+                  CurrencyInputFormatter(),
                   ...(widget.inputFormatters ?? []),
                 ]
               : widget.inputFormatters,

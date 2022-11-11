@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:catatan_keuangan_online/app/mahas/services/mahas_service.dart';
+import 'package:catatan_keuangan_online/app/mahas/mahas_service.dart';
 import '../mahas_config.dart';
 import '../models/api_result_model.dart';
 import 'package:http/http.dart' as http;
@@ -79,7 +79,7 @@ class HttpApi {
     }
   }
 
-  static Future<ApiResultModel> delete(String url) async {
+  static Future<ApiResultModel> delete(String url, {Object? body}) async {
     try {
       final token = await _token();
       final urlX = Uri.parse(getUrl(url));
@@ -88,6 +88,7 @@ class HttpApi {
         headers: {
           'Authorization': token != null ? 'Bearer $token' : '',
         },
+        body: json.encode(body),
       );
       return _getResult(r);
     } on HttpException catch (ex) {
