@@ -2,16 +2,67 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Test;
 use Illuminate\Http\Request;
 
 class TestController extends Controller
 {
     public function index(Request $request)
     {
+        $query = Test::query();
+        if (isset($request->filter)){
+            $query = $query->where('name', 'like', '%'.$request->filter.'%');
+        }
+        $totalRowCount = $query->count();
+        $models = $query->simplePaginate(30);
+
         return response()->json([
-            'firebase_user' => $request->firebase_user,
-            'user' => $request->user,
-            'perusahaan' => $request->perusahaan,
+            'data' => $models,
+            'totalRowCount' => $totalRowCount
         ]);
+    }
+
+    public function store(Request $request)
+    {
+        $model = new Test;
+        $model->name = $request->name;
+        $model->save();
+
+        return response()->json(['id' => $model->id], 200);
+    }
+
+    public function show($id)
+    {
+        $model = Test::find($id);
+        if (empty($model)) return response()->json([
+            'message' => 'Data tidak ditemukan'
+        ], 401);
+
+        return response()->json($model, 200);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $model = Test::find($id);
+        if (empty($model)) return response()->json([
+            'message' => 'Data tidak ditemukan'
+        ], 401);
+
+        $model->name = $request->name;
+        $model->save();
+
+        return response()->json(['id' => $model->id], 200);
+    }
+
+    public function destroy($id)
+    {
+        $model = Test::find($id);
+        if (empty($model)) return response()->json([
+            'message' => 'Data tidak ditemukan'
+        ], 401);
+
+        $model->delete();
+
+        return response()->json(['id' => $model->id], 200);
     }
 }

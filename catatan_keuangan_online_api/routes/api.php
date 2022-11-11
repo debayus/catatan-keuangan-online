@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\RekeningController;
 use App\Http\Controllers\TestController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,8 +24,20 @@ Route::group(['middleware' => ['firebase.auth']], function(){
     Route::post('/auth', [AuthController::class, 'store']);
     Route::delete('/auth', [AuthController::class, 'destroy']);
 
+    Route::prefix('/rekening')->controller(RekeningController::class)->group(function () {
+        Route::get('/', 'index');
+        Route::get('/{id}', 'show');
+        Route::post('/','store');
+        Route::put('/{id}','update');
+        Route::delete('/{id}', 'destroy');
+    });
+
 });
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('/test')->controller(TestController::class)->group(function () {
+    Route::get('/', 'index');
+    Route::get('/{id}', 'show');
+    Route::post('/','store');
+    Route::put('/{id}','update');
+    Route::delete('/{id}', 'destroy');
 });

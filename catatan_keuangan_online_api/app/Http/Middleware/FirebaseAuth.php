@@ -26,28 +26,27 @@ class FirebaseAuth
 
             // user
             $user = User::where('id_firebase', '=', $uid)->first();
+            if (empty($user)) return response('unauthorized', 401);
             $request->user = $user;
 
             // perusahaan
-            if (!empty($user)){
-                $perusahaan = Perusahaan::where('id_user', '=', $user->id)->first();
-                if (empty($perusahaan)){
-                    $perusahaanUser = PerusahaanUser::where('id_user', '=', $firebase_user->uid)->first();
-                    if (empty($perusahaanUser)){
-                        $perusahaanUser = PerusahaanUser::where('email', '=', $firebase_user->email)->first();
-                        if(!empty($perusahaanUser)){
-                            $perusahaanUser->id_user = $user->id;
-                        }
+            $perusahaan = Perusahaan::where('id_user', '=', $user->id)->first();
+            if (empty($perusahaan)){
+                $perusahaanUser = PerusahaanUser::where('id_user', '=', $firebase_user->uid)->first();
+                if (empty($perusahaanUser)){
+                    $perusahaanUser = PerusahaanUser::where('email', '=', $firebase_user->email)->first();
+                    if(!empty($perusahaanUser)){
+                        $perusahaanUser->id_user = $user->id;
                     }
-                    if (empty($perusahaanUser)){
-                        $perusahaan = Perusahaan::find($perusahaanUser->id_perusahaan);
-                        $request->perusahaan = $perusahaanUser->super_user;
-                    }
-                }else{
-                    $request->super_user = true;
                 }
-                $request->perusahaan = $perusahaan;
+                if (empty($perusahaanUser)){
+                    $perusahaan = Perusahaan::find($perusahaanUser->id_perusahaan);
+                    $request->perusahaan = $perusahaanUser->super_user;
+                }
+            }else{
+                $request->super_user = true;
             }
+            $request->perusahaan = $perusahaan;
 
             return $next($request);
         } catch (Exception $ex){
