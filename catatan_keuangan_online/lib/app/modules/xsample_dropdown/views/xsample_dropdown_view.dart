@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../mahas/components/inputs/input_dropdown_component.dart';
+import '../../../mahas/components/inputs/input_lookup_component.dart';
+import '../../../models/text_model.dart';
 import '../controllers/xsample_dropdown_controller.dart';
 
 class XsampleDropdownView extends GetView<XsampleDropdownController> {
@@ -27,12 +29,12 @@ class XsampleDropdownView extends GetView<XsampleDropdownController> {
                   required: true,
                   label: 'Drop Down',
                 ),
-                // InputLookupComponent<TestModel>(
-                //   controller: controller.lookupCon,
-                //   editable: controller.editable.value,
-                //   required: true,
-                //   label: 'Lookup',
-                // ),
+                InputLookupComponent<TestModel>(
+                  controller: controller.lookupCon,
+                  editable: controller.editable.value,
+                  required: true,
+                  label: 'Lookup',
+                ),
                 ElevatedButton(
                   onPressed: controller.validateOnPress,
                   child: const Text("Validate"),
