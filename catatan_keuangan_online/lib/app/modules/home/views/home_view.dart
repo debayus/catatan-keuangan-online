@@ -11,35 +11,38 @@ class HomeView extends GetView<HomeController> {
   const HomeView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Obx(
-          () => IndexedStack(
-            index: controller.tabIndex.value,
-            children: [
-              TrasaksiView(controller: controller.transaksiCon),
-              GrafikView(controller: controller.grafikCon),
-              HutangPiutangView(controller: controller.hutangPiutangCon),
-              PengaturanView(controller: controller.pengaturanCon),
-            ],
+    return Container(
+      color: MahasColors.blue,
+      child: SafeArea(
+        child: Scaffold(
+          body: Obx(
+            () => IndexedStack(
+              index: controller.tabIndex.value,
+              children: [
+                TrasaksiView(controller: controller.transaksiCon),
+                GrafikView(controller: controller.grafikCon),
+                HutangPiutangView(controller: controller.hutangPiutangCon),
+                PengaturanView(controller: controller.pengaturanCon),
+              ],
+            ),
           ),
-        ),
-        bottomNavigationBar: Obx(
-          () => BottomNavigationBar(
-            showSelectedLabels: false,
-            onTap: controller.bottomNavigationBarOnTab,
-            currentIndex: controller.tabIndex.value,
-            unselectedItemColor: Colors.white.withOpacity(0.4),
-            selectedItemColor: Colors.white,
-            items: controller.menus
-                .map(
-                  (e) => BottomNavigationBarItem(
-                    backgroundColor: MahasColors.blue,
-                    icon: Icon(e['icon'], size: 25),
-                    label: e['label'],
-                  ),
-                )
-                .toList(),
+          bottomNavigationBar: Obx(
+            () => BottomNavigationBar(
+              showSelectedLabels: false,
+              onTap: controller.bottomNavigationBarOnTab,
+              currentIndex: controller.tabIndex.value,
+              unselectedItemColor: Colors.white.withOpacity(0.4),
+              selectedItemColor: Colors.white,
+              items: controller.menus
+                  .map(
+                    (e) => BottomNavigationBarItem(
+                      backgroundColor: MahasColors.blue,
+                      icon: Icon(e['icon'], size: 25),
+                      label: e['label'],
+                    ),
+                  )
+                  .toList(),
+            ),
           ),
         ),
       ),

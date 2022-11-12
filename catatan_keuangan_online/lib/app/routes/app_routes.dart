@@ -28,6 +28,10 @@ abstract class Routes {
   static const XSAMPLE_INPUT = _Paths.XSAMPLE_INPUT;
   static const XSAMPLE_LIST = _Paths.XSAMPLE_LIST;
   static const XSAMPLE_SETUP = _Paths.XSAMPLE_SETUP;
+  static const PENGATURAN_JENIS_PENGELUARAN_SETUP =
+      _Paths.PENGATURAN_JENIS_PENGELUARAN_SETUP;
+  static const PENGATURAN_JENIS_PEMASUKAN_SETUP =
+      _Paths.PENGATURAN_JENIS_PEMASUKAN_SETUP;
 }
 
 abstract class _Paths {
@@ -54,4 +58,8 @@ abstract class _Paths {
   static const XSAMPLE_INPUT = '/xsample-input';
   static const XSAMPLE_LIST = '/xsample-list';
   static const XSAMPLE_SETUP = '/xsample-setup';
+  static const PENGATURAN_JENIS_PENGELUARAN_SETUP =
+      '/pengaturan-jenis-pengeluaran-setup';
+  static const PENGATURAN_JENIS_PEMASUKAN_SETUP =
+      '/pengaturan-jenis-pemasukan-setup';
 }

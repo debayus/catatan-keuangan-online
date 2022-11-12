@@ -35,8 +35,8 @@ class MahasThemes {
       begin: Alignment.topRight,
       end: Alignment.bottomLeft,
       colors: [
-        MahasColors.lightBlue.withOpacity(.6),
-        MahasColors.lightBlue,
+        MahasColors.blue.withOpacity(.8),
+        MahasColors.blue,
       ],
     ),
   );

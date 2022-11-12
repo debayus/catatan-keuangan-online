@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class MahasFormat {
@@ -62,5 +61,24 @@ class MahasFormat {
     if (value is double) return value;
     if (value is int) return value.toDouble();
     return double.tryParse(value);
+  }
+
+  static bool? dynamicToBool(dynamic value) {
+    if (value == null) return null;
+    if (value is int) {
+      return value == 1
+          ? true
+          : value == 0
+              ? false
+              : null;
+    }
+    if (value is String) {
+      return value.toUpperCase() == "TRUE"
+          ? true
+          : value.toUpperCase() == "FALSE"
+              ? false
+              : null;
+    }
+    return value;
   }
 }

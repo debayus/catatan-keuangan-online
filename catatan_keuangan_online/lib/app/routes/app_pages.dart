@@ -16,8 +16,12 @@ import '../modules/pengaturan_icon/bindings/pengaturan_icon_binding.dart';
 import '../modules/pengaturan_icon/views/pengaturan_icon_view.dart';
 import '../modules/pengaturan_jenis_pemasukan/bindings/pengaturan_jenis_pemasukan_binding.dart';
 import '../modules/pengaturan_jenis_pemasukan/views/pengaturan_jenis_pemasukan_view.dart';
+import '../modules/pengaturan_jenis_pemasukan_setup/bindings/pengaturan_jenis_pemasukan_setup_binding.dart';
+import '../modules/pengaturan_jenis_pemasukan_setup/views/pengaturan_jenis_pemasukan_setup_view.dart';
 import '../modules/pengaturan_jenis_pengeluaran/bindings/pengaturan_jenis_pengeluaran_binding.dart';
 import '../modules/pengaturan_jenis_pengeluaran/views/pengaturan_jenis_pengeluaran_view.dart';
+import '../modules/pengaturan_jenis_pengeluaran_setup/bindings/pengaturan_jenis_pengeluaran_setup_binding.dart';
+import '../modules/pengaturan_jenis_pengeluaran_setup/views/pengaturan_jenis_pengeluaran_setup_view.dart';
 import '../modules/pengaturan_rekening/bindings/pengaturan_rekening_binding.dart';
 import '../modules/pengaturan_rekening/views/pengaturan_rekening_view.dart';
 import '../modules/pengaturan_rekening_setup/bindings/pengaturan_rekening_setup_binding.dart';
@@ -116,6 +120,11 @@ class AppPages {
       binding: PengaturanJenisPengeluaranBinding(),
     ),
     GetPage(
+      name: _Paths.PENGATURAN_JENIS_PENGELUARAN_SETUP,
+      page: () => const PengaturanJenisPengeluaranSetupView(),
+      binding: PengaturanJenisPengeluaranSetupBinding(),
+    ),
+    GetPage(
       name: _Paths.PENGATURAN_REKENING_SETUP,
       page: () => const PengaturanRekeningSetupView(),
       binding: PengaturanRekeningSetupBinding(),
@@ -164,6 +173,11 @@ class AppPages {
       name: _Paths.XSAMPLE_SETUP,
       page: () => const XsampleSetupView(),
       binding: XsampleSetupBinding(),
+    ),
+    GetPage(
+      name: _Paths.PENGATURAN_JENIS_PEMASUKAN_SETUP,
+      page: () => const PengaturanJenisPemasukanSetupView(),
+      binding: PengaturanJenisPemasukanSetupBinding(),
     ),
   ];
 }
