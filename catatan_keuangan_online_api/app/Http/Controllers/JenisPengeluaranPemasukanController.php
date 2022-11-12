@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Rekening;
+use App\Models\JenisPengeluaranPemasukan;
 use Exception;
 use Illuminate\Http\Request;
 
-class RekeningController extends Controller
+class JenisPengeluaranPemasukanController extends Controller
 {
     public function index(Request $request)
     {
         try{
-            $query = Rekening::where('id_perusahaan', '=', $request->perusahaan->id);
+            $query = JenisPengeluaranPemasukan::where('id_perusahaan', '=', $request->perusahaan->id);
+            $query = $query->where('pengeluaran', '=', $request->pengeluaran);
             if (isset($request->filter)){
                 $query = $query->where('nama', 'like', '%'.$request->filter.'%');
             }
@@ -23,18 +24,18 @@ class RekeningController extends Controller
                 'totalRowCount' => $totalRowCount
             ]);
         }catch(Exception $ex){
-            return response()->json($ex->getMessage(), 500);
+            return response()->json($ex->getMessage(), 401);
         }
     }
 
     public function store(Request $request)
     {
         try{
-            $model = new Rekening;
+            $model = new JenisPengeluaranPemasukan;
             $model->id_perusahaan = $request->perusahaan->id;
             $model->nama = $request->nama;
             $model->icon = $request->icon;
-            $model->saldo = $request->saldo;
+            $model->pengeluaran = $request->pengeluaran;
             $model->save();
             return response()->json(['id' => $model->id], 200);
         }catch(Exception $ex){
@@ -45,7 +46,7 @@ class RekeningController extends Controller
     public function show(Request $request, $id)
     {
         try{
-            $model = Rekening::where('id_perusahaan', '=', $request->perusahaan->id)->find($id);
+            $model = JenisPengeluaranPemasukan::where('id_perusahaan', '=', $request->perusahaan->id)->find($id);
             if (empty($model)) return response()->json([
                 'message' => 'Data tidak ditemukan'
             ], 401);
@@ -59,7 +60,7 @@ class RekeningController extends Controller
     public function update(Request $request, $id)
     {
         try{
-            $model = Rekening::where('id_perusahaan', '=', $request->perusahaan->id)->find($id);
+            $model = JenisPengeluaranPemasukan::where('id_perusahaan', '=', $request->perusahaan->id)->find($id);
             if (empty($model)) return response()->json([
                 'message' => 'Data tidak ditemukan'
             ], 401);
@@ -77,7 +78,7 @@ class RekeningController extends Controller
     public function destroy(Request $request, $id)
     {
         try{
-            $model = Rekening::where('id_perusahaan', '=', $request->perusahaan->id)->find($id);
+            $model = JenisPengeluaranPemasukan::where('id_perusahaan', '=', $request->perusahaan->id)->find($id);
             if (empty($model)) return response()->json([
                 'message' => 'Data tidak ditemukan'
             ], 401);

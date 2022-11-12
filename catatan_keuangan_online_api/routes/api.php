@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\JenisPengeluaranPemasukanController;
 use App\Http\Controllers\RekeningController;
 use App\Http\Controllers\TestController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,11 +18,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['middleware' => ['firebase.auth']], function(){
-    Route::get('/test', [TestController::class, 'index']);
-
-    Route::get('/auth', [AuthController::class, 'index']);
     Route::post('/auth', [AuthController::class, 'store']);
-    Route::delete('/auth', [AuthController::class, 'destroy']);
+});
+
+Route::group(['middleware' => ['firebase.admin']], function(){
+    Route::prefix('/auth')->controller(AuthController::class)->group(function () {
+        Route::get('/', 'index');
+        Route::delete('/', 'destroy');
+    });
 
     Route::prefix('/rekening')->controller(RekeningController::class)->group(function () {
         Route::get('/', 'index');
@@ -32,6 +35,13 @@ Route::group(['middleware' => ['firebase.auth']], function(){
         Route::delete('/{id}', 'destroy');
     });
 
+    Route::prefix('/jenispengeluaranpemasukan')->controller(JenisPengeluaranPemasukanController::class)->group(function () {
+        Route::get('/', 'index');
+        Route::get('/{id}', 'show');
+        Route::post('/','store');
+        Route::put('/{id}','update');
+        Route::delete('/{id}', 'destroy');
+    });
 });
 
 Route::prefix('/test')->controller(TestController::class)->group(function () {
