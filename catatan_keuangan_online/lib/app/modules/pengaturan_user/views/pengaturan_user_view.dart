@@ -1,3 +1,4 @@
+import 'package:catatan_keuangan_online/app/mahas/mahas_config.dart';
 import 'package:catatan_keuangan_online/app/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -14,13 +15,16 @@ class PengaturanUserView extends GetView<PengaturanUserController> {
         title: const Text('User'),
         centerTitle: true,
         actions: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(right: 10),
-            child: GestureDetector(
-              onTap: controller.addOnPress,
-              child: const Icon(
-                FontAwesomeIcons.circlePlus,
-                size: 24,
+          Visibility(
+            visible: MahasConfig.profile?.superUser == true,
+            child: Padding(
+              padding: const EdgeInsets.only(right: 10),
+              child: GestureDetector(
+                onTap: controller.addOnPress,
+                child: const Icon(
+                  FontAwesomeIcons.circlePlus,
+                  size: 24,
+                ),
               ),
             ),
           ),
@@ -30,7 +34,7 @@ class PengaturanUserView extends GetView<PengaturanUserController> {
         controller: controller.listCon,
         itemBuilder: (UserModel e) {
           return ListTile(
-            title: Text(e.nama!),
+            title: Text(e.nama ?? "-"),
             subtitle: Text(e.email!),
             onTap: () => controller.itemOnTab(e.id!),
           );

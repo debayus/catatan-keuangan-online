@@ -3,6 +3,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import '../../../mahas/components/inputs/input_text_component.dart';
 import '../../../mahas/components/pages/setup_page_component.dart';
+import '../../../mahas/mahas_config.dart';
 import '../../../mahas/services/helper.dart';
 import '../../../models/jenis_pengeluaran_pemasukan_model.dart';
 import '../../../routes/app_pages.dart';
@@ -47,6 +48,8 @@ class PengaturanJenisPemasukanSetupController extends GetxController {
         namaCon.value = model.nama;
         inputIcon.value = model.icon!;
       },
+      allowDelete: MahasConfig.profile?.superUser == true,
+      allowEdit: MahasConfig.profile?.superUser == true,
     );
 
     super.onInit();

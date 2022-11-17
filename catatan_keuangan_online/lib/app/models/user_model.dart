@@ -1,10 +1,13 @@
 import 'dart:convert';
 
+import '../mahas/services/mahas_format.dart';
+
 class UserModel {
   int? id;
   String? nama;
   String? email;
   String? idFirebase;
+  bool? superUser;
 
   UserModel();
   UserModel.init(this.id, this.nama);
@@ -20,6 +23,7 @@ class UserModel {
     model.nama = dynamicData['nama'];
     model.idFirebase = dynamicData['id_firebase'];
     model.email = dynamicData['email'];
+    model.superUser = MahasFormat.dynamicToBool(dynamicData['super_user']);
     return model;
   }
 }

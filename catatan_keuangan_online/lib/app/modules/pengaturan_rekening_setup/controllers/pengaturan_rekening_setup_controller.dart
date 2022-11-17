@@ -6,6 +6,7 @@ import 'package:catatan_keuangan_online/app/models/rekening_model.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import '../../../mahas/components/pages/setup_page_component.dart';
+import '../../../mahas/mahas_config.dart';
 import '../../../routes/app_pages.dart';
 
 class PengaturanRekeningSetupController extends GetxController {
@@ -53,6 +54,8 @@ class PengaturanRekeningSetupController extends GetxController {
         saldoCon.value = model.saldo;
         inputIcon.value = model.icon!;
       },
+      allowDelete: MahasConfig.profile?.superUser == true,
+      allowEdit: MahasConfig.profile?.superUser == true,
     );
 
     super.onInit();

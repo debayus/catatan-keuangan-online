@@ -7,6 +7,12 @@ import '../../services/helper.dart';
 import '../../services/http_api.dart';
 import '../others/shimmer_component.dart';
 
+enum SetupPageState {
+  create,
+  update,
+  detail,
+}
+
 class SetupPageController<T> extends ChangeNotifier {
   final String Function(dynamic id)? urlApiGet;
   final String Function()? urlApiPost;
@@ -183,6 +189,18 @@ class SetupPageController<T> extends ChangeNotifier {
         }
         await EasyLoading.dismiss();
       }
+    }
+  }
+
+  SetupPageState get isState {
+    if (editable) {
+      if (_id == null) {
+        return SetupPageState.create;
+      } else {
+        return SetupPageState.update;
+      }
+    } else {
+      return SetupPageState.detail;
     }
   }
 }
