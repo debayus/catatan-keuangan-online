@@ -26,6 +26,10 @@ import '../modules/pengaturan_rekening/bindings/pengaturan_rekening_binding.dart
 import '../modules/pengaturan_rekening/views/pengaturan_rekening_view.dart';
 import '../modules/pengaturan_rekening_setup/bindings/pengaturan_rekening_setup_binding.dart';
 import '../modules/pengaturan_rekening_setup/views/pengaturan_rekening_setup_view.dart';
+import '../modules/pengaturan_user/bindings/pengaturan_user_binding.dart';
+import '../modules/pengaturan_user/views/pengaturan_user_view.dart';
+import '../modules/pengaturan_user_setup/bindings/pengaturan_user_setup_binding.dart';
+import '../modules/pengaturan_user_setup/views/pengaturan_user_setup_view.dart';
 import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
 import '../modules/splash_screen/bindings/splash_screen_binding.dart';
@@ -185,6 +189,16 @@ class AppPages {
       name: _Paths.TRANSAKSI_SETUP,
       page: () => const TransaksiSetupView(),
       binding: TransaksiSetupBinding(),
+    ),
+    GetPage(
+      name: _Paths.PENGATURAN_USER,
+      page: () => const PengaturanUserView(),
+      binding: PengaturanUserBinding(),
+    ),
+    GetPage(
+      name: _Paths.PENGATURAN_USER_SETUP,
+      page: () => const PengaturanUserSetupView(),
+      binding: PengaturanUserSetupBinding(),
     ),
   ];
 }

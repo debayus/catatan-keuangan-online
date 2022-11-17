@@ -2,6 +2,7 @@ import 'dart:convert';
 
 class ProfileModel {
   String? perusahaan;
+  int? id;
   String? nama;
   bool? superUser;
 
@@ -14,6 +15,7 @@ class ProfileModel {
     final model = ProfileModel();
 
     model.perusahaan = dynamicData['perusahaan'];
+    model.id = dynamicData['id'];
     model.nama = dynamicData['nama'];
     model.superUser = dynamicData['super_user'];
     return model;

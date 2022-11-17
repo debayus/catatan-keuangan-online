@@ -80,7 +80,7 @@ class Helper {
             const Padding(padding: EdgeInsets.all(7)),
             Text(
               message ?? "-",
-              maxLines: 2,
+              // maxLines: 2,
               style: const TextStyle(
                 color: MahasColors.yellow,
               ),

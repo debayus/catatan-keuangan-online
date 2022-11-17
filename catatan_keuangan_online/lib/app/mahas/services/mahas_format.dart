@@ -8,6 +8,38 @@ class MahasFormat {
     return dateFormat.format(date);
   }
 
+  static String? dateToString(DateTime? date) {
+    if (date == null) return null;
+    var dateFormat = DateFormat("yyyy-MM-dd");
+    return dateFormat.format(date);
+  }
+
+  static String? timeToString(
+    TimeOfDay? time, {
+    bool twentyFour = true,
+    bool millisecond = true,
+  }) {
+    if (time == null) return null;
+    var hour =
+        twentyFour ? time.hour : (time.hour > 12 ? time.hour - 12 : time.hour);
+    if (hour == 0) {
+      hour = 12;
+    }
+    var minute = time.minute;
+    var strHour = hour > 9 ? '$hour' : '0$hour';
+    var strMinute = minute > 9 ? '$minute' : '0$minute';
+    var r = "$strHour:$strMinute";
+    if (millisecond) {
+      r += ":00";
+    }
+    return twentyFour ? r : '$r ${time.hour > 12 ? 'PM' : 'AM'}';
+  }
+
+  static String? dateTimeOfDayToString(DateTime? date, TimeOfDay? time) {
+    if (date == null || time == null) return null;
+    return "${dateToString(date)}T${timeToString(time)}";
+  }
+
   static String displayTime(
     TimeOfDay? time, {
     bool twentyFour = true,

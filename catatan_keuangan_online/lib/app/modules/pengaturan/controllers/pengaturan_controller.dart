@@ -22,6 +22,10 @@ class PengaturanController extends GetxController {
     Get.toNamed(Routes.PENGATURAN_JENIS_PEMASUKAN);
   }
 
+  void userOnPress() {
+    Get.toNamed(Routes.PENGATURAN_USER);
+  }
+
   void hapusAkunOnPress() async {
     if (EasyLoading.isShow) return;
     var r = await Helper.dialogQuestion(
@@ -54,6 +58,7 @@ class PengaturanController extends GetxController {
         FontAwesomeIcons.fileInvoiceDollar, jenisPengeluaranOnPress));
     menus.add(MenuItemModel('Jenis Pemasukan',
         FontAwesomeIcons.handHoldingDollar, jenisPemasukanOnPress));
+    menus.add(MenuItemModel('User', FontAwesomeIcons.user, userOnPress));
     menus.add(MenuItemModel(
         'Hapus Akun', FontAwesomeIcons.trashCan, hapusAkunOnPress));
     menus.add(MenuItemModel(

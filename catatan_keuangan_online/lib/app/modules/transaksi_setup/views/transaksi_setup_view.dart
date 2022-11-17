@@ -16,6 +16,12 @@ class TransaksiSetupView extends GetView<TransaksiSetupController> {
       controller: controller.formCon,
       title: 'Transaksi',
       children: () => [
+        InputLookupComponent<RekeningModel>(
+          controller: controller.userCon,
+          editable: controller.formCon.editable,
+          required: true,
+          label: 'User',
+        ),
         InputRadioComponent(
           controller: controller.tipeCon,
           editable: controller.formCon.editable,

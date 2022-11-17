@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'package:catatan_keuangan_online/app/mahas/mahas_config.dart';
 import 'package:catatan_keuangan_online/app/mahas/services/helper.dart';
+import 'package:catatan_keuangan_online/app/mahas/services/mahas_format.dart';
 import 'package:catatan_keuangan_online/app/models/jenis_pengeluaran_pemasukan_model.dart';
 import 'package:catatan_keuangan_online/app/models/master_icon_model.dart';
 import 'package:catatan_keuangan_online/app/models/rekening_model.dart';
@@ -10,10 +12,18 @@ import '../../../mahas/components/inputs/input_lookup_component.dart';
 import '../../../mahas/components/inputs/input_radio_component.dart';
 import '../../../mahas/components/inputs/input_text_component.dart';
 import '../../../mahas/components/pages/setup_page_component.dart';
+import '../../../models/user_model.dart';
 
 class TransaksiSetupController extends GetxController {
   late SetupPageController formCon;
 
+  final userCon = InputLookupController<UserModel>(
+    urlApi: (pageIndex, filter) =>
+        '/api/pengeluaranpemasukan/user?page=$pageIndex&filter=$filter',
+    fromDynamic: UserModel.fromDynamic,
+    itemText: (e) => e.nama ?? "",
+    itemValue: (e) => e.id,
+  );
   late InputRadioController tipeCon;
   final rekeningCon = InputLookupController<RekeningModel>(
     urlApi: (pageIndex, filter) =>
@@ -77,7 +87,14 @@ class TransaksiSetupController extends GetxController {
       urlApiPut: (id) => '/api/test/$id',
       urlApiDelete: (id) => '/api/test/$id',
       bodyApi: (id) => {
-        // 'name': nameCon.value,
+        'id_perusahaan_user': null,
+        'id_jenis_pengeluaran_pemasukan': jenisCon.value!.id,
+        'id_rekening': rekeningCon.value!.id,
+        'tanggal':
+            "${MahasFormat.dateTimeOfDayToString(tanggalCon.value, jamCon.value)}",
+        'nilai': nilaiCon.value,
+        'catatan': catatanCon.value,
+        'pengeluaran': tipeCon.value
       },
       itemKey: (e) => e['id'],
       itemIdAfterSubmit: (e) => json.decode(e)['id'],
@@ -97,6 +114,8 @@ class TransaksiSetupController extends GetxController {
       onInit: () async {
         tanggalCon.value = DateTime.now();
         jamCon.value = TimeOfDay.fromDateTime(DateTime.now());
+        userCon.value =
+            UserModel.init(MahasConfig.profile!.id, MahasConfig.profile!.nama);
       },
     );
 
