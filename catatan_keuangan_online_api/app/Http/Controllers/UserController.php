@@ -63,9 +63,7 @@ class UserController extends Controller
                 'users.id_firebase',
                 'perusahaan_users.super_user'
             )->find($id);
-            if (empty($model)) return response()->json([
-                'message' => 'Data tidak ditemukan'
-            ], 401);
+            if (empty($model)) return response()->json('Data tidak ditemukan', 401);
 
             return response()->json($model, 200);
         }catch(Exception $ex){
@@ -78,9 +76,7 @@ class UserController extends Controller
         if (!$request->super_user) return response()->json('unauthorized', 401);
         try{
             $model = PerusahaanUser::where('id_perusahaan', '=', $request->perusahaan->id)->find($id);
-            if (empty($model)) return response()->json([
-                'message' => 'Data tidak ditemukan'
-            ], 401);
+            if (empty($model)) return response()->json('Data tidak ditemukan', 401);
             $modelUser = User::find($model->id_user);
             if (!empty($modelUser)){
                 $modelUser->nama = $request->nama;
@@ -102,9 +98,7 @@ class UserController extends Controller
         if (!$request->super_user) return response()->json('unauthorized', 401);
         try{
             $model = PerusahaanUser::where('id_perusahaan', '=', $request->perusahaan->id)->find($id);
-            if (empty($model)) return response()->json([
-                'message' => 'Data tidak ditemukan'
-            ], 401);
+            if (empty($model)) return response()->json('Data tidak ditemukan', 401);
 
             $model->delete();
 

@@ -1,7 +1,7 @@
 import 'package:catatan_keuangan_online/app/mahas/components/mahas_colors.dart';
+import 'package:catatan_keuangan_online/app/mahas/components/others/empty_component.dart';
 import 'package:catatan_keuangan_online/app/mahas/mahas_config.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../models/api_list_resut_model.dart';
 import '../../services/helper.dart';
 import '../../services/http_api.dart';
@@ -295,31 +295,9 @@ class _LookupComponentState<T, U> extends State<LookupComponent<T, U>> {
                                 ? const ShimmerComponent()
                                 : widget.controller._items.isEmpty &&
                                         !widget.controller._isItemRefresh
-                                    ? Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.stretch,
-                                        children: [
-                                          const Icon(
-                                            FontAwesomeIcons.boxOpen,
-                                            size: 40,
-                                          ),
-                                          const Padding(
-                                              padding: EdgeInsets.all(5)),
-                                          const Center(
-                                              child: Text("Tidak ada data")),
-                                          const Padding(
-                                              padding: EdgeInsets.all(5)),
-                                          TextButton(
-                                            onPressed:
-                                                widget.controller.refreshItems,
-                                            child: const Text(
-                                              "Refresh",
-                                            ),
-                                          )
-                                        ],
-                                      )
+                                    ? EmptyComponent(
+                                        onPressed:
+                                            widget.controller.refreshItems)
                                     : ListView.separated(
                                         separatorBuilder: (context, index) =>
                                             const Divider(height: 0),

@@ -1,6 +1,10 @@
+import 'package:catatan_keuangan_online/app/mahas/components/mahas_themes.dart';
+import 'package:catatan_keuangan_online/app/mahas/services/mahas_format.dart';
+import 'package:catatan_keuangan_online/app/models/transaksi_model.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import '../../../mahas/components/others/list_component.dart';
 import '../controllers/transaksi_controller.dart';
 
 class TransaksiView extends GetView<TransaksiController> {
@@ -38,8 +42,27 @@ class TransaksiView extends GetView<TransaksiController> {
             ),
           ],
         ),
-        body: Center(
-          child: Container(),
+        body: ListComponent(
+          controller: controller.listCon,
+          itemBuilder: (TransaksiModel e) {
+            return ListTile(
+              leading: Container(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: Icon(controller.getIcon(e.jenis)),
+              ),
+              title: Text(e.rekeningsNama ?? "-"),
+              trailing: Text(
+                MahasFormat.toCurrency(e.nilai),
+                style: MahasThemes.muted,
+              ),
+              subtitle: Text(
+                e.catatan ?? "-",
+                style: MahasThemes.muted,
+              ),
+              // subtitle: Text(MahasFormat.toCurrency(e.saldo)),
+              // onTap: () => controller.itemOnTab(e.id!),
+            );
+          },
         ),
       ),
     );

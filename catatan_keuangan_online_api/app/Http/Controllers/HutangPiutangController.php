@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PengeluaranPemasukan;
+use App\Models\HutangPiutang;
+use App\Models\HutangPiutangPembayaran;
 use App\Models\PerusahaanUser;
 use App\Models\Rekening;
 use App\Models\User;
@@ -10,8 +11,27 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class PengeluaranPemasukanController extends Controller
+class HutangPiutangController extends Controller
 {
+    public function index(Request $request)
+    {
+        try{
+            $query = HutangPiutang::where('id_perusahaan', '=', $request->perusahaan->id);
+            if (isset($request->filter)){
+                $query = $query->where('nama', 'like', '%'.$request->filter.'%');
+            }
+            $totalRowCount = $query->count();
+            $models = $query->simplePaginate(30);
+
+            return response()->json([
+                'data' => $models,
+                'totalRowCount' => $totalRowCount
+            ]);
+        }catch(Exception $ex){
+            return response()->json($ex->getMessage(), 400);
+        }
+    }
+
     public function store(Request $request)
     {
         try{
@@ -20,7 +40,7 @@ class PengeluaranPemasukanController extends Controller
 
             // check saldo
             $saldo = $rekening->saldo;
-            if ($request->pengeluaran){
+            if ($request->hutang){
                 $saldo -= $request->nilai;
             }else{
                 $saldo += $request->nilai;
@@ -29,16 +49,15 @@ class PengeluaranPemasukanController extends Controller
 
             DB::beginTransaction();
 
-            $model = new PengeluaranPemasukan;
+            $model = new HutangPiutang;
             $model->id_perusahaan = $request->perusahaan->id;
             $model->id_user_create = $request->user->id;
-            $model->id_perusahaan_user = $request->id_perusahaan_user;
-            $model->id_jenis_pengeluaran_pemasukan = $request->id_jenis_pengeluaran_pemasukan;
             $model->id_rekening = $request->id_rekening;
             $model->tanggal = $request->tanggal;
+            $model->tanggal_tempo = $request->tanggal_tempo;
             $model->nilai = $request->nilai;
             $model->catatan = $request->catatan;
-            $model->pengeluaran = $request->pengeluaran;
+            $model->hutang = $request->hutang;
             $model->save();
 
             $rekening->saldo = $saldo;
@@ -54,7 +73,7 @@ class PengeluaranPemasukanController extends Controller
     public function show(Request $request, $id)
     {
         try{
-            $model = PengeluaranPemasukan::where('id_perusahaan', '=', $request->perusahaan->id)->find($id);
+            $model = HutangPiutang::where('id_perusahaan', '=', $request->perusahaan->id)->find($id);
             if (empty($model)) return response()->json('Data tidak ditemukan', 401);
 
             return response()->json($model, 200);
@@ -66,8 +85,13 @@ class PengeluaranPemasukanController extends Controller
     public function update(Request $request, $id)
     {
         try{
-            $model = PengeluaranPemasukan::where('id_perusahaan', '=', $request->perusahaan->id)->find($id);
-            if (empty($model)) return response()->json(='Data tidak ditemukan', 401);
+            $model = HutangPiutang::where('id_perusahaan', '=', $request->perusahaan->id)->find($id);
+            if (empty($model)) return response()->json('Data tidak ditemukan', 401);
+
+            if ($model->nilai != $request->nilai){
+                $rekening = Rekening::where('id_perusahaan', '=', $request->perusahaan->id)->find($model->id_rekening);
+                if (empty($rekening)) return response()->json('Sudah melakukan transaksi, tidak dapat mengubah nilai', 401);
+            }
 
             $rekening_old = Rekening::where('id_perusahaan', '=', $request->perusahaan->id)->find($model->id_rekening);
             if (empty($rekening)) return response()->json('Rekening tidak ditemukan', 401);
@@ -81,13 +105,13 @@ class PengeluaranPemasukanController extends Controller
             // check saldo old
             $saldo_new = null;
             $saldo_old = $rekening_old->saldo;
-            if ($model->pengeluaran){
+            if ($model->hutang){
                 $saldo_old += $model->nilai;
             }else{
                 $saldo_old -= $model->nilai;
             }
             if (empty($rekening)){
-                if ($model->pengeluaran){
+                if ($model->hutang){
                     $saldo_old -= $request->nilai;
                 }else{
                     $saldo_old += $request->nilai;
@@ -97,7 +121,7 @@ class PengeluaranPemasukanController extends Controller
 
             if (!empty($rekening)){
                 $saldo_new = $rekening->saldo;
-                if ($model->pengeluaran){
+                if ($model->hutang){
                     $saldo_new -= $request->nilai;
                 }else{
                     $saldo_new += $request->nilai;
@@ -106,13 +130,12 @@ class PengeluaranPemasukanController extends Controller
 
             DB::beginTransaction();
 
-            $model->id_perusahaan_user = $request->id_perusahaan_user;
-            $model->id_jenis_pengeluaran_pemasukan = $request->id_jenis_pengeluaran_pemasukan;
             $model->id_rekening = $request->id_rekening;
             $model->tanggal = $request->tanggal;
+            $model->tanggal_tempo = $request->tanggal_tempo;
             $model->nilai = $request->nilai;
             $model->catatan = $request->catatan;
-            $model->pengeluaran = $request->pengeluaran;
+            $model->hutang = $request->hutang;
             $model->save();
 
             $rekening_old->saldo = $saldo_old;
@@ -132,15 +155,18 @@ class PengeluaranPemasukanController extends Controller
     public function destroy(Request $request, $id)
     {
         try{
-            $model = PengeluaranPemasukan::where('id_perusahaan', '=', $request->perusahaan->id)->find($id);
+            $model = HutangPiutang::where('id_perusahaan', '=', $request->perusahaan->id)->find($id);
             if (empty($model)) return response()->json('Data tidak ditemukan', 401);
 
+            $pembayaran = HutangPiutangPembayaran::where('id_hutang_piutang', '=', $request->perusahaan->id)->count();
+            if ($pembayaran > 0) response()->json('Sudah melakukan transaksi', 401);
+
             $rekening = Rekening::where('id_perusahaan', '=', $request->perusahaan->id)->find($model->id_rekening);
-            if (empty($rekening)) return response()->json('Rekening tidak ditemukan', 401);
+            if (empty($rekening)) return response()->json('Sudah melakukan transaksi', 401);
 
             // check saldo
             $saldo = $rekening->saldo;
-            if ($request->pengeluaran){
+            if ($request->hutang){
                 $saldo += $request->nilai;
             }else{
                 $saldo -= $request->nilai;

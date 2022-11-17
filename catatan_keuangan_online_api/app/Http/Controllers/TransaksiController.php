@@ -14,25 +14,27 @@ class TransaksiController extends Controller
     public function index(Request $request)
     {
         try{
-            $hutangPiutang = HutangPiutang::where('id_perusahaan', '=', $request->perusahaan->id)
-            ->join('rekenings', 'rekenings.id', '=', 'hutangpiutangs.id_rekening')
+            $hutangPiutang = HutangPiutang::where('hutang_piutangs.id_perusahaan', '=', $request->perusahaan->id)
+            ->join('rekenings', 'rekenings.id', '=', 'hutang_piutangs.id_rekening')
             ->select(
-                'hutangpiutangs.id_rekening',
-                'hutangpiutangs.tanggal',
-                'hutangpiutangs.nilai',
-                'hutangpiutangs.catatan',
-                'CASE WHEN hutangpiutangs.hutang = 1 THEN "Hutang" ELSE "Piutang" END as jenis',
+                'hutang_piutangs.id',
+                'hutang_piutangs.id_rekening',
+                'hutang_piutangs.tanggal',
+                'hutang_piutangs.nilai',
+                'hutang_piutangs.catatan',
+                DB::raw('CASE WHEN hutang_piutangs.hutang = 1 THEN "Hutang" ELSE "Piutang" END as jenis'),
                 'rekenings.nama as rekenings_nama'
             );
 
-            $query = PengeluaranPemasukan::where('id_perusahaan', '=', $request->perusahaan->id)
-            ->join('rekenings', 'rekenings.id', '=', 'pengeluaranpemasukans.id_rekening')
+            $query = PengeluaranPemasukan::where('pengeluaran_pemasukans.id_perusahaan', '=', $request->perusahaan->id)
+            ->join('rekenings', 'rekenings.id', '=', 'pengeluaran_pemasukans.id_rekening')
             ->select(
-                'pengeluaranpemasukans.id_rekening',
-                'pengeluaranpemasukans.tanggal',
-                'pengeluaranpemasukans.nilai',
-                'pengeluaranpemasukans.catatan',
-                'CASE WHEN pengeluaranpemasukans.pengeluaran = 1 THEN "Pengeluaran" ELSE "Pemasukan" END as jenis',
+                'pengeluaran_pemasukans.id',
+                'pengeluaran_pemasukans.id_rekening',
+                'pengeluaran_pemasukans.tanggal',
+                'pengeluaran_pemasukans.nilai',
+                'pengeluaran_pemasukans.catatan',
+                DB::raw('CASE WHEN pengeluaran_pemasukans.pengeluaran = 1 THEN "Pengeluaran" ELSE "Pemasukan" END as jenis'),
                 'rekenings.nama as rekenings_nama'
             )
             ->union($hutangPiutang);

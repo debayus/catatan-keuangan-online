@@ -34,9 +34,7 @@ class TestController extends Controller
     public function show($id)
     {
         $model = Test::find($id);
-        if (empty($model)) return response()->json([
-            'message' => 'Data tidak ditemukan'
-        ], 401);
+        if (empty($model)) return response()->json('Data tidak ditemukan', 401);
 
         return response()->json($model, 200);
     }
@@ -44,9 +42,7 @@ class TestController extends Controller
     public function update(Request $request, $id)
     {
         $model = Test::find($id);
-        if (empty($model)) return response()->json([
-            'message' => 'Data tidak ditemukan'
-        ], 401);
+        if (empty($model)) return response()->json('Data tidak ditemukan', 401);
 
         $model->name = $request->name;
         $model->save();
@@ -57,9 +53,7 @@ class TestController extends Controller
     public function destroy($id)
     {
         $model = Test::find($id);
-        if (empty($model)) return response()->json([
-            'message' => 'Data tidak ditemukan'
-        ], 401);
+        if (empty($model)) return response()->json('Data tidak ditemukan', 401);
 
         $model->delete();
 

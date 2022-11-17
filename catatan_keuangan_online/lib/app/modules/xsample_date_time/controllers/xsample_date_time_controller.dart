@@ -21,7 +21,7 @@ class XsampleDateTimeController extends GetxController {
   }
 
   void setValueOnPress() {
-    dateCon.value = MahasFormat.stringToDate('2021-01-01');
+    dateCon.value = MahasFormat.stringToDateTime('2021-01-01');
     timeCon.value = MahasFormat.stringToTime('11:24');
   }
 

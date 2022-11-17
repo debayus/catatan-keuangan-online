@@ -1,5 +1,6 @@
 import 'package:catatan_keuangan_online/app/mahas/components/mahas_colors.dart';
 import 'package:catatan_keuangan_online/app/mahas/components/mahas_themes.dart';
+import 'package:catatan_keuangan_online/app/mahas/components/others/empty_component.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -222,20 +223,9 @@ class _InputDetailComponentState<T> extends State<InputDetailComponent<T>> {
                 Visibility(
                   visible:
                       widget.controller._values.isEmpty && !widget.editable,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: const [
-                      Padding(padding: EdgeInsets.all(5)),
-                      Icon(
-                        FontAwesomeIcons.boxOpen,
-                        size: 30,
-                      ),
-                      Padding(padding: EdgeInsets.all(5)),
-                      Text(
-                        "Tidak ada data",
-                      ),
-                    ],
+                  child: Container(
+                    margin: const EdgeInsets.only(top: 15),
+                    child: const EmptyComponent(),
                   ),
                 ),
                 Column(

@@ -7,6 +7,7 @@ use App\Http\Controllers\RekeningController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\UserController;
+use App\Models\HutangPiutang;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -60,6 +61,18 @@ Route::group(['middleware' => ['firebase.admin']], function(){
         Route::post('/','store');
         Route::put('/{id}','update');
         Route::delete('/{id}', 'destroy');
+    });
+
+    Route::prefix('/hutangpiutang')->controller(HutangPiutang::class)->group(function () {
+        Route::get('/', 'index');
+        Route::get('/{id}', 'show');
+        Route::post('/','store');
+        Route::put('/{id}','update');
+        Route::delete('/{id}', 'destroy');
+    });
+
+    Route::prefix('/transaksi')->controller(TransaksiController::class)->group(function () {
+        Route::get('/', 'index');
     });
 });
 

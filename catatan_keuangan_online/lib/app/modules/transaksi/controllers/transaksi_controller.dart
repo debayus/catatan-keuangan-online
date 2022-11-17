@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
+import '../../../mahas/components/others/list_component.dart';
 import '../../../mahas/services/helper.dart';
+import '../../../models/transaksi_model.dart';
 
 class TransaksiController extends GetxController {
   List<Widget> menus = [
@@ -36,6 +38,25 @@ class TransaksiController extends GetxController {
       Get.toNamed(Routes.TRANSAKSI_SETUP);
     }
   }
+
+  IconData getIcon(String? jenis) {
+    if (jenis == null) return FontAwesomeIcons.icons;
+    return jenis == "Pemasukan"
+        ? FontAwesomeIcons.handHoldingDollar
+        : jenis == "Pengeluaran"
+            ? FontAwesomeIcons.fileInvoiceDollar
+            : jenis == "Hutang"
+                ? FontAwesomeIcons.creditCard
+                : jenis == "Piutang"
+                    ? FontAwesomeIcons.creditCard
+                    : FontAwesomeIcons.icons;
+  }
+
+  final listCon = ListComponentController<TransaksiModel>(
+    urlApi: (index, filter) => '/api/transaksi?page=$index&filter=$filter',
+    fromDynamic: TransaksiModel.fromDynamic,
+    allowSearch: false,
+  );
 
   void searchOnPress() {}
 }

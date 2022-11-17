@@ -16,12 +16,18 @@ class EmptyComponent extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Icon(
+          Icon(
             FontAwesomeIcons.boxOpen,
             size: 40,
+            color: Colors.black.withOpacity(.3),
           ),
           const Padding(padding: EdgeInsets.all(5)),
-          const Text("Tidak ada data"),
+          Text(
+            "Tidak ada data",
+            style: TextStyle(
+              color: Colors.black.withOpacity(.3),
+            ),
+          ),
           const Padding(padding: EdgeInsets.all(5)),
           Visibility(
             visible: onPressed != null,
