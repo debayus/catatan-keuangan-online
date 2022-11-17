@@ -33,7 +33,7 @@ class XsampleDetailView extends GetView<XsampleDetailController> {
                 // builder: (e, editable, deleteOnPress) => Container(
                 //   child: Column(
                 //     children: [
-                //       TextComponent(e.nama ?? ""),
+                //       Text(e.nama ?? ""),
                 //       InkWell(
                 //         onTap: deleteOnPress,
                 //         child: Icon(
@@ -63,7 +63,7 @@ class XsampleDetailView extends GetView<XsampleDetailController> {
                 // builder: (e, editable, deleteOnPress, editOnPress) => Container(
                 //   child: Column(
                 //     children: [
-                //       TextComponent(e.nama ?? ""),
+                //       Text(e.nama ?? ""),
                 //       InkWell(
                 //         onTap: deleteOnPress,
                 //         child: Icon(

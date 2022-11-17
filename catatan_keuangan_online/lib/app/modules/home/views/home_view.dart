@@ -2,9 +2,9 @@ import 'package:catatan_keuangan_online/app/mahas/components/mahas_colors.dart';
 import 'package:catatan_keuangan_online/app/modules/grafik/views/grafik_view.dart';
 import 'package:catatan_keuangan_online/app/modules/hutang_piutang/views/hutang_piutang_view.dart';
 import 'package:catatan_keuangan_online/app/modules/pengaturan/views/pengaturan_view.dart';
-import 'package:catatan_keuangan_online/app/modules/trasaksi/views/trasaksi_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../transaksi/views/transaksi_view.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -19,7 +19,7 @@ class HomeView extends GetView<HomeController> {
             () => IndexedStack(
               index: controller.tabIndex.value,
               children: [
-                TrasaksiView(controller: controller.transaksiCon),
+                TransaksiView(controller: controller.transaksiCon),
                 GrafikView(controller: controller.grafikCon),
                 HutangPiutangView(controller: controller.hutangPiutangCon),
                 PengaturanView(controller: controller.pengaturanCon),

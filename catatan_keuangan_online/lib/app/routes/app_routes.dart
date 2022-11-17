@@ -9,7 +9,6 @@ abstract class Routes {
   static const LOGIN = _Paths.LOGIN;
   static const ERROR = _Paths.ERROR;
   static const REGISTER = _Paths.REGISTER;
-  static const TRASAKSI = _Paths.TRASAKSI;
   static const GRAFIK = _Paths.GRAFIK;
   static const HUTANG_PIUTANG = _Paths.HUTANG_PIUTANG;
   static const PENGATURAN = _Paths.PENGATURAN;
@@ -32,6 +31,8 @@ abstract class Routes {
       _Paths.PENGATURAN_JENIS_PENGELUARAN_SETUP;
   static const PENGATURAN_JENIS_PEMASUKAN_SETUP =
       _Paths.PENGATURAN_JENIS_PEMASUKAN_SETUP;
+  static const TRANSAKSI = _Paths.TRANSAKSI;
+  static const TRANSAKSI_SETUP = _Paths.TRANSAKSI_SETUP;
 }
 
 abstract class _Paths {
@@ -40,7 +41,6 @@ abstract class _Paths {
   static const LOGIN = '/login';
   static const ERROR = '/error';
   static const REGISTER = '/register';
-  static const TRASAKSI = '/trasaksi';
   static const GRAFIK = '/grafik';
   static const HUTANG_PIUTANG = '/hutang-piutang';
   static const PENGATURAN = '/pengaturan';
@@ -62,4 +62,6 @@ abstract class _Paths {
       '/pengaturan-jenis-pengeluaran-setup';
   static const PENGATURAN_JENIS_PEMASUKAN_SETUP =
       '/pengaturan-jenis-pemasukan-setup';
+  static const TRANSAKSI = '/transaksi';
+  static const TRANSAKSI_SETUP = '/transaksi-setup';
 }

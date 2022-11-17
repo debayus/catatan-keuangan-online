@@ -21,7 +21,7 @@ class PengaturanRekeningView extends GetView<PengaturanRekeningController> {
             child: GestureDetector(
               onTap: controller.addOnPress,
               child: const Icon(
-                FontAwesomeIcons.plus,
+                FontAwesomeIcons.circlePlus,
                 size: 24,
               ),
             ),

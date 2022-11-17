@@ -113,9 +113,8 @@ class LookupController<T, U> extends ChangeNotifier {
         });
       }
       if (apiModel.success) {
-        ApiResultListModel listModel = MahasConfig.isLaravelBackend
-            ? ApiResultListModel.fromJson(apiModel.body)
-            : ApiResultListModel.fromDynamic(apiModel.body);
+        ApiResultListModel listModel =
+            ApiResultListModel.fromJson(apiModel.body);
         _maxPage = listModel.maxPage!;
         _pageIndex = pageIndexX;
         for (var i = 0; i < (listModel.datas ?? []).length; i++) {
@@ -300,7 +299,7 @@ class _LookupComponentState<T, U> extends State<LookupComponent<T, U>> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.center,
+                                            CrossAxisAlignment.stretch,
                                         children: [
                                           const Icon(
                                             FontAwesomeIcons.boxOpen,
@@ -308,7 +307,8 @@ class _LookupComponentState<T, U> extends State<LookupComponent<T, U>> {
                                           ),
                                           const Padding(
                                               padding: EdgeInsets.all(5)),
-                                          const Text("Tidak ada data"),
+                                          const Center(
+                                              child: Text("Tidak ada data")),
                                           const Padding(
                                               padding: EdgeInsets.all(5)),
                                           TextButton(

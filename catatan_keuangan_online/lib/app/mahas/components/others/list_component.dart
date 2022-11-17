@@ -66,9 +66,8 @@ class ListComponentController<T> {
         _isItemRefresh = false;
       });
       if (apiModel.success) {
-        ApiResultListModel listModel = MahasConfig.isLaravelBackend
-            ? ApiResultListModel.fromJson(apiModel.body)
-            : ApiResultListModel.fromDynamic(apiModel.body);
+        ApiResultListModel listModel =
+            ApiResultListModel.fromJson(apiModel.body);
         _maxPage = listModel.maxPage!;
         _pageIndex = pageIndexX;
         for (var obj in (listModel.datas ?? [])) {

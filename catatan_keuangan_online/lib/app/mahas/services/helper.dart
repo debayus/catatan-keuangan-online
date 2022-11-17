@@ -3,6 +3,7 @@ import 'package:catatan_keuangan_online/app/mahas/components/mahas_themes.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:uuid/uuid.dart';
 
 class Helper {
@@ -110,5 +111,28 @@ class Helper {
     const uuid = Uuid();
     var r = uuid.v4();
     return r;
+  }
+
+  static dynamic modalMenu(List<Widget> children) async {
+    return await showCustomModalBottomSheet(
+      context: Get.context!,
+      builder: (context) => Container(
+        margin: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
+        decoration: BoxDecoration(
+          borderRadius:
+              BorderRadius.all(Radius.circular(MahasThemes.borderRadius)),
+          color: Colors.white,
+        ),
+        child: Column(
+          children: children,
+        ),
+      ),
+      containerWidget: (_, animation, child) => SafeArea(
+        child: Column(
+          children: [Expanded(child: Container()), child],
+        ),
+      ),
+      expand: false,
+    );
   }
 }

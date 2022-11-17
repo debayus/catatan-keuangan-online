@@ -14,13 +14,14 @@ class ApiResultListModel {
 
   static ApiResultListModel fromDynamic(dynamic data) {
     final model = ApiResultListModel();
-    model.totalRowCount = data['totalRowCount'];
     if (MahasConfig.isLaravelBackend) {
+      model.totalRowCount = data['totalRowCount'];
       model.limit = data['data']['per_page'];
       model.datas = data['data']['data'];
     } else {
+      model.totalRowCount = data['totalCount'];
       model.limit = data['pageSize'];
-      model.datas = data['list'];
+      model.datas = data['datas'];
     }
     model.maxPage = model.totalRowCount == 0
         ? 0

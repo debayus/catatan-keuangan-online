@@ -25,7 +25,7 @@ class XsampleDropdownController extends GetxController {
     // custom widget
     // itemBuilder: (e, onClick, color) => ListTile(
     //   tileColor: color,
-    //   title: TextComponent(e.nama ?? ""),
+    //   title: Text(e.nama ?? ""),
     //   trailing: Icon(Icons.rocket),
     //   onTap: onClick,
     // ),

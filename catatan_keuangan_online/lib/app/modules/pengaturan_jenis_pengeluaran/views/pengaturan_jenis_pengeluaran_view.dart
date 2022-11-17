@@ -21,7 +21,7 @@ class PengaturanJenisPengeluaranView
             child: GestureDetector(
               onTap: controller.addOnPress,
               child: const Icon(
-                FontAwesomeIcons.plus,
+                FontAwesomeIcons.circlePlus,
                 size: 24,
               ),
             ),

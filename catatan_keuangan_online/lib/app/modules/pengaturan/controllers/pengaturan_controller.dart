@@ -50,10 +50,10 @@ class PengaturanController extends GetxController {
 
     menus.add(MenuItemModel(
         'Rekening', FontAwesomeIcons.creditCard, rekeningOnPress));
-    menus.add(MenuItemModel('Jenis Pemasukan',
-        FontAwesomeIcons.handHoldingDollar, jenisPemasukanOnPress));
     menus.add(MenuItemModel('Jenis Pengeluaran',
         FontAwesomeIcons.fileInvoiceDollar, jenisPengeluaranOnPress));
+    menus.add(MenuItemModel('Jenis Pemasukan',
+        FontAwesomeIcons.handHoldingDollar, jenisPemasukanOnPress));
     menus.add(MenuItemModel(
         'Hapus Akun', FontAwesomeIcons.trashCan, hapusAkunOnPress));
     menus.add(MenuItemModel(

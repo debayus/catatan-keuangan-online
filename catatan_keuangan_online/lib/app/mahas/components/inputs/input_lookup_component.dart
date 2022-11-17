@@ -16,19 +16,19 @@ class InputLookupController<T> {
   final T Function(dynamic e) fromDynamic;
   late LookupController<T, T> _lookupCon;
   late Function(VoidCallback fn) setState;
+  late bool Function()? beforeOnOpenModal;
   late BuildContext context;
-  String? title;
   String? label;
   Widget Function(T e, void Function() onClick, Color? color)? itemBuilder;
   bool _isInit = false;
 
   InputLookupController({
-    this.title,
     required this.itemText,
     required this.itemValue,
     required this.urlApi,
     required this.fromDynamic,
     this.itemBuilder,
+    this.beforeOnOpenModal,
   });
 
   String get text {
@@ -63,6 +63,7 @@ class InputLookupController<T> {
 
   void _onTab(bool editable) async {
     if (!editable) return;
+    if (beforeOnOpenModal != null && beforeOnOpenModal!() == false) return;
     _lookupCon.clearSelectedItems();
 
     FocusScope.of(context).unfocus();
@@ -70,7 +71,7 @@ class InputLookupController<T> {
       context: context,
       builder: (context) => LookupComponent<T, T>(
         controller: _lookupCon,
-        title: title ?? label,
+        title: label,
       ),
     );
   }
@@ -154,7 +155,7 @@ class _InputLookupComponentState<T> extends State<InputLookupComponent<T>> {
       onTap: !widget.editable
           ? null
           : () => widget.controller._onTab(widget.editable),
-      icon: !widget.editable ? null : FontAwesomeIcons.searchengin,
+      icon: !widget.editable ? null : FontAwesomeIcons.magnifyingGlass,
       childText: widget.controller.text,
     );
   }

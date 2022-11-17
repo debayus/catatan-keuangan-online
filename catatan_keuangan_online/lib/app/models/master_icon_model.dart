@@ -8,7 +8,8 @@ class MasterIconModel {
 
   MasterIconModel(this.name, this.icon);
 
-  static IconData? getIcon(String name) {
+  static IconData? getIcon(String? name) {
+    if (name == null) return FontAwesomeIcons.icons;
     return icons.firstWhereOrNull((e) => e.name == name)?.icon;
   }
 

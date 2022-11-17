@@ -30,8 +30,10 @@ import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
 import '../modules/splash_screen/bindings/splash_screen_binding.dart';
 import '../modules/splash_screen/views/splash_screen_view.dart';
-import '../modules/trasaksi/bindings/trasaksi_binding.dart';
-import '../modules/trasaksi/views/trasaksi_view.dart';
+import '../modules/transaksi/bindings/transaksi_binding.dart';
+import '../modules/transaksi/views/transaksi_view.dart';
+import '../modules/transaksi_setup/bindings/transaksi_setup_binding.dart';
+import '../modules/transaksi_setup/views/transaksi_setup_view.dart';
 import '../modules/xsample/bindings/xsample_binding.dart';
 import '../modules/xsample/views/xsample_view.dart';
 import '../modules/xsample_checkbox_radio/bindings/xsample_checkbox_radio_binding.dart';
@@ -78,11 +80,6 @@ class AppPages {
       name: _Paths.REGISTER,
       page: () => const RegisterView(),
       binding: RegisterBinding(),
-    ),
-    GetPage(
-      name: _Paths.TRASAKSI,
-      page: () => const TrasaksiView(),
-      binding: TrasaksiBinding(),
     ),
     GetPage(
       name: _Paths.GRAFIK,
@@ -178,6 +175,16 @@ class AppPages {
       name: _Paths.PENGATURAN_JENIS_PEMASUKAN_SETUP,
       page: () => const PengaturanJenisPemasukanSetupView(),
       binding: PengaturanJenisPemasukanSetupBinding(),
+    ),
+    GetPage(
+      name: _Paths.TRANSAKSI,
+      page: () => const TransaksiView(),
+      binding: TransaksiBinding(),
+    ),
+    GetPage(
+      name: _Paths.TRANSAKSI_SETUP,
+      page: () => const TransaksiSetupView(),
+      binding: TransaksiSetupBinding(),
     ),
   ];
 }

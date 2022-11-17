@@ -2,3 +2,6 @@
 1.0.1 bug input money
 1.0.2 setup title
 1.0.3 dynamicToDouble
+1.1.0 Helper.modalMenu
+1.1.1 Lookup bug
+1.1.2 Input Radio bug

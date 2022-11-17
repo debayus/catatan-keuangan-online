@@ -35,6 +35,7 @@ class InputRadioController {
 
   InputRadioController({
     this.items = const [],
+    this.onChanged,
   });
 
   void _onChanged(RadioButtonItem v, bool editable) {
