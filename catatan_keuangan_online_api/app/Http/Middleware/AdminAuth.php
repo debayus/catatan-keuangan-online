@@ -8,6 +8,7 @@ use App\Models\User;
 use Closure;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Kreait\Firebase\Factory;
 
 class AdminAuth
@@ -25,23 +26,36 @@ class AdminAuth
 
             // user
             $user = User::where('id_firebase', '=', $uid)->first();
-            if (empty($user)) return response('unauthorized', 401);
+            if (empty($user)) {
+
+                // perusahaan user
+                $perusahaanUser = PerusahaanUser::where('email', '=', $firebase_user->email)->first();
+                if (empty($perusahaanUser)) return response('unauthorized', 401);
+
+                DB::beginTransaction();
+
+                // create user
+                $user = new User;
+                $user->id_firebase = $firebase_user->uid;
+                $user->nama = $firebase_user->email;
+                $user->email = $firebase_user->email;
+                $user->save();
+
+                // update perusahaan user
+                $perusahaanUser->id_user = $user->id;
+                $perusahaanUser->save();
+
+                DB::commit();
+            }
             $request->user = $user;
 
             // perusahaan
             $perusahaan = Perusahaan::where('id_user', '=', $user->id)->first();
             if (empty($perusahaan)){
-                $perusahaanUser = PerusahaanUser::where('id_user', '=', $firebase_user->uid)->first();
-                if (empty($perusahaanUser)){
-                    $perusahaanUser = PerusahaanUser::where('email', '=', $firebase_user->email)->first();
-                    if(!empty($perusahaanUser)){
-                        $perusahaanUser->id_user = $user->id;
-                    }
-                }
-                if (empty($perusahaanUser)){
-                    $perusahaan = Perusahaan::find($perusahaanUser->id_perusahaan);
-                    $request->perusahaan = $perusahaanUser->super_user;
-                }
+                $perusahaanUser = PerusahaanUser::where('id_user', '=', $user->id)->first();
+                if (empty($perusahaanUser)) return response('unauthorized', 401);
+                $perusahaan = Perusahaan::find($perusahaanUser->id_perusahaan);
+                $request->perusahaan = $perusahaanUser->super_user;
             }else{
                 $request->super_user = true;
             }

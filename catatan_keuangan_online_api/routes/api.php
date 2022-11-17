@@ -2,8 +2,11 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\JenisPengeluaranPemasukanController;
+use App\Http\Controllers\PengeluaranPemasukanController;
 use App\Http\Controllers\RekeningController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,6 +39,22 @@ Route::group(['middleware' => ['firebase.admin']], function(){
     });
 
     Route::prefix('/jenispengeluaranpemasukan')->controller(JenisPengeluaranPemasukanController::class)->group(function () {
+        Route::get('/', 'index');
+        Route::get('/{id}', 'show');
+        Route::post('/','store');
+        Route::put('/{id}','update');
+        Route::delete('/{id}', 'destroy');
+    });
+
+    Route::prefix('/pengeluaranpemasukan')->controller(PengeluaranPemasukanController::class)->group(function () {
+        Route::get('/user', 'user');
+        Route::get('/{id}', 'show');
+        Route::post('/','store');
+        Route::put('/{id}','update');
+        Route::delete('/{id}', 'destroy');
+    });
+
+    Route::prefix('/user')->controller(UserController::class)->group(function () {
         Route::get('/', 'index');
         Route::get('/{id}', 'show');
         Route::post('/','store');

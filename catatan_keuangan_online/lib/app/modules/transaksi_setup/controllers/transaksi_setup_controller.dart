@@ -34,7 +34,8 @@ class TransaksiSetupController extends GetxController {
     itemBuilder: (e, onClick, color) => ListTile(
       tileColor: color,
       title: Text(e.nama ?? ""),
-      trailing: Icon(MasterIconModel.getIcon(e.icon)),
+      leading: Icon(MasterIconModel.getIcon(e.icon)),
+      subtitle: Text(MahasFormat.toCurrency(e.saldo)),
       onTap: onClick,
     ),
   );
@@ -68,7 +69,7 @@ class TransaksiSetupController extends GetxController {
       itemBuilder: (e, onClick, color) => ListTile(
         tileColor: color,
         title: Text(e.nama ?? ""),
-        trailing: Icon(MasterIconModel.getIcon(e.icon)),
+        leading: Icon(MasterIconModel.getIcon(e.icon)),
         onTap: onClick,
       ),
       beforeOnOpenModal: () {
@@ -82,12 +83,12 @@ class TransaksiSetupController extends GetxController {
     );
 
     formCon = SetupPageController(
-      urlApiGet: (id) => '/api/test/$id',
-      urlApiPost: () => '/api/test',
-      urlApiPut: (id) => '/api/test/$id',
-      urlApiDelete: (id) => '/api/test/$id',
+      urlApiGet: (id) => '/api/pengeluaranpemasukan/$id',
+      urlApiPost: () => '/api/pengeluaranpemasukan',
+      urlApiPut: (id) => '/api/pengeluaranpemasukan/$id',
+      urlApiDelete: (id) => '/api/pengeluaranpemasukan/$id',
       bodyApi: (id) => {
-        'id_perusahaan_user': null,
+        'id_perusahaan_user': userCon.value?.id,
         'id_jenis_pengeluaran_pemasukan': jenisCon.value!.id,
         'id_rekening': rekeningCon.value!.id,
         'tanggal':
@@ -99,6 +100,7 @@ class TransaksiSetupController extends GetxController {
       itemKey: (e) => e['id'],
       itemIdAfterSubmit: (e) => json.decode(e)['id'],
       onBeforeSubmit: () {
+        if (!userCon.isValid) return false;
         if (!tipeCon.isValid) return false;
         if (!jenisCon.isValid) return false;
         if (!tanggalCon.isValid) return false;
@@ -114,8 +116,8 @@ class TransaksiSetupController extends GetxController {
       onInit: () async {
         tanggalCon.value = DateTime.now();
         jamCon.value = TimeOfDay.fromDateTime(DateTime.now());
-        userCon.value =
-            UserModel.init(MahasConfig.profile!.id, MahasConfig.profile!.nama);
+        userCon.value = UserModel.init(
+            MahasConfig.profile!.idPerusahaanUser, MahasConfig.profile!.nama);
       },
     );
 

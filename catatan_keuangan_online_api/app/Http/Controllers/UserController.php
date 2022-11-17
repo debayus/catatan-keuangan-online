@@ -2,17 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\JenisPengeluaranPemasukan;
+use App\Models\PerusahaanUser;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 
-class JenisPengeluaranPemasukanController extends Controller
+class UserController extends Controller
 {
     public function index(Request $request)
     {
         try{
-            $query = JenisPengeluaranPemasukan::where('id_perusahaan', '=', $request->perusahaan->id);
-            $query = $query->where('pengeluaran', '=', $request->pengeluaran);
+            $query = PerusahaanUser::where('id_perusahaan', '=', $request->perusahaan->id)
+            ->leftJoin('users', 'users.id', '=', 'perusahaan_users.id_user')
+            ->select(
+                'perusahaan_users.id',
+                'users.nama',
+                'perusahaan_users.email',
+                'users.id_firebase',
+                'perusahaan_users.super_user'
+            );
             if (isset($request->filter)){
                 $query = $query->where('nama', 'like', '%'.$request->filter.'%');
             }
@@ -32,11 +40,10 @@ class JenisPengeluaranPemasukanController extends Controller
     {
         if (!$request->super_user) return response()->json('unauthorized', 401);
         try{
-            $model = new JenisPengeluaranPemasukan;
+            $model = new PerusahaanUser;
             $model->id_perusahaan = $request->perusahaan->id;
-            $model->nama = $request->nama;
-            $model->icon = $request->icon;
-            $model->pengeluaran = $request->pengeluaran;
+            $model->email = $request->email;
+            $model->super_user = $request->input_super_user;
             $model->save();
             return response()->json(['id' => $model->id], 200);
         }catch(Exception $ex){
@@ -47,7 +54,15 @@ class JenisPengeluaranPemasukanController extends Controller
     public function show(Request $request, $id)
     {
         try{
-            $model = JenisPengeluaranPemasukan::where('id_perusahaan', '=', $request->perusahaan->id)->find($id);
+            $model = $query = PerusahaanUser::where('id_perusahaan', '=', $request->perusahaan->id)
+            ->leftJoin('users', 'users.id', '=', 'perusahaan_users.id_user')
+            ->select(
+                'perusahaan_users.id',
+                'users.nama',
+                'perusahaan_users.email',
+                'users.id_firebase',
+                'perusahaan_users.super_user'
+            )->find($id);
             if (empty($model)) return response()->json([
                 'message' => 'Data tidak ditemukan'
             ], 401);
@@ -62,13 +77,18 @@ class JenisPengeluaranPemasukanController extends Controller
     {
         if (!$request->super_user) return response()->json('unauthorized', 401);
         try{
-            $model = JenisPengeluaranPemasukan::where('id_perusahaan', '=', $request->perusahaan->id)->find($id);
+            $model = PerusahaanUser::where('id_perusahaan', '=', $request->perusahaan->id)->find($id);
             if (empty($model)) return response()->json([
                 'message' => 'Data tidak ditemukan'
             ], 401);
+            $modelUser = User::find($model->id_user);
+            if (!empty($modelUser)){
+                $modelUser->nama = $request->nama;
+                $modelUser->save();
+            }
 
-            $model->nama = $request->nama;
-            $model->icon = $request->icon;
+            $model->email = $request->email;
+            $model->super_user = $request->input_super_user;
             $model->save();
 
             return response()->json(['id' => $model->id], 200);
@@ -81,7 +101,7 @@ class JenisPengeluaranPemasukanController extends Controller
     {
         if (!$request->super_user) return response()->json('unauthorized', 401);
         try{
-            $model = JenisPengeluaranPemasukan::where('id_perusahaan', '=', $request->perusahaan->id)->find($id);
+            $model = PerusahaanUser::where('id_perusahaan', '=', $request->perusahaan->id)->find($id);
             if (empty($model)) return response()->json([
                 'message' => 'Data tidak ditemukan'
             ], 401);

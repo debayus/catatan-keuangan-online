@@ -52,7 +52,7 @@ class TransaksiController extends Controller
                 'totalRowCount' => $totalRowCount
             ]);
         }catch(Exception $ex){
-            return response()->json($ex->getMessage(), 401);
+            return response()->json($ex->getMessage(), 400);
         }
     }
 }

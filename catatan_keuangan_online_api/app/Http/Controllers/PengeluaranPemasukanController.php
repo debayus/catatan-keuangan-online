@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\PengeluaranPemasukan;
+use App\Models\PerusahaanUser;
 use App\Models\Rekening;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -25,9 +27,7 @@ class PengeluaranPemasukanController extends Controller
             }else{
                 $saldo += $request->nilai;
             }
-            if ($saldo < 0) return response()->json([
-                'message' => 'Saldo kurang'
-            ], 401);
+            if ($saldo < 0) return response()->json('Saldo kurang', 401);
 
             DB::beginTransaction();
 
@@ -44,12 +44,12 @@ class PengeluaranPemasukanController extends Controller
             $model->save();
 
             $rekening->saldo = $saldo;
-            $model->save();
+            $rekening->save();
 
             DB::commit();
             return response()->json(['id' => $model->id], 200);
         }catch(Exception $ex){
-            return response()->json($ex->getMessage(), 500);
+            return response()->json($ex->getMessage(), 400);
         }
     }
 
@@ -63,7 +63,7 @@ class PengeluaranPemasukanController extends Controller
 
             return response()->json($model, 200);
         }catch(Exception $ex){
-            return response()->json($ex->getMessage(), 500);
+            return response()->json($ex->getMessage(), 400);
         }
     }
 
@@ -103,9 +103,8 @@ class PengeluaranPemasukanController extends Controller
                     $saldo_old += $request->nilai;
                 }
             }
-            if ($saldo_old < 0) return response()->json([
-                'message' => 'Saldo kurang'
-            ], 401);
+            if ($saldo_old < 0) return response()->json('Saldo kurang', 401);
+
             if (!empty($rekening)){
                 $saldo_new = $rekening->saldo;
                 if ($model->pengeluaran){
@@ -129,13 +128,14 @@ class PengeluaranPemasukanController extends Controller
             $rekening_old->saldo = $saldo_old;
             if (!empty($rekening)){
                 $rekening->saldo = $saldo_new;
+                $rekening->save();
             }
 
-            $model->save();
+            $rekening_old->save();
             DB::commit();
             return response()->json(['id' => $model->id], 200);
         }catch(Exception $ex){
-            return response()->json($ex->getMessage(), 500);
+            return response()->json($ex->getMessage(), 400);
         }
     }
 
@@ -159,21 +159,44 @@ class PengeluaranPemasukanController extends Controller
             }else{
                 $saldo -= $request->nilai;
             }
-            if ($saldo < 0) return response()->json([
-                'message' => 'Saldo kurang'
-            ], 401);
+            if ($saldo < 0) return response()->json('Saldo kurang', 401);
 
             DB::beginTransaction();
 
             $model->delete();
 
             $rekening->saldo = $saldo;
-            $model->save();
+            $rekening->save();
 
             DB::commit();
             return response()->json(['id' => $model->id], 200);
         }catch(Exception $ex){
-            return response()->json($ex->getMessage(), 500);
+            return response()->json($ex->getMessage(), 400);
+        }
+    }
+
+    public function user(Request $request)
+    {
+        try{
+            $query = PerusahaanUser::where('id_perusahaan', '=', $request->perusahaan->id)
+            ->join('users', 'users.id', '=', 'perusahaan_users.id_user')
+            ->select(
+                'perusahaan_users.id',
+                'users.nama'
+            );
+            if (isset($request->filter)){
+                $query = $query->where('nama', 'like', '%'.$request->filter.'%');
+            }
+            $totalRowCount = $query->count();
+
+            $models = $query->simplePaginate(30);
+
+            return response()->json([
+                'data' => $models,
+                'totalRowCount' => $totalRowCount
+            ]);
+        }catch(Exception $ex){
+            return response()->json($ex->getMessage(), 400);
         }
     }
 }

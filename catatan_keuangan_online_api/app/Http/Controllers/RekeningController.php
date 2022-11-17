@@ -23,12 +23,13 @@ class RekeningController extends Controller
                 'totalRowCount' => $totalRowCount
             ]);
         }catch(Exception $ex){
-            return response()->json($ex->getMessage(), 500);
+            return response()->json($ex->getMessage(), 400);
         }
     }
 
     public function store(Request $request)
     {
+        if (!$request->super_user) return response()->json('unauthorized', 401);
         try{
             $model = new Rekening;
             $model->id_perusahaan = $request->perusahaan->id;
@@ -38,7 +39,7 @@ class RekeningController extends Controller
             $model->save();
             return response()->json(['id' => $model->id], 200);
         }catch(Exception $ex){
-            return response()->json($ex->getMessage(), 500);
+            return response()->json($ex->getMessage(), 400);
         }
     }
 
@@ -52,12 +53,13 @@ class RekeningController extends Controller
 
             return response()->json($model, 200);
         }catch(Exception $ex){
-            return response()->json($ex->getMessage(), 500);
+            return response()->json($ex->getMessage(), 400);
         }
     }
 
     public function update(Request $request, $id)
     {
+        if (!$request->super_user) return response()->json('unauthorized', 401);
         try{
             $model = Rekening::where('id_perusahaan', '=', $request->perusahaan->id)->find($id);
             if (empty($model)) return response()->json([
@@ -70,12 +72,13 @@ class RekeningController extends Controller
 
             return response()->json(['id' => $model->id], 200);
         }catch(Exception $ex){
-            return response()->json($ex->getMessage(), 500);
+            return response()->json($ex->getMessage(), 400);
         }
     }
 
     public function destroy(Request $request, $id)
     {
+        if (!$request->super_user) return response()->json('unauthorized', 401);
         try{
             $model = Rekening::where('id_perusahaan', '=', $request->perusahaan->id)->find($id);
             if (empty($model)) return response()->json([
@@ -86,7 +89,7 @@ class RekeningController extends Controller
 
             return response()->json(['id' => $model->id], 200);
         }catch(Exception $ex){
-            return response()->json($ex->getMessage(), 500);
+            return response()->json($ex->getMessage(), 400);
         }
     }
 }

@@ -12,8 +12,13 @@ class AuthController extends Controller
 {
     public function index(Request $request)
     {
+        $perusahaan_user = PerusahaanUser::where('id_perusahaan', '=', $request->perusahaan->id)
+            ->where('id_user', '=', $request->user->id)
+            ->first();
         return response()->json([
             'perusahaan' => $request->perusahaan->nama,
+            'id' => $request->user->id,
+            'id_perusahaan_user' => $perusahaan_user->id,
             'nama' => $request->user->nama,
             'super_user' => $request->super_user
         ]);
@@ -36,6 +41,14 @@ class AuthController extends Controller
             $perusahaan->id_user = $user->id;
             $perusahaan->nama = $request->firebase_user->email;
             $perusahaan->save();
+
+            // create perusahaan user
+            $perusahaanuser = new PerusahaanUser;
+            $perusahaanuser->id_perusahaan = $perusahaan->id;
+            $perusahaanuser->id_user = $user->id;
+            $perusahaanuser->email = $user->email;
+            $perusahaanuser->super_user = true;
+            $perusahaanuser->save();
 
             DB::commit();
         }
