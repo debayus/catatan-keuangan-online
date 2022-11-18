@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:catatan_keuangan_online/app/mahas/mahas_service.dart';
 import '../mahas_config.dart';
 import '../models/api_result_model.dart';
@@ -23,7 +22,7 @@ class HttpApi {
     return ApiResultModel(r.statusCode, r.body);
   }
 
-  static ApiResultModel _getErrorResult(Exception ex) {
+  static ApiResultModel _getErrorResult(dynamic ex) {
     return ApiResultModel.error("$ex");
   }
 
@@ -38,7 +37,7 @@ class HttpApi {
         },
       );
       return _getResult(r);
-    } on HttpException catch (ex) {
+    } catch (ex) {
       return _getErrorResult(ex);
     }
   }
@@ -56,7 +55,7 @@ class HttpApi {
         body: json.encode(body),
       );
       return _getResult(r);
-    } on HttpException catch (ex) {
+    } catch (ex) {
       return _getErrorResult(ex);
     }
   }
@@ -74,7 +73,7 @@ class HttpApi {
         body: json.encode(body),
       );
       return _getResult(r);
-    } on HttpException catch (ex) {
+    } catch (ex) {
       return _getErrorResult(ex);
     }
   }
@@ -91,7 +90,7 @@ class HttpApi {
         body: json.encode(body),
       );
       return _getResult(r);
-    } on HttpException catch (ex) {
+    } catch (ex) {
       return _getErrorResult(ex);
     }
   }

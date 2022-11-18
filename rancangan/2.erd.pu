@@ -6,24 +6,17 @@ skinparam linetype ortho
 entity "user" as user {
     *id : int <<auto>>
     --
-    id_firebase : varchar(200)
+    id_perusahaan : int <<FK>> : NULL
+    id_firebase : varchar(200) : NULL
     nama : varchar(100)
     email : varchar(100)
+    super_user : bool
 }
 
 entity "perusahaan" as perusahaan {
     *id : int <<auto>>
     --
     id_user : int <<FK>>
-}
-
-entity "perusahaan_user" as perusahaan_user {
-    *id : int <<auto>>
-    --
-    id_perusahaan : int <<FK>>
-    id_user : int : NULL
-    email : varchar(200) : NULL
-    super_user : bool
 }
 
 entity "rekening" as rekening {
@@ -49,7 +42,7 @@ entity "pengeluaran_pemasukan" as pengeluaran_pemasukan {
     --
     id_perusahaan : int <<FK>>
     id_user_create : int <<FK>>
-    id_perusahaan_user : int <<FK>>
+    id_user : int <<FK>>
     id_jenis_pengeluaran_pemasukan : int <<FK>>
     id_rekening : int <<FK>>
     tanggal : datetime
@@ -85,8 +78,6 @@ entity "hutang_piutang_pembayaran" as hutang_piutang_pembayaran {
 }
 
 user ||--o| perusahaan
-perusahaan_user }o--|| perusahaan
-perusahaan_user |o--|| user
 rekening }o--|| perusahaan
 jenis_pengeluaran_pemasukan }o--|| perusahaan
 jenis_pengeluaran_pemasukan }o--|| perusahaan

@@ -43,7 +43,6 @@ class MahasFormat {
   static String displayTime(
     TimeOfDay? time, {
     bool twentyFour = true,
-    bool returnNull = false,
   }) {
     if (time == null) return "-";
     var hour =

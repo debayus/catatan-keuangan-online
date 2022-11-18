@@ -6,7 +6,6 @@ class UserModel {
   int? id;
   String? nama;
   String? email;
-  String? idFirebase;
   bool? superUser;
 
   UserModel();
@@ -21,7 +20,6 @@ class UserModel {
     final model = UserModel();
     model.id = dynamicData['id'];
     model.nama = dynamicData['nama'];
-    model.idFirebase = dynamicData['id_firebase'];
     model.email = dynamicData['email'];
     model.superUser = MahasFormat.dynamicToBool(dynamicData['super_user']);
     return model;

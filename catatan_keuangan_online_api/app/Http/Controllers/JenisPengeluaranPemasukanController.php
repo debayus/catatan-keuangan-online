@@ -30,7 +30,7 @@ class JenisPengeluaranPemasukanController extends Controller
 
     public function store(Request $request)
     {
-        if (!$request->super_user) return response()->json('unauthorized', 401);
+        if (!$request->user->super_user) return response()->json('unauthorized', 401);
         try{
             $model = new JenisPengeluaranPemasukan;
             $model->id_perusahaan = $request->perusahaan->id;
@@ -58,7 +58,7 @@ class JenisPengeluaranPemasukanController extends Controller
 
     public function update(Request $request, $id)
     {
-        if (!$request->super_user) return response()->json('unauthorized', 401);
+        if (!$request->user->super_user) return response()->json('unauthorized', 401);
         try{
             $model = JenisPengeluaranPemasukan::where('id_perusahaan', '=', $request->perusahaan->id)->find($id);
             if (empty($model)) return response()->json('Data tidak ditemukan', 401);
@@ -75,7 +75,7 @@ class JenisPengeluaranPemasukanController extends Controller
 
     public function destroy(Request $request, $id)
     {
-        if (!$request->super_user) return response()->json('unauthorized', 401);
+        if (!$request->user->super_user) return response()->json('unauthorized', 401);
         try{
             $model = JenisPengeluaranPemasukan::where('id_perusahaan', '=', $request->perusahaan->id)->find($id);
             if (empty($model)) return response()->json('Data tidak ditemukan', 401);

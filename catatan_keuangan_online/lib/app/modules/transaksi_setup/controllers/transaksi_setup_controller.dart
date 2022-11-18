@@ -116,8 +116,8 @@ class TransaksiSetupController extends GetxController {
       onInit: () async {
         tanggalCon.value = DateTime.now();
         jamCon.value = TimeOfDay.fromDateTime(DateTime.now());
-        userCon.value = UserModel.init(
-            MahasConfig.profile!.idPerusahaanUser, MahasConfig.profile!.nama);
+        userCon.value =
+            UserModel.init(MahasConfig.profile!.id, MahasConfig.profile!.nama);
       },
     );
 

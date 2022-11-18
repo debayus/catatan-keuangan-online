@@ -15,7 +15,7 @@ class PengaturanJenisPemasukanSetupView
   Widget build(BuildContext context) {
     return SetupPageComponent(
       controller: controller.formCon,
-      title: 'Jenis Pengeluaran',
+      title: 'Jenis Pemasukan',
       children: () => [
         InputTextComponent(
           label: 'Jenis Pemasukan',

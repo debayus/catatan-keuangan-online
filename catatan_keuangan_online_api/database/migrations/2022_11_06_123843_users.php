@@ -16,8 +16,11 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('id_firebase')->nullable();
+            $table->unsignedBigInteger('id_perusahaan')->nullable();
             $table->string('nama');
-            $table->string('email')->nullable();
+            $table->string('email');
+            $table->boolean('super_user');
+            $table->foreign('id_perusahaan')->references('id')->on('perusahaans');
             $table->timestamps();
         });
     }

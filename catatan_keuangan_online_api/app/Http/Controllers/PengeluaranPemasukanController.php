@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\PengeluaranPemasukan;
-use App\Models\PerusahaanUser;
 use App\Models\Rekening;
 use App\Models\User;
 use Exception;
@@ -67,7 +66,7 @@ class PengeluaranPemasukanController extends Controller
     {
         try{
             $model = PengeluaranPemasukan::where('id_perusahaan', '=', $request->perusahaan->id)->find($id);
-            if (empty($model)) return response()->json(='Data tidak ditemukan', 401);
+            if (empty($model)) return response()->json('Data tidak ditemukan', 401);
 
             $rekening_old = Rekening::where('id_perusahaan', '=', $request->perusahaan->id)->find($model->id_rekening);
             if (empty($rekening)) return response()->json('Rekening tidak ditemukan', 401);
@@ -164,12 +163,7 @@ class PengeluaranPemasukanController extends Controller
     public function user(Request $request)
     {
         try{
-            $query = PerusahaanUser::where('id_perusahaan', '=', $request->perusahaan->id)
-            ->join('users', 'users.id', '=', 'perusahaan_users.id_user')
-            ->select(
-                'perusahaan_users.id',
-                'users.nama'
-            );
+            $query = User::where('id_perusahaan', '=', $request->perusahaan->id);
             if (isset($request->filter)){
                 $query = $query->where('nama', 'like', '%'.$request->filter.'%');
             }

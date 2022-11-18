@@ -2,8 +2,9 @@ class ApiResultModel {
   bool success = true;
   dynamic body;
   String? message;
+  int? statusCode;
 
-  ApiResultModel(int statusCode, this.body) {
+  ApiResultModel(this.statusCode, this.body) {
     if (statusCode == 200) {
       success = true;
     } else {

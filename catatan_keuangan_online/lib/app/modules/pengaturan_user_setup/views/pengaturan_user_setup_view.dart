@@ -15,28 +15,17 @@ class PengaturanUserSetupView extends GetView<PengaturanUserSetupController> {
       controller: controller.formCon,
       title: 'User',
       children: () => [
-        Visibility(
-          visible: (controller.tokenCon.value as String).isNotEmpty,
-          child: InputTextComponent(
-            label: 'Nama',
-            controller: controller.namaCon,
-            required: true,
-            editable: controller.formCon.editable,
-          ),
+        InputTextComponent(
+          label: 'Nama',
+          controller: controller.namaCon,
+          required: true,
+          editable: controller.formCon.editable,
         ),
         InputTextComponent(
           label: 'Email',
           controller: controller.emailCon,
           required: true,
           editable: controller.formCon.editable,
-        ),
-        Visibility(
-          visible: controller.formCon.isState == SetupPageState.detail,
-          child: InputTextComponent(
-            label: 'Token',
-            controller: controller.tokenCon,
-            editable: false,
-          ),
         ),
         InputCheckboxComponent(
           controller: controller.superUserCon,

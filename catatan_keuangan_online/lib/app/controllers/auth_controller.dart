@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:catatan_keuangan_online/app/mahas/mahas_config.dart';
 import 'package:catatan_keuangan_online/app/mahas/models/profile_model.dart';
+import 'package:catatan_keuangan_online/app/mahas/services/helper.dart';
 import 'package:catatan_keuangan_online/app/mahas/services/http_api.dart';
 import 'package:catatan_keuangan_online/app/routes/app_pages.dart';
 import 'package:crypto/crypto.dart';
@@ -46,10 +47,13 @@ class AuthController extends GetxController {
       if (Get.currentRoute != Routes.HOME) {
         Get.offAllNamed(Routes.HOME);
       }
-    } else {
+    } else if (r.statusCode == 401) {
       if (Get.currentRoute != Routes.REGISTER) {
         Get.offAllNamed(Routes.REGISTER);
       }
+    } else {
+      Get.offAllNamed(Routes.LOGIN);
+      Helper.dialogWarning(r.message);
     }
     if (EasyLoading.isShow) {
       EasyLoading.dismiss();

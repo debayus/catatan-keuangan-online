@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PerusahaanUser;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -12,15 +11,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         try{
-            $query = PerusahaanUser::where('id_perusahaan', '=', $request->perusahaan->id)
-            ->leftJoin('users', 'users.id', '=', 'perusahaan_users.id_user')
-            ->select(
-                'perusahaan_users.id',
-                'users.nama',
-                'perusahaan_users.email',
-                'users.id_firebase',
-                'perusahaan_users.super_user'
-            );
+            $query = User::where('id_perusahaan', '=', $request->perusahaan->id);
             if (isset($request->filter)){
                 $query = $query->where('nama', 'like', '%'.$request->filter.'%');
             }
@@ -38,10 +29,11 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        if (!$request->super_user) return response()->json('unauthorized', 401);
+        if (!$request->user->super_user) return response()->json('unauthorized', 401);
         try{
-            $model = new PerusahaanUser;
+            $model = new User;
             $model->id_perusahaan = $request->perusahaan->id;
+            $model->nama = $request->nama;
             $model->email = $request->email;
             $model->super_user = $request->input_super_user;
             $model->save();
@@ -54,15 +46,7 @@ class UserController extends Controller
     public function show(Request $request, $id)
     {
         try{
-            $model = $query = PerusahaanUser::where('id_perusahaan', '=', $request->perusahaan->id)
-            ->leftJoin('users', 'users.id', '=', 'perusahaan_users.id_user')
-            ->select(
-                'perusahaan_users.id',
-                'users.nama',
-                'perusahaan_users.email',
-                'users.id_firebase',
-                'perusahaan_users.super_user'
-            )->find($id);
+            $model = User::where('id_perusahaan', '=', $request->perusahaan->id)->find($id);
             if (empty($model)) return response()->json('Data tidak ditemukan', 401);
 
             return response()->json($model, 200);
@@ -73,18 +57,15 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-        if (!$request->super_user) return response()->json('unauthorized', 401);
+        if (!$request->user->super_user) return response()->json('unauthorized', 401);
         try{
-            $model = PerusahaanUser::where('id_perusahaan', '=', $request->perusahaan->id)->find($id);
+            $model = User::where('id_perusahaan', '=', $request->perusahaan->id)->find($id);
             if (empty($model)) return response()->json('Data tidak ditemukan', 401);
-            $modelUser = User::find($model->id_user);
-            if (!empty($modelUser)){
-                $modelUser->nama = $request->nama;
-                $modelUser->save();
-            }
 
+            $model->nama = $request->nama;
             $model->email = $request->email;
             $model->super_user = $request->input_super_user;
+
             $model->save();
 
             return response()->json(['id' => $model->id], 200);
@@ -95,9 +76,9 @@ class UserController extends Controller
 
     public function destroy(Request $request, $id)
     {
-        if (!$request->super_user) return response()->json('unauthorized', 401);
+        if (!$request->user->super_user) return response()->json('unauthorized', 401);
         try{
-            $model = PerusahaanUser::where('id_perusahaan', '=', $request->perusahaan->id)->find($id);
+            $model = User::where('id_perusahaan', '=', $request->perusahaan->id)->find($id);
             if (empty($model)) return response()->json('Data tidak ditemukan', 401);
 
             $model->delete();

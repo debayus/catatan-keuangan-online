@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\HutangPiutang;
 use App\Models\HutangPiutangPembayaran;
-use App\Models\PerusahaanUser;
 use App\Models\Rekening;
-use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -182,31 +180,6 @@ class HutangPiutangController extends Controller
 
             DB::commit();
             return response()->json(['id' => $model->id], 200);
-        }catch(Exception $ex){
-            return response()->json($ex->getMessage(), 400);
-        }
-    }
-
-    public function user(Request $request)
-    {
-        try{
-            $query = PerusahaanUser::where('id_perusahaan', '=', $request->perusahaan->id)
-            ->join('users', 'users.id', '=', 'perusahaan_users.id_user')
-            ->select(
-                'perusahaan_users.id',
-                'users.nama'
-            );
-            if (isset($request->filter)){
-                $query = $query->where('nama', 'like', '%'.$request->filter.'%');
-            }
-            $totalRowCount = $query->count();
-
-            $models = $query->simplePaginate(30);
-
-            return response()->json([
-                'data' => $models,
-                'totalRowCount' => $totalRowCount
-            ]);
         }catch(Exception $ex){
             return response()->json($ex->getMessage(), 400);
         }

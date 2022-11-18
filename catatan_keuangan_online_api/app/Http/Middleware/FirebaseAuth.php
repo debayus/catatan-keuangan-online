@@ -2,9 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Perusahaan;
-use App\Models\PerusahaanUser;
-use App\Models\User;
 use Closure;
 use Exception;
 use Illuminate\Http\Request;
