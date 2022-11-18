@@ -8,6 +8,7 @@ class TransaksiModel {
   double? nilai;
   String? catatan;
   String? jenis;
+  String? tipe;
   String? rekeningsNama;
 
   static TransaksiModel fromJson(String jsonString) {
@@ -21,6 +22,7 @@ class TransaksiModel {
     model.idRekening = dynamicData['id_rekening'];
     model.catatan = dynamicData['catatan'];
     model.jenis = dynamicData['jenis'];
+    model.tipe = dynamicData['tipe'];
     model.rekeningsNama = dynamicData['rekenings_nama'];
     model.tanggal = MahasFormat.dynamicToDateTime(dynamicData['tanggal']);
     model.nilai = MahasFormat.dynamicToDouble(dynamicData['nilai']);

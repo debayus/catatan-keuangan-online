@@ -122,7 +122,11 @@ class InputTextComponent extends StatefulWidget {
 class _InputTextState extends State<InputTextComponent> {
   @override
   void initState() {
-    widget.controller._init(setState);
+    widget.controller._init((fn) {
+      if (mounted) {
+        setState(fn);
+      }
+    });
     super.initState();
   }
 

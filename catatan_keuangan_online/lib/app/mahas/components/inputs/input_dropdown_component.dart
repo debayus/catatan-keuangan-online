@@ -120,7 +120,11 @@ class _InputDropdownComponentState extends State<InputDropdownComponent> {
   @override
   void initState() {
     widget.controller._init(
-      setState,
+      (fn) {
+        if (mounted) {
+          setState(fn);
+        }
+      },
       widget.required,
     );
     super.initState();

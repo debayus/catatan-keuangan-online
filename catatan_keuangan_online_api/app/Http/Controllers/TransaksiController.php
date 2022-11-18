@@ -22,19 +22,22 @@ class TransaksiController extends Controller
                 'hutang_piutangs.tanggal',
                 'hutang_piutangs.nilai',
                 'hutang_piutangs.catatan',
-                DB::raw('CASE WHEN hutang_piutangs.hutang = 1 THEN "Hutang" ELSE "Piutang" END as jenis'),
+                'hutang_piutangs.catatan as jeni',
+                DB::raw('CASE WHEN hutang_piutangs.hutang = 1 THEN "Hutang" ELSE "Piutang" END as tipe'),
                 'rekenings.nama as rekenings_nama'
             );
 
             $query = PengeluaranPemasukan::where('pengeluaran_pemasukans.id_perusahaan', '=', $request->perusahaan->id)
             ->join('rekenings', 'rekenings.id', '=', 'pengeluaran_pemasukans.id_rekening')
+            ->join('jenis_pengeluaran_pemasukans', 'jenis_pengeluaran_pemasukans.id', '=', 'pengeluaran_pemasukans.id_jenis_pengeluaran_pemasukan')
             ->select(
                 'pengeluaran_pemasukans.id',
                 'pengeluaran_pemasukans.id_rekening',
                 'pengeluaran_pemasukans.tanggal',
                 'pengeluaran_pemasukans.nilai',
                 'pengeluaran_pemasukans.catatan',
-                DB::raw('CASE WHEN pengeluaran_pemasukans.pengeluaran = 1 THEN "Pengeluaran" ELSE "Pemasukan" END as jenis'),
+                'jenis_pengeluaran_pemasukans.nama as jenis',
+                DB::raw('CASE WHEN pengeluaran_pemasukans.pengeluaran = 1 THEN "Pengeluaran" ELSE "Pemasukan" END as tipe'),
                 'rekenings.nama as rekenings_nama'
             )
             ->union($hutangPiutang);

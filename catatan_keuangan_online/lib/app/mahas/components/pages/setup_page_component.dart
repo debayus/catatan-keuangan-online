@@ -166,6 +166,9 @@ class SetupPageController<T> extends ChangeNotifier {
 
       if (urlApiPost != null || urlApiPut != null) {
         await EasyLoading.show();
+        setState(() {
+          editable = false;
+        });
         ApiResultModel r = _id == null
             ? await HttpApi.post(
                 urlApiPost!(),
@@ -186,6 +189,9 @@ class SetupPageController<T> extends ChangeNotifier {
           }
         } else {
           Helper.dialogWarning(r.message ?? "");
+          setState(() {
+            editable = true;
+          });
         }
         await EasyLoading.dismiss();
       }
@@ -234,7 +240,13 @@ class SetupPageComponent extends StatefulWidget {
 class _SetupPageComponentState extends State<SetupPageComponent> {
   @override
   void initState() {
-    widget.controller._init(setStateX: setState, contextX: context);
+    widget.controller._init(
+        setStateX: (fn) {
+          if (mounted) {
+            setState(fn);
+          }
+        },
+        contextX: context);
     super.initState();
   }
 
@@ -261,7 +273,7 @@ class _SetupPageComponentState extends State<SetupPageComponent> {
                             if (widget.controller.editable) {
                               r.add(const PopupMenuItem(
                                 value: 'Cancel',
-                                child: Text('Cancel'),
+                                child: Text('Batal'),
                               ));
                             } else {
                               if (widget.controller.allowEdit) {

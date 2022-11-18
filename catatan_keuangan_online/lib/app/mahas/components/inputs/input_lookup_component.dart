@@ -137,7 +137,11 @@ class InputLookupComponent<T> extends StatefulWidget {
 class _InputLookupComponentState<T> extends State<InputLookupComponent<T>> {
   @override
   void initState() {
-    widget.controller._init(setState, context, widget.label);
+    widget.controller._init((fn) {
+      if (mounted) {
+        setState(fn);
+      }
+    }, context, widget.label);
     widget.controller._required = widget.required;
     super.initState();
   }

@@ -12,6 +12,7 @@ import '../../../mahas/components/inputs/input_lookup_component.dart';
 import '../../../mahas/components/inputs/input_radio_component.dart';
 import '../../../mahas/components/inputs/input_text_component.dart';
 import '../../../mahas/components/pages/setup_page_component.dart';
+import '../../../models/pengeluaran_pemasukan_model.dart';
 import '../../../models/user_model.dart';
 
 class TransaksiSetupController extends GetxController {
@@ -88,7 +89,7 @@ class TransaksiSetupController extends GetxController {
       urlApiPut: (id) => '/api/pengeluaranpemasukan/$id',
       urlApiDelete: (id) => '/api/pengeluaranpemasukan/$id',
       bodyApi: (id) => {
-        'id_perusahaan_user': userCon.value?.id,
+        'id_user': userCon.value?.id,
         'id_jenis_pengeluaran_pemasukan': jenisCon.value!.id,
         'id_rekening': rekeningCon.value!.id,
         'tanggal':
@@ -110,8 +111,18 @@ class TransaksiSetupController extends GetxController {
         return true;
       },
       apiToView: (json) {
-        // TestModel model = TestModel.fromJson(json);
-        // nameCon.value = model.name;
+        PengeluaranPemasukanModel model =
+            PengeluaranPemasukanModel.fromJson(json);
+        userCon.value = UserModel.init(model.idUser, model.idUserNama);
+        tipeCon.value = model.pengeluaran == true ? 1 : 0;
+        jenisCon.value = JenisPengeluaranPemasukanModel.init(
+            model.idJenisPengeluaranPemasukan,
+            model.idJenisPengeluaranPemasukanNama);
+        tanggalCon.value = model.tanggal;
+        jamCon.value = TimeOfDay.fromDateTime(model.tanggal!);
+        rekeningCon.value =
+            RekeningModel.init(model.idRekening, model.idRekeningNama);
+        nilaiCon.value = model.nilai;
       },
       onInit: () async {
         tanggalCon.value = DateTime.now();

@@ -48,19 +48,18 @@ class TransaksiView extends GetView<TransaksiController> {
             return ListTile(
               leading: Container(
                 padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Icon(controller.getIcon(e.jenis)),
+                child: Icon(controller.getIcon(e.tipe)),
               ),
-              title: Text(e.rekeningsNama ?? "-"),
+              title: Text(e.jenis ?? "-"),
               trailing: Text(
                 MahasFormat.toCurrency(e.nilai),
                 style: MahasThemes.muted,
               ),
               subtitle: Text(
-                e.catatan ?? "-",
+                "${MahasFormat.displayDate(e.tanggal)} ${MahasFormat.displayTime(TimeOfDay.fromDateTime(e.tanggal!))}",
                 style: MahasThemes.muted,
               ),
-              // subtitle: Text(MahasFormat.toCurrency(e.saldo)),
-              // onTap: () => controller.itemOnTab(e.id!),
+              onTap: () => controller.itemOnTab(e),
             );
           },
         ),

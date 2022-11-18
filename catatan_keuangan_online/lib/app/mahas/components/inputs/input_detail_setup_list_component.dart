@@ -288,7 +288,11 @@ class _InputDetailSetupListComponentState<T, U>
   void initState() {
     widget.controller._formBuilder = widget.formBuilder;
     widget.controller._builder = widget.builder;
-    widget.controller._init(setState, context, widget.label);
+    widget.controller._init((fn) {
+      if (mounted) {
+        setState(fn);
+      }
+    }, context, widget.label);
     widget.controller._required = widget.required;
     super.initState();
   }

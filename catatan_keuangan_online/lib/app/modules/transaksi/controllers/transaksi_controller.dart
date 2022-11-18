@@ -30,24 +30,25 @@ class TransaksiController extends GetxController {
 
   void addOnPress() async {
     String? result = await Helper.modalMenu(menus);
+    bool? refresh = false;
     if (result == 'transaksi') {
-      Get.toNamed(Routes.TRANSAKSI_SETUP);
+      refresh = await Get.toNamed(Routes.TRANSAKSI_SETUP);
     } else if (result == 'hutang piutang') {
-      Get.toNamed(Routes.TRANSAKSI_SETUP);
-    } else if (result == 'mutasi rekening') {
-      Get.toNamed(Routes.TRANSAKSI_SETUP);
+    } else if (result == 'mutasi rekening') {}
+    if (refresh == true) {
+      listCon.refresh();
     }
   }
 
-  IconData getIcon(String? jenis) {
-    if (jenis == null) return FontAwesomeIcons.icons;
-    return jenis == "Pemasukan"
+  IconData getIcon(String? tipe) {
+    if (tipe == null) return FontAwesomeIcons.icons;
+    return tipe == "Pemasukan"
         ? FontAwesomeIcons.handHoldingDollar
-        : jenis == "Pengeluaran"
+        : tipe == "Pengeluaran"
             ? FontAwesomeIcons.fileInvoiceDollar
-            : jenis == "Hutang"
+            : tipe == "Hutang"
                 ? FontAwesomeIcons.creditCard
-                : jenis == "Piutang"
+                : tipe == "Piutang"
                     ? FontAwesomeIcons.creditCard
                     : FontAwesomeIcons.icons;
   }
@@ -57,6 +58,21 @@ class TransaksiController extends GetxController {
     fromDynamic: TransaksiModel.fromDynamic,
     allowSearch: false,
   );
+
+  void itemOnTab(TransaksiModel model) async {
+    bool? refresh = false;
+    if (model.tipe == "Pemasukan" || model.tipe == "Pengeluaran") {
+      refresh = await Get.toNamed(
+        Routes.TRANSAKSI_SETUP,
+        parameters: {
+          'id': model.id.toString(),
+        },
+      );
+    }
+    if (refresh == true) {
+      listCon.refresh();
+    }
+  }
 
   void searchOnPress() {}
 }

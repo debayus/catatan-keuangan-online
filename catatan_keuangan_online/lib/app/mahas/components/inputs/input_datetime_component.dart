@@ -133,7 +133,11 @@ class InputDatetimeComponent extends StatefulWidget {
 class _InputDatetimeComponentState extends State<InputDatetimeComponent> {
   @override
   void initState() {
-    widget.controller._init(setState, context, widget.required, widget.type);
+    widget.controller._init((fn) {
+      if (mounted) {
+        setState(fn);
+      }
+    }, context, widget.required, widget.type);
     super.initState();
   }
 

@@ -7,6 +7,9 @@ class JenisPengeluaranPemasukanModel {
   String? icon;
   bool? pengeluaran;
 
+  JenisPengeluaranPemasukanModel();
+  JenisPengeluaranPemasukanModel.init(this.id, this.nama);
+
   static JenisPengeluaranPemasukanModel fromJson(String jsonString) {
     final data = json.decode(jsonString);
     return fromDynamic(data);

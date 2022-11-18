@@ -53,11 +53,14 @@ class PengaturanRekeningSetupView
           ),
         ),
         const Padding(padding: EdgeInsets.all(10)),
-        InputTextComponent(
-          label: 'Saldo',
-          controller: controller.saldoCon,
-          required: true,
-          editable: controller.formCon.editable,
+        Visibility(
+          visible: controller.formCon.isState != SetupPageState.update,
+          child: InputTextComponent(
+            label: 'Saldo',
+            controller: controller.saldoCon,
+            required: true,
+            editable: controller.formCon.editable,
+          ),
         ),
       ],
     );

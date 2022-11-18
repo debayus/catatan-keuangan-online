@@ -244,7 +244,11 @@ class LookupComponent<T, U> extends StatefulWidget {
 class _LookupComponentState<T, U> extends State<LookupComponent<T, U>> {
   @override
   void initState() {
-    widget.controller._init(setState, context);
+    widget.controller._init((fn) {
+      if (mounted) {
+        setState(fn);
+      }
+    }, context);
     super.initState();
   }
 

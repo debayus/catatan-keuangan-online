@@ -106,7 +106,11 @@ class InputRadioComponent extends StatefulWidget {
 class _InputRadioComponentState extends State<InputRadioComponent> {
   @override
   void initState() {
-    widget.controller._init(setState);
+    widget.controller._init((fn) {
+      if (mounted) {
+        setState(fn);
+      }
+    });
     widget.controller.required = widget.required;
     super.initState();
   }

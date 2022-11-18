@@ -8,6 +8,9 @@ class RekeningModel {
   String? icon;
   double? saldo;
 
+  RekeningModel();
+  RekeningModel.init(this.id, this.nama);
+
   static RekeningModel fromJson(String jsonString) {
     final data = json.decode(jsonString);
     return fromDynamic(data);

@@ -31,7 +31,7 @@ class PengeluaranPemasukanController extends Controller
             $model = new PengeluaranPemasukan;
             $model->id_perusahaan = $request->perusahaan->id;
             $model->id_user_create = $request->user->id;
-            $model->id_perusahaan_user = $request->id_perusahaan_user;
+            $model->id_user = $request->id_user;
             $model->id_jenis_pengeluaran_pemasukan = $request->id_jenis_pengeluaran_pemasukan;
             $model->id_rekening = $request->id_rekening;
             $model->tanggal = $request->tanggal;
@@ -53,7 +53,17 @@ class PengeluaranPemasukanController extends Controller
     public function show(Request $request, $id)
     {
         try{
-            $model = PengeluaranPemasukan::where('id_perusahaan', '=', $request->perusahaan->id)->find($id);
+            $model = PengeluaranPemasukan::where('users.id_perusahaan', '=', $request->perusahaan->id)
+            ->leftJoin('users', 'users.id', 'pengeluaran_pemasukans.id_user')
+            ->leftJoin('rekenings', 'rekenings.id', 'pengeluaran_pemasukans.id_rekening')
+            ->leftJoin('jenis_pengeluaran_pemasukans', 'jenis_pengeluaran_pemasukans.id', 'pengeluaran_pemasukans.id_jenis_pengeluaran_pemasukan')
+            ->select(
+                'pengeluaran_pemasukans.*',
+                'users.nama as id_user_nama',
+                'rekenings.nama as id_rekening_nama',
+                'jenis_pengeluaran_pemasukans.nama as id_jenis_pengeluaran_pemasukan_nama',
+            )
+            ->find($id);
             if (empty($model)) return response()->json('Data tidak ditemukan', 401);
 
             return response()->json($model, 200);
@@ -69,9 +79,9 @@ class PengeluaranPemasukanController extends Controller
             if (empty($model)) return response()->json('Data tidak ditemukan', 401);
 
             $rekening_old = Rekening::where('id_perusahaan', '=', $request->perusahaan->id)->find($model->id_rekening);
-            if (empty($rekening)) return response()->json('Rekening tidak ditemukan', 401);
+            if (empty($rekening_old)) return response()->json('Rekening tidak ditemukan', 401);
 
-            $rekening;
+            $rekening = null;
             if ($model->id_rekening != $request->id_rekening){
                 $rekening = Rekening::where('id_perusahaan', '=', $request->perusahaan->id)->find($request->id_rekening);
                 if (empty($rekening)) return response()->json('Rekening tidak ditemukan', 401);
@@ -105,7 +115,7 @@ class PengeluaranPemasukanController extends Controller
 
             DB::beginTransaction();
 
-            $model->id_perusahaan_user = $request->id_perusahaan_user;
+            $model->id_user = $request->id_user;
             $model->id_jenis_pengeluaran_pemasukan = $request->id_jenis_pengeluaran_pemasukan;
             $model->id_rekening = $request->id_rekening;
             $model->tanggal = $request->tanggal;
@@ -139,10 +149,10 @@ class PengeluaranPemasukanController extends Controller
 
             // check saldo
             $saldo = $rekening->saldo;
-            if ($request->pengeluaran){
-                $saldo += $request->nilai;
+            if ($model->pengeluaran){
+                $saldo += $model->nilai;
             }else{
-                $saldo -= $request->nilai;
+                $saldo -= $model->nilai;
             }
             if ($saldo < 0) return response()->json('Saldo kurang', 401);
 

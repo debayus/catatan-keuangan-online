@@ -64,7 +64,11 @@ class InputCheckboxComponent extends StatefulWidget {
 class _InputCheckboxComponentState extends State<InputCheckboxComponent> {
   @override
   void initState() {
-    widget.controller._init(setState);
+    widget.controller._init((fn) {
+      if (mounted) {
+        setState(fn);
+      }
+    });
     super.initState();
   }
 

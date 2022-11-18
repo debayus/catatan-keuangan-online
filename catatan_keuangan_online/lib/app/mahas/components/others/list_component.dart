@@ -125,7 +125,11 @@ class ListComponent<T> extends StatefulWidget {
 class _ListComponentState<T> extends State<ListComponent<T>> {
   @override
   void initState() {
-    widget.controller.init(setState);
+    widget.controller.init((fn) {
+      if (mounted) {
+        setState(fn);
+      }
+    });
     super.initState();
   }
 
