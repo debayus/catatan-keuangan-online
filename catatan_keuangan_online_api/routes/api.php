@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\JenisPengeluaranPemasukanController;
+use App\Http\Controllers\MutasiRekeningController;
 use App\Http\Controllers\PengeluaranPemasukanController;
 use App\Http\Controllers\RekeningController;
 use App\Http\Controllers\TestController;
@@ -65,6 +66,13 @@ Route::group(['middleware' => ['firebase.admin']], function(){
 
     Route::prefix('/hutangpiutang')->controller(HutangPiutang::class)->group(function () {
         Route::get('/', 'index');
+        Route::get('/{id}', 'show');
+        Route::post('/','store');
+        Route::put('/{id}','update');
+        Route::delete('/{id}', 'destroy');
+    });
+
+    Route::prefix('/mutasirekening')->controller(MutasiRekeningController::class)->group(function () {
         Route::get('/{id}', 'show');
         Route::post('/','store');
         Route::put('/{id}','update');

@@ -18,9 +18,10 @@ return new class extends Migration
             $table->string('id_firebase')->nullable();
             $table->unsignedBigInteger('id_perusahaan')->nullable();
             $table->string('nama');
-            $table->string('email');
+            $table->string('email')->nullable();
             $table->boolean('super_user');
             $table->foreign('id_perusahaan')->references('id')->on('perusahaans');
+            $table->boolean('pemilik');
             $table->timestamps();
         });
     }

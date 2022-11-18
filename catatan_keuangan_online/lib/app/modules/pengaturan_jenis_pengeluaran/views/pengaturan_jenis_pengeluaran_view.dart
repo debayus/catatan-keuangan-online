@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import '../../../mahas/components/others/list_component.dart';
+import '../../../mahas/mahas_config.dart';
 import '../../../models/jenis_pengeluaran_pemasukan_model.dart';
 import '../../../models/master_icon_model.dart';
 import '../controllers/pengaturan_jenis_pengeluaran_controller.dart';
@@ -17,8 +18,7 @@ class PengaturanJenisPengeluaranView
         centerTitle: true,
         actions: <Widget>[
           Visibility(
-            // visible: MahasConfig.profile?.superUser == true,
-            visible: true,
+            visible: MahasConfig.profile?.superUser == true,
             child: Padding(
               padding: const EdgeInsets.only(right: 10),
               child: GestureDetector(

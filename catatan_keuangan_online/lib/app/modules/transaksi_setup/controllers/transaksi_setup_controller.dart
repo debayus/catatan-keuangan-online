@@ -123,6 +123,7 @@ class TransaksiSetupController extends GetxController {
         rekeningCon.value =
             RekeningModel.init(model.idRekening, model.idRekeningNama);
         nilaiCon.value = model.nilai;
+        catatanCon.value = model.catatan;
       },
       onInit: () async {
         tanggalCon.value = DateTime.now();

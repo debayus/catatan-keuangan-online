@@ -1,7 +1,6 @@
 import 'package:catatan_keuangan_online/app/controllers/auth_controller.dart';
 import 'package:catatan_keuangan_online/app/mahas/services/helper.dart';
 import 'package:catatan_keuangan_online/app/mahas/services/http_api.dart';
-import 'package:catatan_keuangan_online/app/routes/app_pages.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
@@ -11,11 +10,11 @@ class RegisterController extends GetxController {
     EasyLoading.show();
     var r = await HttpApi.post('/api/auth');
     if (r.success) {
-      Get.toNamed(Routes.HOME);
+      Get.find<AuthController>().toHome();
     } else {
+      EasyLoading.dismiss();
       Helper.dialogWarning(r.message);
     }
-    EasyLoading.dismiss();
   }
 
   void kembaliOnPress() {

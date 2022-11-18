@@ -36,6 +36,8 @@ import '../modules/splash_screen/bindings/splash_screen_binding.dart';
 import '../modules/splash_screen/views/splash_screen_view.dart';
 import '../modules/transaksi/bindings/transaksi_binding.dart';
 import '../modules/transaksi/views/transaksi_view.dart';
+import '../modules/transaksi_mutasi_rekening/bindings/transaksi_mutasi_rekening_binding.dart';
+import '../modules/transaksi_mutasi_rekening/views/transaksi_mutasi_rekening_view.dart';
 import '../modules/transaksi_setup/bindings/transaksi_setup_binding.dart';
 import '../modules/transaksi_setup/views/transaksi_setup_view.dart';
 import '../modules/xsample/bindings/xsample_binding.dart';
@@ -199,6 +201,11 @@ class AppPages {
       name: _Paths.PENGATURAN_USER_SETUP,
       page: () => const PengaturanUserSetupView(),
       binding: PengaturanUserSetupBinding(),
+    ),
+    GetPage(
+      name: _Paths.TRANSAKSI_MUTASI_REKENING,
+      page: () => const TransaksiMutasiRekeningView(),
+      binding: TransaksiMutasiRekeningBinding(),
     ),
   ];
 }

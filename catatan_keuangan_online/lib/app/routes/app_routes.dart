@@ -35,6 +35,7 @@ abstract class Routes {
   static const TRANSAKSI_SETUP = _Paths.TRANSAKSI_SETUP;
   static const PENGATURAN_USER = _Paths.PENGATURAN_USER;
   static const PENGATURAN_USER_SETUP = _Paths.PENGATURAN_USER_SETUP;
+  static const TRANSAKSI_MUTASI_REKENING = _Paths.TRANSAKSI_MUTASI_REKENING;
 }
 
 abstract class _Paths {
@@ -68,4 +69,5 @@ abstract class _Paths {
   static const TRANSAKSI_SETUP = '/transaksi-setup';
   static const PENGATURAN_USER = '/pengaturan-user';
   static const PENGATURAN_USER_SETUP = '/pengaturan-user-setup';
+  static const TRANSAKSI_MUTASI_REKENING = '/transaksi-mutasi-rekening';
 }

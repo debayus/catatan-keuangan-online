@@ -31,7 +31,7 @@ class AuthController extends GetxController {
     if (user == null) {
       _toLigin();
     } else {
-      _toHome();
+      toHome();
     }
   }
 
@@ -40,7 +40,7 @@ class AuthController extends GetxController {
     MahasConfig.profile = null;
   }
 
-  void _toHome() async {
+  void toHome() async {
     var r = await HttpApi.get('/api/auth');
     if (r.success) {
       MahasConfig.profile = ProfileModel.fromJson(r.body);
@@ -156,7 +156,8 @@ class AuthController extends GetxController {
         var r = await HttpApi.delete('/api/auth');
         if (r.success) {
         } else {
-          Get.defaultDialog(title: 'Error', middleText: r.message!);
+          Helper.dialogWarning(r.message);
+          return;
         }
         await userCredential!.user!.delete();
       }

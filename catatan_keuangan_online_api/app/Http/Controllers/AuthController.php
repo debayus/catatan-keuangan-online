@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JenisPengeluaranPemasukan;
 use App\Models\Perusahaan;
+use App\Models\Rekening;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -30,23 +32,57 @@ class AuthController extends Controller
             if (empty($request->perusahaan)){
                 DB::beginTransaction();
 
+                // create perusahan
+                $perusahaan = new Perusahaan;
+                $perusahaan->nama = $request->firebase_user->email;
+                $perusahaan->save();
+
                 // create user
                 $user = new User;
                 $user->id_firebase = $request->firebase_user->uid;
                 $user->nama = $request->firebase_user->email;
                 $user->email = $request->firebase_user->email;
                 $user->super_user = true;
-                $user->save();
-
-                // create perusahan
-                $perusahaan = new Perusahaan;
-                $perusahaan->id_user = $user->id;
-                $perusahaan->nama = $request->firebase_user->email;
-                $perusahaan->save();
-
-                // update user
+                $user->pemilik = true;
                 $user->id_perusahaan = $perusahaan->id;
                 $user->save();
+
+                // rekening
+                $rekenings = [
+                    ['nama' => 'Bank', 'icon' => 'landmark' ],
+                    ['nama' => 'Cash', 'icon' => 'moneyBill' ],
+                ];
+                for($i = 0; $i < count($rekenings); $i++){
+                    $item = $rekenings[$i];
+                    $rekening = new Rekening;
+                    $rekening->id_perusahaan = $perusahaan->id;
+                    $rekening->nama = $item['nama'];
+                    $rekening->icon = $item['icon'];
+                    $rekening->saldo = 1000000;
+                    $rekening->save();
+                }
+
+                // pemasukan
+                $jenis_pengeluaran_pemasukans = [
+                    ['nama' => 'Gaji', 'icon' => 'sackDollar', 'pengeluaran' => false ],
+                    ['nama' => 'Bonus', 'icon' => 'sackDollar', 'pengeluaran' => false ],
+                    ['nama' => 'Makanan', 'icon' => 'utensils', 'pengeluaran' => true ],
+                    ['nama' => 'Kendaraan', 'icon' => 'carSide', 'pengeluaran' => true ],
+                    ['nama' => 'Pendidikan', 'icon' => 'userGraduate', 'pengeluaran' => true ],
+                    ['nama' => 'Olahraga', 'icon' => 'dumbbell', 'pengeluaran' => true ],
+                    ['nama' => 'Kesehanan', 'icon' => 'pills', 'pengeluaran' => true ],
+                    ['nama' => 'Peliharaan', 'icon' => 'paw', 'pengeluaran' => true ],
+                    ['nama' => 'Hobi', 'icon' => 'music', 'pengeluaran' => true ],
+                ];
+                for($i = 0; $i < count($jenis_pengeluaran_pemasukans); $i++){
+                    $item = $jenis_pengeluaran_pemasukans[$i];
+                    $jenis = new JenisPengeluaranPemasukan();
+                    $jenis->id_perusahaan = $perusahaan->id;
+                    $jenis->nama = $item['nama'];
+                    $jenis->icon = $item['icon'];
+                    $jenis->pengeluaran = $item['pengeluaran'];
+                    $jenis->save();
+                }
 
                 DB::commit();
             }

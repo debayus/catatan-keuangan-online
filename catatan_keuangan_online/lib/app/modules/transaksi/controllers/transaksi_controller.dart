@@ -24,7 +24,7 @@ class TransaksiController extends GetxController {
     ListTile(
       onTap: () => Get.back(result: 'hutang piutang'),
       title: const Text("Hutang Piutang"),
-      leading: const Icon(FontAwesomeIcons.repeat),
+      leading: const Icon(FontAwesomeIcons.handshake),
     ),
   ];
 
@@ -33,8 +33,9 @@ class TransaksiController extends GetxController {
     bool? refresh = false;
     if (result == 'transaksi') {
       refresh = await Get.toNamed(Routes.TRANSAKSI_SETUP);
-    } else if (result == 'hutang piutang') {
-    } else if (result == 'mutasi rekening') {}
+    } else if (result == 'mutasi rekening') {
+      refresh = await Get.toNamed(Routes.TRANSAKSI_MUTASI_REKENING);
+    } else if (result == 'hutang piutang') {}
     if (refresh == true) {
       listCon.refresh();
     }
@@ -50,7 +51,9 @@ class TransaksiController extends GetxController {
                 ? FontAwesomeIcons.creditCard
                 : tipe == "Piutang"
                     ? FontAwesomeIcons.creditCard
-                    : FontAwesomeIcons.icons;
+                    : tipe == "Mutasi Rekening"
+                        ? FontAwesomeIcons.creditCard
+                        : FontAwesomeIcons.icons;
   }
 
   final listCon = ListComponentController<TransaksiModel>(
@@ -64,6 +67,13 @@ class TransaksiController extends GetxController {
     if (model.tipe == "Pemasukan" || model.tipe == "Pengeluaran") {
       refresh = await Get.toNamed(
         Routes.TRANSAKSI_SETUP,
+        parameters: {
+          'id': model.id.toString(),
+        },
+      );
+    } else if (model.tipe == "Mutasi Rekening") {
+      refresh = await Get.toNamed(
+        Routes.TRANSAKSI_MUTASI_REKENING,
         parameters: {
           'id': model.id.toString(),
         },

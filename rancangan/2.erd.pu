@@ -3,6 +3,12 @@
 hide circle
 skinparam linetype ortho
 
+entity "perusahaan" as perusahaan {
+    *id : int <<auto>>
+    --
+    nama : varchar(100)
+}
+
 entity "user" as user {
     *id : int <<auto>>
     --
@@ -11,12 +17,6 @@ entity "user" as user {
     nama : varchar(100)
     email : varchar(100)
     super_user : bool
-}
-
-entity "perusahaan" as perusahaan {
-    *id : int <<auto>>
-    --
-    id_user : int <<FK>>
 }
 
 entity "rekening" as rekening {
@@ -77,6 +77,18 @@ entity "hutang_piutang_pembayaran" as hutang_piutang_pembayaran {
     hitang : bool
 }
 
+entity "mutasi_rekening" as mutasi_rekening {
+    *id : int <<auto>>
+    --
+    id_user_create : int <<FK>>
+    id_perusahaan : int <<FK>>
+    id_rekening_dari : int <<FK>>
+    id_rekening_tujuan : int <<FK>>
+    tanggal : datetime
+    nilai : decimal(19, 4)
+    catatan : varchar(500)
+}
+
 user ||--o| perusahaan
 rekening }o--|| perusahaan
 jenis_pengeluaran_pemasukan }o--|| perusahaan
@@ -93,5 +105,9 @@ hutang_piutang_pembayaran }o--|| perusahaan
 hutang_piutang_pembayaran }o--|| hutang_piutang
 hutang_piutang_pembayaran }o--|| user
 hutang_piutang_pembayaran }o--|| rekening
+mutasi_rekening }o--|| user
+mutasi_rekening }o--|| perusahaan
+mutasi_rekening }o--|| rekening
+mutasi_rekening }o--|| rekening
 
 @enduml
