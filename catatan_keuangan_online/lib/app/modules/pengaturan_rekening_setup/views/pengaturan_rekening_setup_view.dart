@@ -3,7 +3,7 @@ import 'package:catatan_keuangan_online/app/mahas/components/mahas_themes.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import '../../../mahas/components/mahas_colors.dart';
+import '../../../mahas/mahas_colors.dart';
 import '../../../mahas/components/pages/setup_page_component.dart';
 import '../../../models/master_icon_model.dart';
 import '../controllers/pengaturan_rekening_setup_controller.dart';

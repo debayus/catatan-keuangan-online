@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:catatan_keuangan_online/app/mahas/services/mahas_format.dart';
+import '../services/mahas_format.dart';
 
 class ProfileModel {
   String? perusahaan;

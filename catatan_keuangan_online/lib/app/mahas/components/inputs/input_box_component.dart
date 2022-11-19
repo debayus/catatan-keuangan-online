@@ -1,7 +1,7 @@
-import 'package:catatan_keuangan_online/app/mahas/components/mahas_colors.dart';
-import 'package:catatan_keuangan_online/app/mahas/components/mahas_themes.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../../mahas_colors.dart';
+import '../mahas_themes.dart';
 
 class InputBoxComponent extends StatelessWidget {
   final String? label;

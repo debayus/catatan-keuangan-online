@@ -4,7 +4,7 @@ import '../controllers/pengaturan_jenis_pengeluaran_setup_controller.dart';
 import 'package:catatan_keuangan_online/app/mahas/components/inputs/input_text_component.dart';
 import 'package:catatan_keuangan_online/app/mahas/components/mahas_themes.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../../../mahas/components/mahas_colors.dart';
+import '../../../mahas/mahas_colors.dart';
 import '../../../mahas/components/pages/setup_page_component.dart';
 import '../../../models/master_icon_model.dart';
 

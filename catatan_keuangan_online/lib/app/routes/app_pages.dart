@@ -8,6 +8,10 @@ import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/hutang_piutang/bindings/hutang_piutang_binding.dart';
 import '../modules/hutang_piutang/views/hutang_piutang_view.dart';
+import '../modules/hutang_piutang_pembayaran/bindings/hutang_piutang_pembayaran_binding.dart';
+import '../modules/hutang_piutang_pembayaran/views/hutang_piutang_pembayaran_view.dart';
+import '../modules/hutang_piutang_setup/bindings/hutang_piutang_setup_binding.dart';
+import '../modules/hutang_piutang_setup/views/hutang_piutang_setup_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/pengaturan/bindings/pengaturan_binding.dart';
@@ -206,6 +210,16 @@ class AppPages {
       name: _Paths.TRANSAKSI_MUTASI_REKENING,
       page: () => const TransaksiMutasiRekeningView(),
       binding: TransaksiMutasiRekeningBinding(),
+    ),
+    GetPage(
+      name: _Paths.HUTANG_PIUTANG_SETUP,
+      page: () => const HutangPiutangSetupView(),
+      binding: HutangPiutangSetupBinding(),
+    ),
+    GetPage(
+      name: _Paths.HUTANG_PIUTANG_PEMBAYARAN,
+      page: () => const HutangPiutangPembayaranView(),
+      binding: HutangPiutangPembayaranBinding(),
     ),
   ];
 }

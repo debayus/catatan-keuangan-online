@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-
 import '../../../mahas/components/inputs/input_datetime_component.dart';
 import '../../../mahas/components/inputs/input_lookup_component.dart';
 import '../../../mahas/components/inputs/input_text_component.dart';
 import '../../../mahas/components/pages/setup_page_component.dart';
-import '../../../models/rekening_model.dart';
 import '../controllers/transaksi_mutasi_rekening_controller.dart';
 
 class TransaksiMutasiRekeningView
@@ -41,13 +38,13 @@ class TransaksiMutasiRekeningView
             ),
           ],
         ),
-        InputLookupComponent<RekeningModel>(
+        InputLookupComponent(
           controller: controller.rekeningDariCon,
           editable: controller.formCon.editable,
           required: true,
           label: 'Rekening Dari',
         ),
-        InputLookupComponent<RekeningModel>(
+        InputLookupComponent(
           controller: controller.rekeningTujuanCon,
           editable: controller.formCon.editable,
           required: true,

@@ -5,33 +5,24 @@ import '../../../mahas/components/inputs/input_lookup_component.dart';
 import '../../../mahas/components/inputs/input_radio_component.dart';
 import '../../../mahas/components/inputs/input_text_component.dart';
 import '../../../mahas/components/pages/setup_page_component.dart';
-import '../controllers/transaksi_setup_controller.dart';
+import '../controllers/hutang_piutang_setup_controller.dart';
 
-class TransaksiSetupView extends GetView<TransaksiSetupController> {
-  const TransaksiSetupView({Key? key}) : super(key: key);
+class HutangPiutangSetupView extends GetView<HutangPiutangSetupController> {
+  const HutangPiutangSetupView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return SetupPageComponent(
       controller: controller.formCon,
-      title: 'Transaksi',
+      title: 'Hutang Piutang',
       children: () => [
-        InputLookupComponent(
-          controller: controller.userCon,
-          editable: controller.formCon.editable,
-          required: true,
-          label: 'User',
-        ),
-        InputRadioComponent(
-          controller: controller.tipeCon,
-          editable: controller.formCon.editable,
-          required: true,
-          label: 'Tipe',
-        ),
-        InputLookupComponent(
-          controller: controller.jenisCon,
-          editable: controller.formCon.editable,
-          required: true,
-          label: 'Jenis',
+        Visibility(
+          visible: controller.formCon.isState != SetupPageState.update,
+          child: InputRadioComponent(
+            controller: controller.tipeCon,
+            editable: controller.formCon.editable,
+            required: true,
+            label: 'Tipe',
+          ),
         ),
         Row(
           children: [
@@ -55,6 +46,12 @@ class TransaksiSetupView extends GetView<TransaksiSetupController> {
               ),
             ),
           ],
+        ),
+        InputDatetimeComponent(
+          controller: controller.tanggalTempoCon,
+          editable: controller.formCon.editable,
+          required: true,
+          label: 'Tanggal Tempo',
         ),
         InputLookupComponent(
           controller: controller.rekeningCon,

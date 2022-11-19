@@ -1,12 +1,12 @@
-import 'package:catatan_keuangan_online/app/mahas/components/others/shimmer_component.dart';
-import 'package:catatan_keuangan_online/app/mahas/mahas_config.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../mahas_config.dart';
 import '../../models/api_list_resut_model.dart';
 import '../../services/helper.dart';
 import '../../services/http_api.dart';
 import '../inputs/input_text_component.dart';
 import 'empty_component.dart';
+import 'shimmer_component.dart';
 
 class ListComponentController<T> {
   final Function(int index, String filter) urlApi;

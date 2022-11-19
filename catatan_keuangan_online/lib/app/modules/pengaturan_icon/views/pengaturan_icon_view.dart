@@ -1,4 +1,4 @@
-import 'package:catatan_keuangan_online/app/mahas/components/mahas_colors.dart';
+import 'package:catatan_keuangan_online/app/mahas/mahas_colors.dart';
 import 'package:catatan_keuangan_online/app/models/master_icon_model.dart';
 import 'package:flutter/material.dart';
 

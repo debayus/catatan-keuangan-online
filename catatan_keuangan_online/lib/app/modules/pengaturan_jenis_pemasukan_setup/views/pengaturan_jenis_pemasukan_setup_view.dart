@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import '../../../mahas/components/inputs/input_text_component.dart';
-import '../../../mahas/components/mahas_colors.dart';
+import '../../../mahas/mahas_colors.dart';
 import '../../../mahas/components/mahas_themes.dart';
 import '../../../mahas/components/pages/setup_page_component.dart';
 import '../../../models/master_icon_model.dart';

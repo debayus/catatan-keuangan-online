@@ -6,3 +6,6 @@
 1.1.1 Lookup bug
 1.1.2 Input Radio bug
 1.1.3 detail empty component
+1.1.4 setup page bug
+1.1.5 list bug
+1.1.6 colors

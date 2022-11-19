@@ -1,10 +1,10 @@
-import 'package:catatan_keuangan_online/app/mahas/components/mahas_colors.dart';
-import 'package:catatan_keuangan_online/app/mahas/components/others/empty_component.dart';
-import 'package:catatan_keuangan_online/app/mahas/mahas_config.dart';
 import 'package:flutter/material.dart';
+import '../../mahas_config.dart';
 import '../../models/api_list_resut_model.dart';
 import '../../services/helper.dart';
 import '../../services/http_api.dart';
+import '../../mahas_colors.dart';
+import '../others/empty_component.dart';
 import '../others/shimmer_component.dart';
 import 'input_text_component.dart';
 

@@ -36,6 +36,8 @@ abstract class Routes {
   static const PENGATURAN_USER = _Paths.PENGATURAN_USER;
   static const PENGATURAN_USER_SETUP = _Paths.PENGATURAN_USER_SETUP;
   static const TRANSAKSI_MUTASI_REKENING = _Paths.TRANSAKSI_MUTASI_REKENING;
+  static const HUTANG_PIUTANG_SETUP = _Paths.HUTANG_PIUTANG_SETUP;
+  static const HUTANG_PIUTANG_PEMBAYARAN = _Paths.HUTANG_PIUTANG_PEMBAYARAN;
 }
 
 abstract class _Paths {
@@ -70,4 +72,6 @@ abstract class _Paths {
   static const PENGATURAN_USER = '/pengaturan-user';
   static const PENGATURAN_USER_SETUP = '/pengaturan-user-setup';
   static const TRANSAKSI_MUTASI_REKENING = '/transaksi-mutasi-rekening';
+  static const HUTANG_PIUTANG_SETUP = '/hutang-piutang-setup';
+  static const HUTANG_PIUTANG_PEMBAYARAN = '/hutang-piutang-pembayaran';
 }

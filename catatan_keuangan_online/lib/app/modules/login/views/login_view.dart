@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:catatan_keuangan_online/app/mahas/components/mahas_colors.dart';
+import 'package:catatan_keuangan_online/app/mahas/mahas_colors.dart';
 import 'package:catatan_keuangan_online/app/mahas/components/mahas_themes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

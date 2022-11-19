@@ -1,5 +1,5 @@
 import 'package:catatan_keuangan_online/app/controllers/auth_controller.dart';
-import 'package:catatan_keuangan_online/app/mahas/components/mahas_colors.dart';
+import 'package:catatan_keuangan_online/app/mahas/mahas_colors.dart';
 import 'package:catatan_keuangan_online/app/mahas/services/helper.dart';
 import 'package:catatan_keuangan_online/app/routes/app_pages.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';

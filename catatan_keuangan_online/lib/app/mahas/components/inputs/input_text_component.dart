@@ -1,9 +1,9 @@
-import 'package:catatan_keuangan_online/app/mahas/components/mahas_themes.dart';
-import 'package:catatan_keuangan_online/app/mahas/services/currency_input_formater.dart';
-import 'package:catatan_keuangan_online/app/mahas/services/mahas_format.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 
+import '../../services/currency_input_formater.dart';
+import '../../services/mahas_format.dart';
+import '../mahas_themes.dart';
 import 'input_box_component.dart';
 
 enum InputTextType { text, email, password, number, paragraf, money }

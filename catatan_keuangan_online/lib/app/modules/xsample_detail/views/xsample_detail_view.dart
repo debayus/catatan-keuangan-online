@@ -6,7 +6,7 @@ import '../../../mahas/components/inputs/input_detail_component.dart';
 import '../../../mahas/components/inputs/input_detail_setup_component.dart';
 import '../../../mahas/components/inputs/input_detail_setup_list_component.dart';
 import '../../../mahas/components/inputs/input_text_component.dart';
-import '../../../mahas/components/mahas_colors.dart';
+import '../../../mahas/mahas_colors.dart';
 import '../../../models/text_model.dart';
 import '../controllers/xsample_detail_controller.dart';
 

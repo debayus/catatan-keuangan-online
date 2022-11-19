@@ -1,7 +1,7 @@
-import 'package:catatan_keuangan_online/app/mahas/services/mahas_format.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../services/mahas_format.dart';
 import 'input_box_component.dart';
 
 class InputDatetimeController {

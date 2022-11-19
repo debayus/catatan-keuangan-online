@@ -20,12 +20,6 @@ class TransaksiController extends GetxController {
       title: const Text("Mutasi Rekening"),
       leading: const Icon(FontAwesomeIcons.repeat),
     ),
-    const Divider(height: 0),
-    ListTile(
-      onTap: () => Get.back(result: 'hutang piutang'),
-      title: const Text("Hutang Piutang"),
-      leading: const Icon(FontAwesomeIcons.handshake),
-    ),
   ];
 
   void addOnPress() async {
@@ -47,12 +41,12 @@ class TransaksiController extends GetxController {
         ? FontAwesomeIcons.handHoldingDollar
         : tipe == "Pengeluaran"
             ? FontAwesomeIcons.fileInvoiceDollar
-            : tipe == "Hutang"
-                ? FontAwesomeIcons.creditCard
-                : tipe == "Piutang"
+            : tipe == "Hutang Piutang"
+                ? FontAwesomeIcons.handshake
+                : tipe == "Mutasi Rekening"
                     ? FontAwesomeIcons.creditCard
-                    : tipe == "Mutasi Rekening"
-                        ? FontAwesomeIcons.creditCard
+                    : tipe == "Pembayaran Hutang Piutang"
+                        ? FontAwesomeIcons.moneyBillWave
                         : FontAwesomeIcons.icons;
   }
 
@@ -74,6 +68,20 @@ class TransaksiController extends GetxController {
     } else if (model.tipe == "Mutasi Rekening") {
       refresh = await Get.toNamed(
         Routes.TRANSAKSI_MUTASI_REKENING,
+        parameters: {
+          'id': model.id.toString(),
+        },
+      );
+    } else if (model.tipe == "Hutang Piutang") {
+      refresh = await Get.toNamed(
+        Routes.HUTANG_PIUTANG_SETUP,
+        parameters: {
+          'id': model.id.toString(),
+        },
+      );
+    } else if (model.tipe == "Pembayaran Hutang Piutang") {
+      refresh = await Get.toNamed(
+        Routes.HUTANG_PIUTANG_PEMBAYARAN,
         parameters: {
           'id': model.id.toString(),
         },

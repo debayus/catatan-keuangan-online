@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'mahas_colors.dart';
+import '../mahas_colors.dart';
 
 class MahasThemes {
   static double borderRadius = 10;

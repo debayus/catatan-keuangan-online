@@ -1,38 +1,22 @@
 import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
+
 import '../../../mahas/components/inputs/input_datetime_component.dart';
 import '../../../mahas/components/inputs/input_lookup_component.dart';
-import '../../../mahas/components/inputs/input_radio_component.dart';
 import '../../../mahas/components/inputs/input_text_component.dart';
 import '../../../mahas/components/pages/setup_page_component.dart';
-import '../controllers/transaksi_setup_controller.dart';
+import '../controllers/hutang_piutang_pembayaran_controller.dart';
 
-class TransaksiSetupView extends GetView<TransaksiSetupController> {
-  const TransaksiSetupView({Key? key}) : super(key: key);
+class HutangPiutangPembayaranView
+    extends GetView<HutangPiutangPembayaranController> {
+  const HutangPiutangPembayaranView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return SetupPageComponent(
       controller: controller.formCon,
-      title: 'Transaksi',
+      title: 'Pembayaran',
       children: () => [
-        InputLookupComponent(
-          controller: controller.userCon,
-          editable: controller.formCon.editable,
-          required: true,
-          label: 'User',
-        ),
-        InputRadioComponent(
-          controller: controller.tipeCon,
-          editable: controller.formCon.editable,
-          required: true,
-          label: 'Tipe',
-        ),
-        InputLookupComponent(
-          controller: controller.jenisCon,
-          editable: controller.formCon.editable,
-          required: true,
-          label: 'Jenis',
-        ),
         Row(
           children: [
             Expanded(
