@@ -14,8 +14,10 @@ class PengeluaranPemasukanController extends Controller
     public function store(Request $request)
     {
         try{
+            DB::beginTransaction();
+
             $rekening = Rekening::where('id_perusahaan', '=', $request->perusahaan->id)->find($request->id_rekening);
-            if (empty($rekening)) return response()->json('Rekening tidak ditemukan', 401);
+            if (empty($rekening)) return response()->json('Rekening tidak ditemukan', 400);
 
             // check saldo
             $saldo = $rekening->saldo;
@@ -24,9 +26,7 @@ class PengeluaranPemasukanController extends Controller
             }else{
                 $saldo += $request->nilai;
             }
-            if ($saldo < 0) return response()->json('Saldo kurang', 401);
-
-            DB::beginTransaction();
+            if ($saldo < 0) return response()->json('Saldo kurang', 400);
 
             $model = new PengeluaranPemasukan;
             $model->id_perusahaan = $request->perusahaan->id;
@@ -64,7 +64,7 @@ class PengeluaranPemasukanController extends Controller
                 'jenis_pengeluaran_pemasukans.nama as id_jenis_pengeluaran_pemasukan_nama',
             )
             ->find($id);
-            if (empty($model)) return response()->json('Data tidak ditemukan', 401);
+            if (empty($model)) return response()->json('Data tidak ditemukan', 400);
 
             return response()->json($model, 200);
         }catch(Exception $ex){
@@ -75,16 +75,18 @@ class PengeluaranPemasukanController extends Controller
     public function update(Request $request, $id)
     {
         try{
+            DB::beginTransaction();
+
             $model = PengeluaranPemasukan::where('id_perusahaan', '=', $request->perusahaan->id)->find($id);
-            if (empty($model)) return response()->json('Data tidak ditemukan', 401);
+            if (empty($model)) return response()->json('Data tidak ditemukan', 400);
 
             $rekening_old = Rekening::where('id_perusahaan', '=', $request->perusahaan->id)->find($model->id_rekening);
-            if (empty($rekening_old)) return response()->json('Rekening tidak ditemukan', 401);
+            if (empty($rekening_old)) return response()->json('Rekening tidak ditemukan', 400);
 
             $rekening = null;
             if ($model->id_rekening != $request->id_rekening){
                 $rekening = Rekening::where('id_perusahaan', '=', $request->perusahaan->id)->find($request->id_rekening);
-                if (empty($rekening)) return response()->json('Rekening tidak ditemukan', 401);
+                if (empty($rekening)) return response()->json('Rekening tidak ditemukan', 400);
             }
 
             // check saldo old
@@ -102,7 +104,7 @@ class PengeluaranPemasukanController extends Controller
                     $saldo_old += $request->nilai;
                 }
             }
-            if ($saldo_old < 0) return response()->json('Saldo kurang', 401);
+            if ($saldo_old < 0) return response()->json('Saldo kurang', 400);
 
             if (!empty($rekening)){
                 $saldo_new = $rekening->saldo;
@@ -112,8 +114,6 @@ class PengeluaranPemasukanController extends Controller
                     $saldo_new += $request->nilai;
                 }
             }
-
-            DB::beginTransaction();
 
             $model->id_user = $request->id_user;
             $model->id_jenis_pengeluaran_pemasukan = $request->id_jenis_pengeluaran_pemasukan;
@@ -141,11 +141,13 @@ class PengeluaranPemasukanController extends Controller
     public function destroy(Request $request, $id)
     {
         try{
+            DB::beginTransaction();
+
             $model = PengeluaranPemasukan::where('id_perusahaan', '=', $request->perusahaan->id)->find($id);
-            if (empty($model)) return response()->json('Data tidak ditemukan', 401);
+            if (empty($model)) return response()->json('Data tidak ditemukan', 400);
 
             $rekening = Rekening::where('id_perusahaan', '=', $request->perusahaan->id)->find($model->id_rekening);
-            if (empty($rekening)) return response()->json('Rekening tidak ditemukan', 401);
+            if (empty($rekening)) return response()->json('Rekening tidak ditemukan', 400);
 
             // check saldo
             $saldo = $rekening->saldo;
@@ -154,9 +156,7 @@ class PengeluaranPemasukanController extends Controller
             }else{
                 $saldo -= $model->nilai;
             }
-            if ($saldo < 0) return response()->json('Saldo kurang', 401);
-
-            DB::beginTransaction();
+            if ($saldo < 0) return response()->json('Saldo kurang', 400);
 
             $model->delete();
 

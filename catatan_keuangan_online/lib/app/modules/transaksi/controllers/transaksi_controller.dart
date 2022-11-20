@@ -81,7 +81,7 @@ class TransaksiController extends GetxController {
       );
     } else if (model.tipe == "Pembayaran Hutang Piutang") {
       refresh = await Get.toNamed(
-        Routes.HUTANG_PIUTANG_PEMBAYARAN,
+        Routes.HUTANG_PIUTANG_PEMBAYARAN_SETUP,
         parameters: {
           'id': model.id.toString(),
         },

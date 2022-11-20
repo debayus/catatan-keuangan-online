@@ -109,6 +109,8 @@ class ListComponent<T> extends StatefulWidget {
   final Widget Function(T e) itemBuilder;
   final bool allowMenuAction;
   final List<Widget>? listMenuAction;
+  final Widget Function(BuildContext context, int index, int length)?
+      separatorBuilder;
 
   const ListComponent({
     Key? key,
@@ -116,6 +118,7 @@ class ListComponent<T> extends StatefulWidget {
     required this.itemBuilder,
     this.allowMenuAction = false,
     this.listMenuAction,
+    this.separatorBuilder,
   }) : super(key: key);
 
   @override
@@ -157,8 +160,10 @@ class _ListComponentState<T> extends State<ListComponent<T>> {
                         onPressed: widget.controller.refresh,
                       )
                     : ListView.separated(
-                        separatorBuilder: (context, index) =>
-                            const Divider(height: 0),
+                        separatorBuilder: widget.separatorBuilder != null
+                            ? (context, index) => widget.separatorBuilder!(
+                                context, index, widget.controller._items.length)
+                            : (context, index) => const Divider(height: 0),
                         controller: widget.controller._listViewController,
                         physics: const AlwaysScrollableScrollPhysics(),
                         itemCount: widget.controller._items.length +

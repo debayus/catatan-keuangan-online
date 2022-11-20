@@ -60,6 +60,6 @@ class MahasThemes {
   );
 
   static TextStyle muted = TextStyle(
-    color: Colors.black.withOpacity(.3),
+    color: Colors.black.withOpacity(.5),
   );
 }

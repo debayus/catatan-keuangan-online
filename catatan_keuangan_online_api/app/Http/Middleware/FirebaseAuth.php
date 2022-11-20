@@ -23,7 +23,7 @@ class FirebaseAuth
 
             return $next($request);
         } catch (Exception $ex){
-            return response($ex->getMessage(), 401);
+            return response($ex->getMessage(), 400);
         }
     }
 }

@@ -47,7 +47,7 @@ class RekeningController extends Controller
     {
         try{
             $model = Rekening::where('id_perusahaan', '=', $request->perusahaan->id)->find($id);
-            if (empty($model)) return response()->json('Data tidak ditemukan', 401);
+            if (empty($model)) return response()->json('Data tidak ditemukan', 400);
 
             return response()->json($model, 200);
         }catch(Exception $ex){
@@ -60,7 +60,7 @@ class RekeningController extends Controller
         if (!$request->user->super_user) return response()->json('unauthorized', 401);
         try{
             $model = Rekening::where('id_perusahaan', '=', $request->perusahaan->id)->find($id);
-            if (empty($model)) return response()->json('Data tidak ditemukan', 401);
+            if (empty($model)) return response()->json('Data tidak ditemukan', 400);
 
             $model->nama = $request->nama;
             $model->icon = $request->icon;
@@ -77,7 +77,7 @@ class RekeningController extends Controller
         if (!$request->user->super_user) return response()->json('unauthorized', 401);
         try{
             $model = Rekening::where('id_perusahaan', '=', $request->perusahaan->id)->find($id);
-            if (empty($model)) return response()->json('Data tidak ditemukan', 401);
+            if (empty($model)) return response()->json('Data tidak ditemukan', 400);
 
             $model->delete();
 

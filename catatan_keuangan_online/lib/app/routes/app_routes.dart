@@ -38,6 +38,8 @@ abstract class Routes {
   static const TRANSAKSI_MUTASI_REKENING = _Paths.TRANSAKSI_MUTASI_REKENING;
   static const HUTANG_PIUTANG_SETUP = _Paths.HUTANG_PIUTANG_SETUP;
   static const HUTANG_PIUTANG_PEMBAYARAN = _Paths.HUTANG_PIUTANG_PEMBAYARAN;
+  static const HUTANG_PIUTANG_PEMBAYARAN_SETUP =
+      _Paths.HUTANG_PIUTANG_PEMBAYARAN_SETUP;
 }
 
 abstract class _Paths {
@@ -74,4 +76,6 @@ abstract class _Paths {
   static const TRANSAKSI_MUTASI_REKENING = '/transaksi-mutasi-rekening';
   static const HUTANG_PIUTANG_SETUP = '/hutang-piutang-setup';
   static const HUTANG_PIUTANG_PEMBAYARAN = '/hutang-piutang-pembayaran';
+  static const HUTANG_PIUTANG_PEMBAYARAN_SETUP =
+      '/hutang-piutang-pembayaran-setup';
 }

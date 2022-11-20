@@ -22,7 +22,6 @@ return new class extends Migration
             $table->dateTime('tanggal');
             $table->decimal('nilai', 19, 4);
             $table->string('catatan')->nullable();
-            $table->boolean('hutang');
             $table->timestamps();
             $table->foreign('id_perusahaan')->references('id')->on('perusahaans');
             $table->foreign('id_user_create')->references('id')->on('users');

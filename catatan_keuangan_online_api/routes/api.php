@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HutangPiutangController;
+use App\Http\Controllers\HutangPiutangPembayaranController;
 use App\Http\Controllers\JenisPengeluaranPemasukanController;
 use App\Http\Controllers\MutasiRekeningController;
 use App\Http\Controllers\PengeluaranPemasukanController;
@@ -64,7 +66,7 @@ Route::group(['middleware' => ['firebase.admin']], function(){
         Route::delete('/{id}', 'destroy');
     });
 
-    Route::prefix('/hutangpiutang')->controller(HutangPiutang::class)->group(function () {
+    Route::prefix('/hutangpiutang')->controller(HutangPiutangController::class)->group(function () {
         Route::get('/', 'index');
         Route::get('/{id}', 'show');
         Route::post('/','store');
@@ -81,6 +83,14 @@ Route::group(['middleware' => ['firebase.admin']], function(){
 
     Route::prefix('/transaksi')->controller(TransaksiController::class)->group(function () {
         Route::get('/', 'index');
+    });
+
+    Route::prefix('/hutangpiutangpembayaran')->controller(HutangPiutangPembayaranController::class)->group(function () {
+        Route::get('/', 'index');
+        Route::get('/{id}', 'show');
+        Route::post('/','store');
+        Route::put('/{id}','update');
+        Route::delete('/{id}', 'destroy');
     });
 });
 

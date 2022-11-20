@@ -50,14 +50,23 @@ class TransaksiView extends GetView<TransaksiController> {
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Icon(controller.getIcon(e.tipe)),
               ),
-              title: Text(e.jenis ?? "-"),
-              trailing: Text(
-                MahasFormat.toCurrency(e.nilai),
-                style: MahasThemes.muted,
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(e.jenis ?? "-"),
+                  Text(
+                    MahasFormat.toCurrency(e.nilai),
+                    style: MahasThemes.muted,
+                  ),
+                ],
               ),
-              subtitle: Text(
-                "${MahasFormat.displayDate(e.tanggal)} ${MahasFormat.displayTime(TimeOfDay.fromDateTime(e.tanggal!))}",
-                style: MahasThemes.muted,
+              subtitle: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(MahasFormat.displayDate(e.tanggal)),
+                  Text(MahasFormat.displayTime(
+                      TimeOfDay.fromDateTime(e.tanggal!))),
+                ],
               ),
               onTap: () => controller.itemOnTab(e),
             );

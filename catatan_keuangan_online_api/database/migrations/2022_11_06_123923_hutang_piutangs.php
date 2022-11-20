@@ -21,6 +21,7 @@ return new class extends Migration
             $table->dateTime('tanggal');
             $table->dateTime('tanggal_tempo');
             $table->decimal('nilai', 19, 4);
+            $table->decimal('dibayar', 19, 4);
             $table->string('catatan')->nullable();
             $table->boolean('hutang');
             $table->timestamps();

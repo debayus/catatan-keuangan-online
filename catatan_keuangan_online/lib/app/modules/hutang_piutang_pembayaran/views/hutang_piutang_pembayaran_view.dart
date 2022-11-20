@@ -1,11 +1,10 @@
+import 'package:catatan_keuangan_online/app/models/hutang_piutang_pembayaran.dart';
 import 'package:flutter/material.dart';
-
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-
-import '../../../mahas/components/inputs/input_datetime_component.dart';
-import '../../../mahas/components/inputs/input_lookup_component.dart';
-import '../../../mahas/components/inputs/input_text_component.dart';
-import '../../../mahas/components/pages/setup_page_component.dart';
+import '../../../mahas/components/others/list_component.dart';
+import '../../../mahas/mahas_config.dart';
+import '../../../mahas/services/mahas_format.dart';
 import '../controllers/hutang_piutang_pembayaran_controller.dart';
 
 class HutangPiutangPembayaranView
@@ -13,51 +12,36 @@ class HutangPiutangPembayaranView
   const HutangPiutangPembayaranView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return SetupPageComponent(
-      controller: controller.formCon,
-      title: 'Pembayaran',
-      children: () => [
-        Row(
-          children: [
-            Expanded(
-              flex: 2,
-              child: InputDatetimeComponent(
-                controller: controller.tanggalCon,
-                editable: controller.formCon.editable,
-                required: true,
-                label: 'Tanggal',
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Pembayaran'),
+        centerTitle: true,
+        actions: <Widget>[
+          Visibility(
+            visible: MahasConfig.profile?.superUser == true,
+            child: Padding(
+              padding: const EdgeInsets.only(right: 10),
+              child: GestureDetector(
+                onTap: controller.addOnPress,
+                child: const Icon(
+                  FontAwesomeIcons.circlePlus,
+                  size: 24,
+                ),
               ),
             ),
-            const Padding(padding: EdgeInsets.all(10)),
-            Expanded(
-              child: InputDatetimeComponent(
-                controller: controller.jamCon,
-                editable: controller.formCon.editable,
-                required: true,
-                type: InputDatetimeType.time,
-                label: 'Jam',
-              ),
-            ),
-          ],
-        ),
-        InputLookupComponent(
-          controller: controller.rekeningCon,
-          editable: controller.formCon.editable,
-          required: true,
-          label: 'Rekening',
-        ),
-        InputTextComponent(
-          label: 'Nilai',
-          required: true,
-          controller: controller.nilaiCon,
-          editable: controller.formCon.editable,
-        ),
-        InputTextComponent(
-          label: 'Catatan',
-          controller: controller.catatanCon,
-          editable: controller.formCon.editable,
-        ),
-      ],
+          ),
+        ],
+      ),
+      body: ListComponent(
+        controller: controller.listCon,
+        itemBuilder: (HutangPiutangPembayaranModel e) {
+          return ListTile(
+            title: Text(MahasFormat.displayDate(e.tanggal)),
+            subtitle: Text(MahasFormat.toCurrency(e.nilai)),
+            onTap: () => controller.itemOnTab(e.id!),
+          );
+        },
+      ),
     );
   }
 }

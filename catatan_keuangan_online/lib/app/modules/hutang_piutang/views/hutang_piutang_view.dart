@@ -1,4 +1,4 @@
-import 'package:catatan_keuangan_online/app/mahas/mahas_colors.dart';
+import 'package:catatan_keuangan_online/app/mahas/components/mahas_themes.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -37,26 +37,104 @@ class HutangPiutangView extends GetView<HutangPiutangController> {
       ),
       body: ListComponent(
         controller: controller.listCon,
+        separatorBuilder: (context, index, length) => Container(
+          height: index == length - 1 ? 10 : 0,
+        ),
         itemBuilder: (HutangPiutangModel e) {
-          return ListTile(
-            title: Text(e.catatan ?? "-"),
-            subtitle: Column(
-              children: [
-                Text(MahasFormat.toCurrency(e.nilai)),
-                Text(MahasFormat.toCurrency(e.dibayar)),
-              ],
-            ),
+          return InkWell(
             onTap: () => controller.itemOnTab(e.id!),
-            trailing: InkWell(
-              child: const SizedBox(
-                height: 100,
-                width: 40,
-                child: Icon(
-                  FontAwesomeIcons.moneyBill1Wave,
-                  color: MahasColors.blue,
+            child: Container(
+              margin: const EdgeInsets.only(
+                  right: 10, left: 10, top: 10, bottom: 0),
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.black.withOpacity(.2)),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(MahasThemes.borderRadius),
                 ),
               ),
-              onTap: () => controller.itemPayOnTab(e.id!),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            e.dibayar! >= e.nilai!
+                                ? "Lunas"
+                                : e.tanggalTempo!.isBefore(DateTime.now())
+                                    ? "Jatuh Tempo"
+                                    : "",
+                            style: MahasThemes.title.copyWith(
+                              color: e.dibayar! >= e.nilai!
+                                  ? Colors.green
+                                  : Colors.red,
+                            ),
+                          ),
+                          Visibility(
+                            visible: e.dibayar! >= e.nilai! ||
+                                e.tanggalTempo!.isBefore(DateTime.now()),
+                            child: const Padding(padding: EdgeInsets.all(2.5)),
+                          ),
+                          Text(e.hutang == true ? "Hutang" : "Piutang"),
+                        ],
+                      ),
+                      Text(e.catatan ?? "-"),
+                    ],
+                  ),
+                  const Padding(padding: EdgeInsets.all(2.5)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Nilai", style: MahasThemes.muted),
+                      Text(MahasFormat.toCurrency(e.nilai)),
+                    ],
+                  ),
+                  const Padding(padding: EdgeInsets.all(2.5)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Dibayar", style: MahasThemes.muted),
+                      Text(MahasFormat.toCurrency(e.dibayar)),
+                    ],
+                  ),
+                  const Padding(padding: EdgeInsets.all(2.5)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Tanggal", style: MahasThemes.muted),
+                      Text(MahasFormat.displayDate(e.tanggal)),
+                    ],
+                  ),
+                  const Padding(padding: EdgeInsets.all(2.5)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Tempo", style: MahasThemes.muted),
+                      Text(MahasFormat.displayDate(e.tanggalTempo)),
+                    ],
+                  ),
+                  const Padding(padding: EdgeInsets.all(5)),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: () => controller.historyOnTab(e.id!),
+                          child: const Text("History"),
+                        ),
+                      ),
+                      const Padding(padding: EdgeInsets.all(2.5)),
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: () => controller.itemPayOnTab(e.id!),
+                          child: const Text("Pembayaran"),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           );
         },

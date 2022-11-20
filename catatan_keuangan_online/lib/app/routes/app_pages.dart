@@ -10,6 +10,8 @@ import '../modules/hutang_piutang/bindings/hutang_piutang_binding.dart';
 import '../modules/hutang_piutang/views/hutang_piutang_view.dart';
 import '../modules/hutang_piutang_pembayaran/bindings/hutang_piutang_pembayaran_binding.dart';
 import '../modules/hutang_piutang_pembayaran/views/hutang_piutang_pembayaran_view.dart';
+import '../modules/hutang_piutang_pembayaran_setup/bindings/hutang_piutang_pembayaran_setup_binding.dart';
+import '../modules/hutang_piutang_pembayaran_setup/views/hutang_piutang_pembayaran_setup_view.dart';
 import '../modules/hutang_piutang_setup/bindings/hutang_piutang_setup_binding.dart';
 import '../modules/hutang_piutang_setup/views/hutang_piutang_setup_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -220,6 +222,11 @@ class AppPages {
       name: _Paths.HUTANG_PIUTANG_PEMBAYARAN,
       page: () => const HutangPiutangPembayaranView(),
       binding: HutangPiutangPembayaranBinding(),
+    ),
+    GetPage(
+      name: _Paths.HUTANG_PIUTANG_PEMBAYARAN_SETUP,
+      page: () => const HutangPiutangPembayaranSetupView(),
+      binding: HutangPiutangPembayaranSetupBinding(),
     ),
   ];
 }
