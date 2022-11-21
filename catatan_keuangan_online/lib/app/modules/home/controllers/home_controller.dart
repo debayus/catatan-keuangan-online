@@ -1,3 +1,4 @@
+import 'package:catatan_keuangan_online/app/mahas/mahas_config.dart';
 import 'package:catatan_keuangan_online/app/modules/grafik/controllers/grafik_controller.dart';
 import 'package:catatan_keuangan_online/app/modules/hutang_piutang/controllers/hutang_piutang_controller.dart';
 import 'package:catatan_keuangan_online/app/modules/pengaturan/controllers/pengaturan_controller.dart';
@@ -34,5 +35,17 @@ class HomeController extends GetxController {
 
   void bottomNavigationBarOnTab(v) {
     tabIndex.value = v;
+    if (v == 0) {
+      if (MahasConfig.refreshListTransaksi) {
+        transaksiCon.listCon.refresh();
+        MahasConfig.refreshListTransaksi = false;
+      }
+    } else if (v == 1) {
+    } else if (v == 2) {
+      if (MahasConfig.refreshListHutangPiutang) {
+        hutangPiutangCon.listCon.refresh();
+        MahasConfig.refreshListHutangPiutang = false;
+      }
+    }
   }
 }

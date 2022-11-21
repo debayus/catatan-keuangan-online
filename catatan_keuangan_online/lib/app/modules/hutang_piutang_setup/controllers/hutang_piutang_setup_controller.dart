@@ -40,9 +40,7 @@ class HutangPiutangSetupController extends GetxController {
   final nilaiCon = InputTextController(
     type: InputTextType.money,
   );
-  final catatanCon = InputTextController(
-    type: InputTextType.paragraf,
-  );
+  final catatanCon = InputTextController();
 
   @override
   void onInit() {

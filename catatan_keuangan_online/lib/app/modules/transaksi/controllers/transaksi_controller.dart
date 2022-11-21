@@ -1,3 +1,7 @@
+import 'package:catatan_keuangan_online/app/mahas/services/mahas_format.dart';
+import 'package:catatan_keuangan_online/app/models/jenis_pengeluaran_pemasukan_model.dart';
+import 'package:catatan_keuangan_online/app/models/rekening_model.dart';
+import 'package:catatan_keuangan_online/app/modules/transaksi_filter/controllers/transaksi_filter_controller.dart';
 import 'package:catatan_keuangan_online/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -50,11 +54,13 @@ class TransaksiController extends GetxController {
                         : FontAwesomeIcons.icons;
   }
 
-  final listCon = ListComponentController<TransaksiModel>(
-    urlApi: (index, filter) => '/api/transaksi?page=$index&filter=$filter',
-    fromDynamic: TransaksiModel.fromDynamic,
-    allowSearch: false,
-  );
+  DateTime? filterDariTanggal;
+  DateTime? filterSampaiTanggal;
+  RekeningModel? filterRekening;
+  String? filterTipe;
+  JenisPengeluaranPemasukanModel? filterJenis;
+
+  late ListComponentController<TransaksiModel> listCon;
 
   void itemOnTab(TransaksiModel model) async {
     bool? refresh = false;
@@ -92,5 +98,51 @@ class TransaksiController extends GetxController {
     }
   }
 
-  void searchOnPress() {}
+  void cariOnPress() async {
+    var refresh = await Get.toNamed(Routes.TRANSAKSI_FILTER, arguments: {
+      "dariTanggal": filterDariTanggal,
+      "sampaiTanggal": filterSampaiTanggal,
+      "rekening": filterRekening,
+      "tipe": filterTipe,
+      "jenis": filterJenis
+    });
+    if (refresh == true) {
+      var transaksiFilterCon = Get.find<TransaksiFilterController>();
+      filterDariTanggal = transaksiFilterCon.dariTanggalCon.value;
+      filterSampaiTanggal = transaksiFilterCon.sampaiTanggalCon.value;
+      filterRekening = transaksiFilterCon.rekeningCon.value;
+      filterTipe = transaksiFilterCon.tipeCon.value;
+      filterJenis = transaksiFilterCon.jenisCon.value;
+      listCon.refresh();
+    }
+  }
+
+  @override
+  void onInit() {
+    listCon = ListComponentController<TransaksiModel>(
+      urlApi: (index, filter) {
+        var url = '/api/transaksi?page=$index';
+        if (filterDariTanggal != null) {
+          url += '&dari_tanggal=${MahasFormat.dateToString(filterDariTanggal)}';
+        }
+        if (filterSampaiTanggal != null) {
+          url +=
+              '&sampai_tanggal=${MahasFormat.dateToString(filterSampaiTanggal)}';
+        }
+        if (filterRekening != null) {
+          url += '&rekening=${filterRekening!.id}';
+        }
+        if (filterTipe != null && filterTipe != "Tampilkan Semua") {
+          url += '&tipe=$filterTipe';
+        }
+        if (filterJenis != null) {
+          url += '&jenis=${filterJenis!.id}';
+        }
+        return url;
+      },
+      fromDynamic: TransaksiModel.fromDynamic,
+      allowSearch: false,
+    );
+    super.onInit();
+  }
 }

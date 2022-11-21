@@ -40,6 +40,7 @@ abstract class Routes {
   static const HUTANG_PIUTANG_PEMBAYARAN = _Paths.HUTANG_PIUTANG_PEMBAYARAN;
   static const HUTANG_PIUTANG_PEMBAYARAN_SETUP =
       _Paths.HUTANG_PIUTANG_PEMBAYARAN_SETUP;
+  static const TRANSAKSI_FILTER = _Paths.TRANSAKSI_FILTER;
 }
 
 abstract class _Paths {
@@ -78,4 +79,5 @@ abstract class _Paths {
   static const HUTANG_PIUTANG_PEMBAYARAN = '/hutang-piutang-pembayaran';
   static const HUTANG_PIUTANG_PEMBAYARAN_SETUP =
       '/hutang-piutang-pembayaran-setup';
+  static const TRANSAKSI_FILTER = '/transaksi-filter';
 }

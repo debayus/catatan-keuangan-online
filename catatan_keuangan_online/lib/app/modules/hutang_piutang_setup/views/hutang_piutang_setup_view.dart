@@ -24,6 +24,11 @@ class HutangPiutangSetupView extends GetView<HutangPiutangSetupController> {
             label: 'Tipe',
           ),
         ),
+        InputTextComponent(
+          label: 'Nama Hutang/Piutang',
+          controller: controller.catatanCon,
+          editable: controller.formCon.editable,
+        ),
         Row(
           children: [
             Expanded(
@@ -63,11 +68,6 @@ class HutangPiutangSetupView extends GetView<HutangPiutangSetupController> {
           label: 'Nilai',
           required: true,
           controller: controller.nilaiCon,
-          editable: controller.formCon.editable,
-        ),
-        InputTextComponent(
-          label: 'Catatan',
-          controller: controller.catatanCon,
           editable: controller.formCon.editable,
         ),
       ],

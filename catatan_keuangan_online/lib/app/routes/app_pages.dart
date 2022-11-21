@@ -42,6 +42,8 @@ import '../modules/splash_screen/bindings/splash_screen_binding.dart';
 import '../modules/splash_screen/views/splash_screen_view.dart';
 import '../modules/transaksi/bindings/transaksi_binding.dart';
 import '../modules/transaksi/views/transaksi_view.dart';
+import '../modules/transaksi_filter/bindings/transaksi_filter_binding.dart';
+import '../modules/transaksi_filter/views/transaksi_filter_view.dart';
 import '../modules/transaksi_mutasi_rekening/bindings/transaksi_mutasi_rekening_binding.dart';
 import '../modules/transaksi_mutasi_rekening/views/transaksi_mutasi_rekening_view.dart';
 import '../modules/transaksi_setup/bindings/transaksi_setup_binding.dart';
@@ -227,6 +229,11 @@ class AppPages {
       name: _Paths.HUTANG_PIUTANG_PEMBAYARAN_SETUP,
       page: () => const HutangPiutangPembayaranSetupView(),
       binding: HutangPiutangPembayaranSetupBinding(),
+    ),
+    GetPage(
+      name: _Paths.TRANSAKSI_FILTER,
+      page: () => const TransaksiFilterView(),
+      binding: TransaksiFilterBinding(),
     ),
   ];
 }

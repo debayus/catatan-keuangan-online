@@ -15,6 +15,7 @@ class HutangPiutangController extends GetxController {
     Get.toNamed(Routes.HUTANG_PIUTANG_SETUP)?.then((value) {
       if (value) {
         listCon.refresh();
+        MahasConfig.refreshListTransaksi = true;
       }
     });
   }
@@ -28,6 +29,7 @@ class HutangPiutangController extends GetxController {
     )?.then((value) {
       if (value) {
         listCon.refresh();
+        MahasConfig.refreshListTransaksi = true;
       }
     });
   }
@@ -41,6 +43,7 @@ class HutangPiutangController extends GetxController {
     )?.then((value) {
       if (value) {
         listCon.refresh();
+        MahasConfig.refreshListTransaksi = true;
       }
     });
   }

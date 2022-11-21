@@ -60,6 +60,7 @@ class InputDropdownController {
 
   InputDropdownController({
     this.items = const [],
+    this.onChanged,
   });
 
   void _rootOnChanged(e) {

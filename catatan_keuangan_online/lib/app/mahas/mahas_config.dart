@@ -6,4 +6,5 @@ class MahasConfig {
   static bool isLaravelBackend = true;
 
   static bool refreshListHutangPiutang = false;
+  static bool refreshListTransaksi = false;
 }

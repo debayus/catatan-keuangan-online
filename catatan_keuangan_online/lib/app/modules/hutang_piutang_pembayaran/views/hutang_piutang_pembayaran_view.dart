@@ -37,7 +37,8 @@ class HutangPiutangPembayaranView
         itemBuilder: (HutangPiutangPembayaranModel e) {
           return ListTile(
             title: Text(MahasFormat.displayDate(e.tanggal)),
-            subtitle: Text(MahasFormat.toCurrency(e.nilai)),
+            trailing: Text(MahasFormat.toCurrency(e.nilai)),
+            subtitle: Text(e.idRekeningNama!),
             onTap: () => controller.itemOnTab(e.id!),
           );
         },

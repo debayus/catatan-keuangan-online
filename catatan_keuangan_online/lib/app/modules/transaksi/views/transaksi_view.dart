@@ -23,7 +23,7 @@ class TransaksiView extends GetView<TransaksiController> {
             Padding(
               padding: const EdgeInsets.only(right: 10),
               child: GestureDetector(
-                onTap: controller.searchOnPress,
+                onTap: controller.cariOnPress,
                 child: const Icon(
                   FontAwesomeIcons.magnifyingGlass,
                   size: 22,
