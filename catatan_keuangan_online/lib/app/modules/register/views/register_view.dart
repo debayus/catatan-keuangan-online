@@ -31,7 +31,7 @@ class RegisterView extends GetView<RegisterController> {
                   child: Text(
                     'Aplikasi ini dapat mencatat pengeluaran, pemasukan, hutang dan piutang.\n\n'
                     'Kelola data keuangan dengan teman kamu hanya dengan memasukan email.\n\n'
-                    'Lihat dan bagikan laporan keuangan kamu dengan mudah.\n\n'
+                    'Lihat laporan keuangan dengan teman kamu dengan mudah.\n\n'
                     'Klik Lanjutkan untuk memulai data baru',
                     textAlign: TextAlign.justify,
                   ),
