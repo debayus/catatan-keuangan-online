@@ -66,7 +66,7 @@ class LoginView extends GetView<LoginController> {
                     child: const Text("Sample"),
                   ),
                 ),
-                const Text("v.1.0"),
+                Obx(() => Text(controller.version.value)),
               ],
             ),
           ),

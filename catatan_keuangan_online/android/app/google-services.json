@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:539138703664:android:ab61055c8dda583a8708f5",
+        "mobilesdk_app_id": "1:539138703664:android:84617b9476d81eb78708f5",
         "android_client_info": {
-          "package_name": "com.mahas.catatankeuanganonline.catatan_keuangan_online"
+          "package_name": "com.mahas.catatankeuanganonline"
         }
       },
       "oauth_client": [
@@ -31,10 +31,10 @@
               "client_type": 3
             },
             {
-              "client_id": "539138703664-ssf7m3in7g1h8i4h7t64oonvsqd4ltne.apps.googleusercontent.com",
+              "client_id": "539138703664-g8b8if3ge2msit6asnjnecmnplke4o2b.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.mahas.catatankeuanganonline.catatanKeuanganOnline"
+                "bundle_id": "com.mahas.catatankeuanganonline"
               }
             }
           ]

@@ -1,4 +1,4 @@
-package com.mahas.catatankeuanganonline.catatan_keuangan_online
+package com.mahas.catatankeuanganonline
 
 import io.flutter.embedding.android.FlutterActivity
 

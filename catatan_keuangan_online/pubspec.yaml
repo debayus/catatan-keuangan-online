@@ -1,5 +1,5 @@
 name: catatan_keuangan_online
-version: 1.0.0+1
+version: 1.0.0
 publish_to: none
 description: A new Flutter project.
 environment: 
@@ -27,6 +27,8 @@ dependencies:
   uuid: ^3.0.6
   modal_bottom_sheet: ^2.1.2
   fl_chart: ^0.55.2
+  package_info_plus: ^3.0.2
+  url_launcher: ^6.1.7
 
 dev_dependencies: 
   flutter_lints: 2.0.1
