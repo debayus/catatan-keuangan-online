@@ -28,14 +28,18 @@ class EmptyComponent extends StatelessWidget {
               color: Colors.black.withOpacity(.3),
             ),
           ),
-          const Padding(padding: EdgeInsets.all(5)),
           Visibility(
             visible: onPressed != null,
-            child: TextButton(
-              onPressed: onPressed,
-              child: const Text(
-                "Refresh",
-              ),
+            child: Column(
+              children: [
+                const Padding(padding: EdgeInsets.all(5)),
+                TextButton(
+                  onPressed: onPressed,
+                  child: const Text(
+                    "Refresh",
+                  ),
+                ),
+              ],
             ),
           )
         ],

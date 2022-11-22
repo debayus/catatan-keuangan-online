@@ -9,6 +9,7 @@ class HutangPiutangController extends GetxController {
     urlApi: (index, filter) => '/api/hutangpiutang?page=$index&filter=$filter',
     fromDynamic: HutangPiutangModel.fromDynamic,
     allowSearch: false,
+    autoRefresh: false,
   );
 
   void addOnPress() {
@@ -16,6 +17,7 @@ class HutangPiutangController extends GetxController {
       if (value) {
         listCon.refresh();
         MahasConfig.refreshListTransaksi = true;
+        MahasConfig.refreshGrafik = true;
       }
     });
   }
@@ -29,6 +31,7 @@ class HutangPiutangController extends GetxController {
     )?.then((value) {
       if (value) {
         listCon.refresh();
+        MahasConfig.refreshGrafik = true;
         MahasConfig.refreshListTransaksi = true;
       }
     });
@@ -44,6 +47,7 @@ class HutangPiutangController extends GetxController {
       if (value) {
         listCon.refresh();
         MahasConfig.refreshListTransaksi = true;
+        MahasConfig.refreshGrafik = true;
       }
     });
   }

@@ -15,6 +15,10 @@ class InputDatetimeController {
   TimeOfDay? _time;
   String? _errorMessage;
 
+  InputDatetimeController({
+    this.onChanged,
+  });
+
   Function()? onChanged;
 
   set value(dynamic val) {

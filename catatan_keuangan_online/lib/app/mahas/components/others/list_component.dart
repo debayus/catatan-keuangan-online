@@ -12,6 +12,7 @@ class ListComponentController<T> {
   final Function(int index, String filter) urlApi;
   final T Function(dynamic e) fromDynamic;
   final bool allowSearch;
+  final bool autoRefresh;
   late Function(VoidCallback fn) setState;
 
   final _listViewController = ScrollController();
@@ -22,6 +23,7 @@ class ListComponentController<T> {
     required this.urlApi,
     required this.fromDynamic,
     this.allowSearch = true,
+    this.autoRefresh = true,
   });
 
   bool _loadingBottom = false;
@@ -100,7 +102,9 @@ class ListComponentController<T> {
         _loadingBottom = false;
       }
     });
-    refresh();
+    if (autoRefresh) {
+      refresh();
+    }
   }
 }
 

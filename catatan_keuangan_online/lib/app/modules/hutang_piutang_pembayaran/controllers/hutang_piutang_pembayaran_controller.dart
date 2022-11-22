@@ -21,6 +21,7 @@ class HutangPiutangPembayaranController extends GetxController {
       if (value) {
         MahasConfig.refreshListHutangPiutang = true;
         MahasConfig.refreshListTransaksi = true;
+        MahasConfig.refreshGrafik = true;
         listCon.refresh();
       }
     });
@@ -36,6 +37,7 @@ class HutangPiutangPembayaranController extends GetxController {
       if (value) {
         MahasConfig.refreshListHutangPiutang = true;
         MahasConfig.refreshListTransaksi = true;
+        MahasConfig.refreshGrafik = true;
         listCon.refresh();
       }
     });
