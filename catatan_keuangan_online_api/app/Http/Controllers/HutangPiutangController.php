@@ -136,6 +136,9 @@ class HutangPiutangController extends Controller
             $model = HutangPiutang::where('id_perusahaan', '=', $request->perusahaan->id)->find($id);
             if (empty($model)) return response()->json('Data tidak ditemukan', 400);
 
+            $transaksi = HutangPiutangPembayaran::where('id_hutang_piutang', '=', $id)->count();
+            if ($transaksi > 0) return response()->json('Data ini masih memiliki transaksi', 400);
+
             $pembayaran = HutangPiutangPembayaran::where('id_hutang_piutang', '=', $request->perusahaan->id)->count();
             if ($pembayaran > 0) response()->json('Sudah melakukan transaksi', 400);
 

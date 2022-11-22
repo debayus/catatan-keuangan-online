@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\HutangPiutang;
+use App\Models\MutasiRekening;
+use App\Models\PengeluaranPemasukan;
 use App\Models\Rekening;
 use Exception;
 use Illuminate\Http\Request;
@@ -76,6 +79,14 @@ class RekeningController extends Controller
     {
         if (!$request->user->super_user) return response()->json('unauthorized', 401);
         try{
+            $pengeluaran_pemasukan = PengeluaranPemasukan::where('id_rekening', '=', $id)->count();
+            $hutang_piutang = HutangPiutang::where('id_rekening', '=', $id)->count();
+            $mutasi_rekening_dari = MutasiRekening::where('id_rekening_dari', '=', $id)->count();
+            $mutasi_rekening_tujuan = MutasiRekening::where('id_rekening_tujuan', '=', $id)->count();
+            if ($pengeluaran_pemasukan > 0 || $hutang_piutang > 0 || $mutasi_rekening_dari > 0 || $mutasi_rekening_tujuan > 0){
+                return response()->json('Terdapat transaksi yang menggunakan data ini', 400);
+            }
+
             $model = Rekening::where('id_perusahaan', '=', $request->perusahaan->id)->find($id);
             if (empty($model)) return response()->json('Data tidak ditemukan', 400);
 

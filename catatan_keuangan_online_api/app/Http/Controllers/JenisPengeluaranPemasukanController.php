@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\JenisPengeluaranPemasukan;
+use App\Models\PengeluaranPemasukan;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -77,6 +78,11 @@ class JenisPengeluaranPemasukanController extends Controller
     {
         if (!$request->user->super_user) return response()->json('unauthorized', 401);
         try{
+            $transaksi = PengeluaranPemasukan::where('id_jenis_pengeluaran_pemasukan', '=', $id)->count();
+            if ($transaksi > 0){
+                return response()->json('Terdapat transaksi yang menggunakan data ini', 400);
+            }
+
             $model = JenisPengeluaranPemasukan::where('id_perusahaan', '=', $request->perusahaan->id)->find($id);
             if (empty($model)) return response()->json('Data tidak ditemukan', 400);
 

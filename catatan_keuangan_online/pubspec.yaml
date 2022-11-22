@@ -34,6 +34,20 @@ dev_dependencies:
   flutter_lints: 2.0.1
   flutter_test: 
     sdk: flutter
+  flutter_launcher_icons: "^0.11.0"
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icons/icon.png"
+  min_sdk_android: 21
+  web:
+    generate: true
+  windows:
+    generate: true
+    icon_size: 48
+  macos:
+    generate: true
 
 flutter: 
   uses-material-design: true
