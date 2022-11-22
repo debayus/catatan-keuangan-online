@@ -13,6 +13,5 @@ class MahasColors {
     Color(0xFFcef8ef),
     Color(0xFFffc145),
     Color(0xFFff4000),
-    Color(0xFFfffffb),
   ];
 }

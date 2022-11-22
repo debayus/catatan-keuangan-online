@@ -67,10 +67,10 @@ class GrafikView extends GetView<GrafikController> {
                           title: "Pemasukan",
                           data: controller.piePemasukan,
                         ),
-                        // LineChartComponent(
-                        //   title: "Pemasukan",
-                        //   data: controller.linePemasukan,
-                        // ),
+                        LineChartComponent(
+                          title: "Pemasukan",
+                          data: controller.linePemasukan,
+                        ),
                       ],
                     ),
                   ),

@@ -66,36 +66,40 @@ class GrafikController extends GetxController {
         }
       }
 
+      var dates = Helper.calculateDaysInterval(dariTanggal, sampaiTanggal);
+
       // line pengeluaran
+      var linePengeluaranData = (jsonData['line_pengeluaran'] as List<dynamic>)
+          .map((x) => GrafikLineItemModel.fromDynamic(x))
+          .toList();
       linePengeluaran.clear();
-      for (var i = 0; i < jsonData['line_pengeluaran'].length; i++) {
-        var data =
-            GrafikLineItemModel.fromDynamic(jsonData['line_pengeluaran'][i]);
+      for (var i = 0; i < dates.length; i++) {
         linePengeluaran.add(LineChartItem(
-          value: data.nilai!,
+          value: linePengeluaranData
+                  .firstWhereOrNull((e) =>
+                      MahasFormat.dateToString(e.tanggal) ==
+                      MahasFormat.dateToString(dates[i]))
+                  ?.nilai ??
+              0,
           x: i.toDouble(),
-          color: MahasColors.grafikColors[index],
         ));
-        index++;
-        if (index >= MahasColors.grafikColors.length) {
-          index = 0;
-        }
       }
 
       // line pemasukan
+      var linePemasukanData = (jsonData['line_pemasukan'] as List<dynamic>)
+          .map((x) => GrafikLineItemModel.fromDynamic(x))
+          .toList();
       linePemasukan.clear();
-      for (var i = 0; i < jsonData['line_pemasukan'].length; i++) {
-        var data =
-            GrafikLineItemModel.fromDynamic(jsonData['line_pemasukan'][i]);
+      for (var i = 0; i < dates.length; i++) {
         linePemasukan.add(LineChartItem(
-          value: data.nilai!,
+          value: linePemasukanData
+                  .firstWhereOrNull((e) =>
+                      MahasFormat.dateToString(e.tanggal) ==
+                      MahasFormat.dateToString(dates[i]))
+                  ?.nilai ??
+              0,
           x: i.toDouble(),
-          color: MahasColors.grafikColors[index],
         ));
-        index++;
-        if (index >= MahasColors.grafikColors.length) {
-          index = 0;
-        }
       }
     } else {
       Helper.dialogWarning(r.message);

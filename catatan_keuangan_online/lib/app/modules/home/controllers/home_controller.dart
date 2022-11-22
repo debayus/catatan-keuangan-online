@@ -46,7 +46,6 @@ class HomeController extends GetxController {
         MahasConfig.refreshGrafik = false;
       }
     } else if (v == 2) {
-      print(v);
       if (MahasConfig.refreshListHutangPiutang) {
         hutangPiutangCon.listCon.refresh();
         MahasConfig.refreshListHutangPiutang = false;
