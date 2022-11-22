@@ -19,8 +19,10 @@ class MutasiRekeningModel {
   static MutasiRekeningModel fromDynamic(dynamic dynamicData) {
     final model = MutasiRekeningModel();
     model.id = dynamicData['id'];
-    model.idRekeningDari = dynamicData['id_rekening_dari'];
-    model.idRekeningTujuan = dynamicData['id_rekening_tujuan'];
+    model.idRekeningDari =
+        MahasFormat.dynamicToInt(dynamicData['id_rekening_dari']);
+    model.idRekeningTujuan =
+        MahasFormat.dynamicToInt(dynamicData['id_rekening_tujuan']);
     model.tanggal = MahasFormat.dynamicToDateTime(dynamicData['tanggal']);
     model.nilai = MahasFormat.dynamicToDouble(dynamicData['nilai']);
     model.catatan = dynamicData['catatan'];

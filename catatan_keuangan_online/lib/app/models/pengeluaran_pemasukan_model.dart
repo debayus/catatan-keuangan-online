@@ -22,10 +22,10 @@ class PengeluaranPemasukanModel {
   static PengeluaranPemasukanModel fromDynamic(dynamic dynamicData) {
     final model = PengeluaranPemasukanModel();
     model.id = dynamicData['id'];
-    model.idUser = dynamicData['id_user'];
+    model.idUser = MahasFormat.dynamicToInt(dynamicData['id_user']);
     model.idJenisPengeluaranPemasukan =
-        dynamicData['id_jenis_pengeluaran_pemasukan'];
-    model.idRekening = dynamicData['id_rekening'];
+        MahasFormat.dynamicToInt(dynamicData['id_jenis_pengeluaran_pemasukan']);
+    model.idRekening = MahasFormat.dynamicToInt(dynamicData['id_rekening']);
     model.tanggal = MahasFormat.dynamicToDateTime(dynamicData['tanggal']);
     model.nilai = MahasFormat.dynamicToDouble(dynamicData['nilai']);
     model.catatan = dynamicData['catatan'];

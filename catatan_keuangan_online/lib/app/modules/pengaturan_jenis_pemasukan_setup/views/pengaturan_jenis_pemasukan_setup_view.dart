@@ -40,8 +40,9 @@ class PengaturanJenisPemasukanSetupView
                       ? controller.iconOnPress
                       : null,
                   style: ElevatedButton.styleFrom(
-                      minimumSize: const Size(60, 60),
-                      backgroundColor: MahasColors.dark),
+                    minimumSize: const Size(60, 60),
+                    backgroundColor: MahasColors.light.withOpacity(.5),
+                  ),
                   child: Icon(
                     MasterIconModel.getIcon(controller.inputIcon.value) ??
                         FontAwesomeIcons.icons,

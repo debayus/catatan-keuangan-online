@@ -30,7 +30,7 @@ class PengaturanIconView extends GetView<PengaturanIconController> {
                         controller.iconOnPress(MasterIconModel.icons[i].name),
                     style: ElevatedButton.styleFrom(
                       minimumSize: const Size(60, 60),
-                      backgroundColor: MahasColors.dark,
+                      backgroundColor: MahasColors.light.withOpacity(.5),
                     ),
                     child: Icon(
                       MasterIconModel.icons[i].icon,
@@ -47,7 +47,7 @@ class PengaturanIconView extends GetView<PengaturanIconController> {
                               .iconOnPress(MasterIconModel.icons[i + 1].name),
                           style: ElevatedButton.styleFrom(
                             minimumSize: const Size(60, 60),
-                            backgroundColor: MahasColors.dark,
+                            backgroundColor: MahasColors.light.withOpacity(.5),
                           ),
                           child: Icon(
                             MasterIconModel.icons[i + 1].icon,
@@ -64,7 +64,7 @@ class PengaturanIconView extends GetView<PengaturanIconController> {
                               .iconOnPress(MasterIconModel.icons[i + 2].name),
                           style: ElevatedButton.styleFrom(
                             minimumSize: const Size(60, 60),
-                            backgroundColor: MahasColors.dark,
+                            backgroundColor: MahasColors.light.withOpacity(.5),
                           ),
                           child: Icon(
                             MasterIconModel.icons[i + 2].icon,

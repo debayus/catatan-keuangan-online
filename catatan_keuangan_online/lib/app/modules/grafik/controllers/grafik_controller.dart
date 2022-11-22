@@ -43,7 +43,7 @@ class GrafikController extends GetxController {
         piePengeluaran.add(PieChartItem(
           value: data.nilai!,
           text: data.nama!,
-          color: MahasColors.grafikColors[index],
+          color: MahasColors.grafikColors[index].withOpacity(.5),
         ));
         index++;
         if (index >= MahasColors.grafikColors.length) {
@@ -58,7 +58,7 @@ class GrafikController extends GetxController {
         piePemasukan.add(PieChartItem(
           value: data.nilai!,
           text: data.nama!,
-          color: MahasColors.grafikColors[index],
+          color: MahasColors.grafikColors[index].withOpacity(.5),
         ));
         index++;
         if (index >= MahasColors.grafikColors.length) {

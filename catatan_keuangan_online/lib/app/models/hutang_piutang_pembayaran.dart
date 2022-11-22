@@ -17,7 +17,7 @@ class HutangPiutangPembayaranModel {
   static HutangPiutangPembayaranModel fromDynamic(dynamic dynamicData) {
     final model = HutangPiutangPembayaranModel();
     model.id = dynamicData['id'];
-    model.idRekening = dynamicData['id_rekening'];
+    model.idRekening = MahasFormat.dynamicToInt(dynamicData['id_rekening']);
     model.idRekeningNama = dynamicData['id_rekening_nama'];
     model.tanggal = MahasFormat.dynamicToDateTime(dynamicData['tanggal']);
     model.nilai = MahasFormat.dynamicToDouble(dynamicData['nilai']);

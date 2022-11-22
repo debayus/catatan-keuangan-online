@@ -101,6 +101,12 @@ class MahasFormat {
     return DateTime.tryParse(value);
   }
 
+  static int? dynamicToInt(dynamic value) {
+    if (value == null) return null;
+    if (value is int) return value;
+    return int.tryParse(value);
+  }
+
   static bool? dynamicToBool(dynamic value) {
     if (value == null) return null;
     if (value is int) {
@@ -111,9 +117,9 @@ class MahasFormat {
               : null;
     }
     if (value is String) {
-      return value.toUpperCase() == "TRUE"
+      return (value.toUpperCase() == "TRUE" || value.toUpperCase() == "1")
           ? true
-          : value.toUpperCase() == "FALSE"
+          : (value.toUpperCase() == "FALSE" || value.toUpperCase() == "0")
               ? false
               : null;
     }
