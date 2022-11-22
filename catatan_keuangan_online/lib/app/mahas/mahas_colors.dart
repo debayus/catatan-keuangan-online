@@ -22,4 +22,15 @@ class MahasColors {
   static const Color dark = Colors.black;
   static const Color danger = red;
   static const Color warning = yellow;
+
+  static BoxDecoration decoration = BoxDecoration(
+    gradient: LinearGradient(
+      begin: Alignment.topRight,
+      end: Alignment.bottomLeft,
+      colors: [
+        MahasColors.cream.withOpacity(.8),
+        MahasColors.cream,
+      ],
+    ),
+  );
 }

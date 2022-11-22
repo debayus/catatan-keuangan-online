@@ -10,12 +10,13 @@ class SplashScreenView extends GetView<SplashScreenController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: MahasColors.primary,
+      color: MahasColors.cream,
       child: SafeArea(
         child: Scaffold(
+          backgroundColor: MahasColors.cream,
           body: Center(
             child: SizedBox(
-              width: 100,
+              width: 150,
               child: Image.asset(
                 'assets/images/icon.png',
               ),

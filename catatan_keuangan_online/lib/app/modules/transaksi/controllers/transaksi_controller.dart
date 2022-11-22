@@ -1,3 +1,4 @@
+import 'package:catatan_keuangan_online/app/mahas/mahas_config.dart';
 import 'package:catatan_keuangan_online/app/mahas/services/mahas_format.dart';
 import 'package:catatan_keuangan_online/app/models/jenis_pengeluaran_pemasukan_model.dart';
 import 'package:catatan_keuangan_online/app/models/rekening_model.dart';
@@ -36,6 +37,7 @@ class TransaksiController extends GetxController {
     } else if (result == 'hutang piutang') {}
     if (refresh == true) {
       listCon.refresh();
+      MahasConfig.refreshGrafik = true;
     }
   }
 
@@ -95,6 +97,7 @@ class TransaksiController extends GetxController {
     }
     if (refresh == true) {
       listCon.refresh();
+      MahasConfig.refreshGrafik = true;
     }
   }
 
@@ -114,6 +117,7 @@ class TransaksiController extends GetxController {
       filterTipe = transaksiFilterCon.tipeCon.value;
       filterJenis = transaksiFilterCon.jenisCon.value;
       listCon.refresh();
+      MahasConfig.refreshGrafik = true;
     }
   }
 

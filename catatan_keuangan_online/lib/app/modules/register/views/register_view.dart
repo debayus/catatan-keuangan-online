@@ -18,7 +18,7 @@ class RegisterView extends GetView<RegisterController> {
           body: Container(
             padding:
                 const EdgeInsets.only(bottom: 10, left: 20, right: 20, top: 20),
-            decoration: MahasThemes.decoration,
+            decoration: MahasColors.decoration,
             child: Column(
               children: [
                 Expanded(child: Container()),

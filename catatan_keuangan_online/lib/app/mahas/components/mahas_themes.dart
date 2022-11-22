@@ -30,17 +30,6 @@ class MahasThemes {
     ),
   );
 
-  static BoxDecoration decoration = BoxDecoration(
-    gradient: LinearGradient(
-      begin: Alignment.topRight,
-      end: Alignment.bottomLeft,
-      colors: [
-        MahasColors.primary.withOpacity(.8),
-        MahasColors.primary,
-      ],
-    ),
-  );
-
   static TextStyle h1 = const TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.bold,

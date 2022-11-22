@@ -15,16 +15,18 @@ class LoginView extends GetView<LoginController> {
       child: SafeArea(
         child: Scaffold(
           body: Container(
-            decoration: MahasThemes.decoration,
+            decoration: MahasColors.decoration,
             padding: const EdgeInsets.all(20),
             child: Column(
               children: [
                 Expanded(
                   child: Container(),
                 ),
-                const Icon(
-                  Icons.account_balance_wallet,
-                  size: 100,
+                SizedBox(
+                  width: 150,
+                  child: Image.asset(
+                    'assets/images/icon.png',
+                  ),
                 ),
                 const Padding(padding: EdgeInsets.all(5)),
                 Text(
@@ -57,9 +59,13 @@ class LoginView extends GetView<LoginController> {
                   flex: 2,
                   child: Container(),
                 ),
-                TextButton(
+                Visibility(
+                  visible: false,
+                  child: TextButton(
                     onPressed: controller.sampleOnPress,
-                    child: const Text("Sample")),
+                    child: const Text("Sample"),
+                  ),
+                ),
                 const Text("v.1.0"),
               ],
             ),
