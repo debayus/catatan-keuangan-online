@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GrafikController;
 use App\Http\Controllers\HutangPiutangController;
 use App\Http\Controllers\HutangPiutangPembayaranController;
 use App\Http\Controllers\JenisPengeluaranPemasukanController;
@@ -91,6 +92,10 @@ Route::group(['middleware' => ['firebase.admin']], function(){
         Route::post('/','store');
         Route::put('/{id}','update');
         Route::delete('/{id}', 'destroy');
+    });
+
+    Route::prefix('/grafik')->controller(GrafikController::class)->group(function () {
+        Route::get('/pengeluaranpemasukan', 'pengeluaran_pemasukan');
     });
 });
 
