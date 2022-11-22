@@ -22,7 +22,7 @@ class LoginButton extends StatelessWidget {
         ? FontAwesomeIcons.google
         : FontAwesomeIcons.apple;
     final backgroundColor =
-        type == LoginButtonType.google ? MahasColors.red : Colors.black;
+        type == LoginButtonType.google ? MahasColors.red : MahasColors.dark;
 
     return ElevatedButton(
       onPressed: onPressed,

@@ -25,7 +25,7 @@ class Helper {
           children: [
             Icon(
               icon ?? FontAwesomeIcons.question,
-              color: color ?? MahasColors.blue,
+              color: color ?? MahasColors.primary,
               size: 40,
             ),
             const Padding(padding: EdgeInsets.all(10)),
@@ -44,7 +44,7 @@ class Helper {
             child: Text(
               textCancel ?? "Close",
               style: const TextStyle(
-                color: MahasColors.grey,
+                color: MahasColors.dark,
               ),
             ),
             onPressed: () {
@@ -55,7 +55,7 @@ class Helper {
             child: Text(
               textConfirm ?? "OK",
               style: TextStyle(
-                color: color ?? MahasColors.blue,
+                color: color ?? MahasColors.primary,
               ),
             ),
             onPressed: () {
@@ -75,15 +75,14 @@ class Helper {
           children: [
             const Icon(
               FontAwesomeIcons.triangleExclamation,
-              color: MahasColors.yellow,
+              color: MahasColors.warning,
               size: 40,
             ),
             const Padding(padding: EdgeInsets.all(7)),
             Text(
               message ?? "-",
-              // maxLines: 2,
               style: const TextStyle(
-                color: MahasColors.yellow,
+                color: MahasColors.warning,
               ),
             ),
           ],
@@ -122,7 +121,7 @@ class Helper {
         decoration: BoxDecoration(
           borderRadius:
               BorderRadius.all(Radius.circular(MahasThemes.borderRadius)),
-          color: Colors.white,
+          color: MahasColors.light,
         ),
         child: Column(
           children: children,

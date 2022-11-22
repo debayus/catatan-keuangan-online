@@ -117,7 +117,7 @@ class XsampleDetailView extends GetView<XsampleDetailController> {
                               onTap: deleteOnPress,
                               child: const Icon(
                                 Icons.delete_forever,
-                                color: Colors.red,
+                                color: MahasColors.danger,
                               ),
                             ),
                           ),
@@ -131,7 +131,7 @@ class XsampleDetailView extends GetView<XsampleDetailController> {
                         onTap: editOnPress,
                         child: const Text(
                           "Edit",
-                          style: TextStyle(color: MahasColors.blue),
+                          style: TextStyle(color: MahasColors.primary),
                         ),
                       )
                     ],

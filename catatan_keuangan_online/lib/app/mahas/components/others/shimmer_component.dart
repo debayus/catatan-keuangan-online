@@ -34,13 +34,13 @@ class ShimmerComponent extends StatelessWidget {
           ),
           width: double.infinity,
           height: 16,
-          color: Colors.white,
+          color: MahasColors.light,
         ),
       );
     }
     return Shimmer.fromColors(
-      baseColor: MahasColors.grey.withOpacity(.5),
-      highlightColor: MahasColors.grey.withOpacity(.1),
+      baseColor: MahasColors.dark.withOpacity(.1),
+      highlightColor: MahasColors.dark.withOpacity(.05),
       child: Column(
         children: shimmers,
       ),

@@ -158,7 +158,7 @@ class InputDetailSetupControler<T> {
                       onTap: () => _itemDeleteOnPress(key),
                       child: const Icon(
                         Icons.delete_forever,
-                        color: Colors.red,
+                        color: MahasColors.danger,
                       ),
                     ),
                   ),
@@ -168,7 +168,7 @@ class InputDetailSetupControler<T> {
                 onTap: () => _itemEditOnPress(key),
                 child: const Text(
                   "Edit",
-                  style: TextStyle(color: MahasColors.blue),
+                  style: TextStyle(color: MahasColors.primary),
                 ),
               )
             ],
@@ -273,7 +273,7 @@ class _InputDetailSetupComponentState<T>
             ),
           ),
           Container(
-            color: MahasColors.grey.withOpacity(.3),
+            color: MahasColors.dark.withOpacity(.05),
             child: Column(
               children: [
                 Visibility(
@@ -320,7 +320,7 @@ class _InputDetailSetupComponentState<T>
                 alignment: Alignment.centerLeft,
                 child: Text(
                   widget.controller._errorMessage ?? "",
-                  style: const TextStyle(color: MahasColors.red),
+                  style: const TextStyle(color: MahasColors.primary),
                 ),
               ),
             ),

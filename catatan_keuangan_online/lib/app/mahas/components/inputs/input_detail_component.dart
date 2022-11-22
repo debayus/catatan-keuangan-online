@@ -122,7 +122,7 @@ class InputDetailControler<T> {
                       onTap: () => _itemDeleteOnPress(element),
                       child: const Icon(
                         Icons.delete_forever,
-                        color: Colors.red,
+                        color: MahasColors.danger,
                       ),
                     ),
                   ),
@@ -217,7 +217,7 @@ class _InputDetailComponentState<T> extends State<InputDetailComponent<T>> {
             ),
           ),
           Container(
-            color: MahasColors.grey.withOpacity(.3),
+            color: MahasColors.dark.withOpacity(.05),
             child: Column(
               children: [
                 Visibility(
@@ -264,7 +264,7 @@ class _InputDetailComponentState<T> extends State<InputDetailComponent<T>> {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   widget.controller._errorMessage ?? "",
-                  style: const TextStyle(color: MahasColors.red),
+                  style: const TextStyle(color: MahasColors.danger),
                 ),
               ),
             ),

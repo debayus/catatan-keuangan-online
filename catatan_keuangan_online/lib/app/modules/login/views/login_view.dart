@@ -11,7 +11,7 @@ class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: MahasColors.blue,
+      color: MahasColors.primary,
       child: SafeArea(
         child: Scaffold(
           body: Container(

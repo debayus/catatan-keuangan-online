@@ -1,3 +1,4 @@
+import 'package:catatan_keuangan_online/app/mahas/mahas_colors.dart';
 import 'package:flutter/material.dart';
 
 import '../mahas_themes.dart';
@@ -137,7 +138,7 @@ class _InputDropdownComponentState extends State<InputDropdownComponent> {
       filled: true,
       contentPadding:
           const EdgeInsets.only(top: 12, bottom: 12, left: 10, right: 10),
-      fillColor: Colors.black.withOpacity(.01),
+      fillColor: MahasColors.dark.withOpacity(.01),
       isDense: true,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.all(
@@ -146,15 +147,15 @@ class _InputDropdownComponentState extends State<InputDropdownComponent> {
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(
             widget.borderRadius ?? Radius.circular(MahasThemes.borderRadius)),
-        borderSide: const BorderSide(color: Colors.black, width: .1),
+        borderSide: const BorderSide(color: MahasColors.dark, width: .1),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(
             widget.borderRadius ?? Radius.circular(MahasThemes.borderRadius)),
-        borderSide: const BorderSide(color: Colors.black, width: .1),
+        borderSide: const BorderSide(color: MahasColors.dark, width: .1),
       ),
       prefixStyle: TextStyle(
-        color: Colors.white.withOpacity(0.6),
+        color: MahasColors.light.withOpacity(0.6),
       ),
       suffixIconConstraints: const BoxConstraints(
         minHeight: 30,
@@ -186,9 +187,9 @@ class _InputDropdownComponentState extends State<InputDropdownComponent> {
                         ))
                     .toList(),
                 style: TextStyle(
-                  color: Colors.black.withOpacity(.7),
+                  color: MahasColors.dark.withOpacity(.7),
                 ),
-                dropdownColor: Colors.white,
+                dropdownColor: MahasColors.light,
               ),
             )
           : null,

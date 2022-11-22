@@ -1,4 +1,5 @@
 import 'package:catatan_keuangan_online/app/mahas/components/mahas_themes.dart';
+import 'package:catatan_keuangan_online/app/mahas/mahas_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -48,7 +49,7 @@ class HutangPiutangView extends GetView<HutangPiutangController> {
                   right: 10, left: 10, top: 10, bottom: 0),
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.black.withOpacity(.2)),
+                border: Border.all(color: MahasColors.dark.withOpacity(.2)),
                 borderRadius: BorderRadius.all(
                   Radius.circular(MahasThemes.borderRadius),
                 ),
@@ -68,8 +69,8 @@ class HutangPiutangView extends GetView<HutangPiutangController> {
                                     : "",
                             style: MahasThemes.title.copyWith(
                               color: e.dibayar! >= e.nilai!
-                                  ? Colors.green
-                                  : Colors.red,
+                                  ? MahasColors.blue
+                                  : MahasColors.red,
                             ),
                           ),
                           Visibility(

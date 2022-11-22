@@ -31,7 +31,7 @@ class PengaturanController extends GetxController {
     var r = await Helper.dialogQuestion(
       message: 'Anda yakin akan menghapus akun ini?',
       textConfirm: 'Hapus',
-      color: MahasColors.red,
+      color: MahasColors.danger,
     );
     if (r == true) {
       EasyLoading.show();

@@ -1,3 +1,4 @@
+import 'package:catatan_keuangan_online/app/mahas/mahas_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -19,13 +20,13 @@ class EmptyComponent extends StatelessWidget {
           Icon(
             FontAwesomeIcons.boxOpen,
             size: 40,
-            color: Colors.black.withOpacity(.3),
+            color: MahasColors.dark.withOpacity(.3),
           ),
           const Padding(padding: EdgeInsets.all(5)),
           Text(
             "Tidak ada data",
             style: TextStyle(
-              color: Colors.black.withOpacity(.3),
+              color: MahasColors.dark.withOpacity(.3),
             ),
           ),
           Visibility(

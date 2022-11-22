@@ -14,7 +14,7 @@ class MahasThemes {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
         ),
-        backgroundColor: MahasColors.blue,
+        backgroundColor: MahasColors.primary,
       ),
     ),
     textButtonTheme: TextButtonThemeData(
@@ -26,7 +26,7 @@ class MahasThemes {
       ),
     ),
     appBarTheme: const AppBarTheme(
-      backgroundColor: MahasColors.blue,
+      backgroundColor: MahasColors.primary,
     ),
   );
 
@@ -35,8 +35,8 @@ class MahasThemes {
       begin: Alignment.topRight,
       end: Alignment.bottomLeft,
       colors: [
-        MahasColors.blue.withOpacity(.8),
-        MahasColors.blue,
+        MahasColors.primary.withOpacity(.8),
+        MahasColors.primary,
       ],
     ),
   );
@@ -60,6 +60,6 @@ class MahasThemes {
   );
 
   static TextStyle muted = TextStyle(
-    color: Colors.black.withOpacity(.5),
+    color: MahasColors.dark.withOpacity(.5),
   );
 }

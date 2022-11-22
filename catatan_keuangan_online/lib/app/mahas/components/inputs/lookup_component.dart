@@ -195,7 +195,7 @@ class LookupController<T, U> extends ChangeNotifier {
             .where((element) => itemValue(element) == itemValue(_items[index]))
             .isEmpty
         ? null
-        : MahasColors.blue.withOpacity(.2);
+        : MahasColors.primary.withOpacity(.2);
   }
 
   String _itemText(int index) {

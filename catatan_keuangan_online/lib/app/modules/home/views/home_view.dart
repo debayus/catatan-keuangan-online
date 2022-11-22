@@ -12,7 +12,7 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: MahasColors.blue,
+      color: MahasColors.primary,
       child: SafeArea(
         child: Scaffold(
           body: Obx(
@@ -31,12 +31,12 @@ class HomeView extends GetView<HomeController> {
               showSelectedLabels: false,
               onTap: controller.bottomNavigationBarOnTab,
               currentIndex: controller.tabIndex.value,
-              unselectedItemColor: Colors.white.withOpacity(0.4),
-              selectedItemColor: Colors.white,
+              unselectedItemColor: MahasColors.light.withOpacity(0.4),
+              selectedItemColor: MahasColors.light,
               items: controller.menus
                   .map(
                     (e) => BottomNavigationBarItem(
-                      backgroundColor: MahasColors.blue,
+                      backgroundColor: MahasColors.primary,
                       icon: Icon(e['icon'], size: 25),
                       label: e['label'],
                     ),

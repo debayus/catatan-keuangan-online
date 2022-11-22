@@ -41,11 +41,11 @@ class PengaturanRekeningSetupView
                       : null,
                   style: ElevatedButton.styleFrom(
                       minimumSize: const Size(60, 60),
-                      backgroundColor: MahasColors.grey),
+                      backgroundColor: MahasColors.dark),
                   child: Icon(
                     MasterIconModel.getIcon(controller.inputIcon.value) ??
                         FontAwesomeIcons.icons,
-                    color: MahasColors.blue,
+                    color: MahasColors.primary,
                   ),
                 ),
               ),

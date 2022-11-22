@@ -1,3 +1,4 @@
+import 'package:catatan_keuangan_online/app/mahas/mahas_colors.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import '../others/empty_component.dart';
@@ -40,7 +41,7 @@ class _PieChartComponentState extends State<PieChartComponent> {
       child: Container(
         margin: const EdgeInsets.only(bottom: 10),
         child: Card(
-          color: Colors.white,
+          color: MahasColors.light,
           child: Container(
             padding: const EdgeInsets.all(10),
             child: Column(

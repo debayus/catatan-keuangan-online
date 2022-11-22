@@ -38,7 +38,7 @@ class _LineChartComponentState extends State<LineChartComponent> {
       child: Container(
         margin: const EdgeInsets.only(bottom: 10),
         child: Card(
-          color: Colors.white,
+          color: MahasColors.light,
           child: Container(
             padding: const EdgeInsets.all(10),
             child: Column(
@@ -86,8 +86,8 @@ class _LineChartComponentState extends State<LineChartComponent> {
                         ),
                         borderData: FlBorderData(
                           show: true,
-                          border:
-                              Border.all(color: Colors.black.withOpacity(.2)),
+                          border: Border.all(
+                              color: MahasColors.dark.withOpacity(.2)),
                         ),
                         minY: 0,
                         lineBarsData: [
@@ -103,7 +103,7 @@ class _LineChartComponentState extends State<LineChartComponent> {
                             ),
                             belowBarData: BarAreaData(
                               show: true,
-                              color: MahasColors.blue.withOpacity(.2),
+                              color: MahasColors.primary.withOpacity(.2),
                             ),
                           ),
                         ],

@@ -30,11 +30,11 @@ class PengaturanIconView extends GetView<PengaturanIconController> {
                         controller.iconOnPress(MasterIconModel.icons[i].name),
                     style: ElevatedButton.styleFrom(
                       minimumSize: const Size(60, 60),
-                      backgroundColor: MahasColors.grey,
+                      backgroundColor: MahasColors.dark,
                     ),
                     child: Icon(
                       MasterIconModel.icons[i].icon,
-                      color: MahasColors.blue,
+                      color: MahasColors.primary,
                     ),
                   ),
                 ),
@@ -47,11 +47,11 @@ class PengaturanIconView extends GetView<PengaturanIconController> {
                               .iconOnPress(MasterIconModel.icons[i + 1].name),
                           style: ElevatedButton.styleFrom(
                             minimumSize: const Size(60, 60),
-                            backgroundColor: MahasColors.grey,
+                            backgroundColor: MahasColors.dark,
                           ),
                           child: Icon(
                             MasterIconModel.icons[i + 1].icon,
-                            color: MahasColors.blue,
+                            color: MahasColors.primary,
                           ),
                         ),
                 ),
@@ -64,11 +64,11 @@ class PengaturanIconView extends GetView<PengaturanIconController> {
                               .iconOnPress(MasterIconModel.icons[i + 2].name),
                           style: ElevatedButton.styleFrom(
                             minimumSize: const Size(60, 60),
-                            backgroundColor: MahasColors.grey,
+                            backgroundColor: MahasColors.dark,
                           ),
                           child: Icon(
                             MasterIconModel.icons[i + 2].icon,
-                            color: MahasColors.blue,
+                            color: MahasColors.primary,
                           ),
                         ),
                 ),

@@ -1,3 +1,4 @@
+import 'package:catatan_keuangan_online/app/mahas/mahas_colors.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 
@@ -136,7 +137,7 @@ class _InputTextState extends State<InputTextComponent> {
 
     final decoration = InputDecoration(
       filled: true,
-      fillColor: Colors.black.withOpacity(widget.editable ? .01 : .05),
+      fillColor: MahasColors.dark.withOpacity(widget.editable ? .01 : .05),
       hintText: widget.placeHolder,
       isDense: true,
       border: OutlineInputBorder(
@@ -146,16 +147,16 @@ class _InputTextState extends State<InputTextComponent> {
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(
             widget.borderRadius ?? Radius.circular(MahasThemes.borderRadius)),
-        borderSide: const BorderSide(color: Colors.black, width: .1),
+        borderSide: const BorderSide(color: MahasColors.dark, width: .1),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(
             widget.borderRadius ?? Radius.circular(MahasThemes.borderRadius)),
-        borderSide: const BorderSide(color: Colors.black, width: .1),
+        borderSide: const BorderSide(color: MahasColors.dark, width: .1),
       ),
       prefixText: widget.prefixText,
       prefixStyle: TextStyle(
-        color: Colors.black.withOpacity(0.6),
+        color: MahasColors.dark.withOpacity(0.6),
       ),
       suffixIconConstraints: const BoxConstraints(
         minHeight: 30,
@@ -172,7 +173,7 @@ class _InputTextState extends State<InputTextComponent> {
                 widget.controller._showPassword
                     ? Icons.visibility_off
                     : Icons.visibility,
-                color: Colors.black.withOpacity(0.6),
+                color: MahasColors.dark.withOpacity(0.6),
                 size: 14,
               ),
             )
@@ -186,7 +187,7 @@ class _InputTextState extends State<InputTextComponent> {
       onTap: widget.controller.onTap,
       onFieldSubmitted: widget.controller.onFieldSubmitted,
       style: const TextStyle(
-        color: Colors.black,
+        color: MahasColors.dark,
       ),
       inputFormatters: widget.controller.type == InputTextType.number
           ? [
