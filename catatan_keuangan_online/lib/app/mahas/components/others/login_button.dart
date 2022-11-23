@@ -17,7 +17,9 @@ class LoginButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final title = type == LoginButtonType.google ? "Google" : "Apple";
+    final title = type == LoginButtonType.google
+        ? "Sign in with Google"
+        : "Sign in with Apple";
     final icon = type == LoginButtonType.google
         ? FontAwesomeIcons.google
         : FontAwesomeIcons.apple;

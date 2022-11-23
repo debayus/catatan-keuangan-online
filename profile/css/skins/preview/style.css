@@ -1,0 +1,638 @@
+body {
+  color: #8a949f;
+}
+
+body.boxed #full-container {
+  box-shadow: 0 9px 40px 5px rgba(138, 148, 159, 0.1);
+}
+
+a {
+  color: #1bc768;
+}
+
+a:hover {
+  color: #111;
+}
+
+a:focus {
+  color: #666;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #292f35;
+}
+
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+  color: #111;
+}
+
+h1 a:hover,
+h2 a:hover,
+h3 a:hover,
+h4 a:hover,
+h5 a:hover,
+h6 a:hover {
+  color: #666;
+}
+
+.text-white h1,
+.text-white h2,
+.text-white h3,
+.text-white h4,
+.text-white h5,
+.text-white h6 {
+  color: #fff;
+}
+
+.subheader {
+  color: #1bc768;
+}
+
+.dark p {
+  color: #fff;
+}
+
+strong {
+  color: #111;
+}
+
+::-moz-selection {
+  color: #333;
+}
+
+::selection {
+  color: #333;
+}
+
+.colored {
+  color: #1bc768;
+}
+
+input,
+input.form-control,
+button,
+button.form-control,
+textarea,
+textarea.form-control,
+select,
+select.form-control {
+  color: #111;
+  box-shadow: inset 0 0 0 1px #eee;
+}
+
+input:focus,
+input.form-control:focus,
+textarea:focus,
+textarea.form-control:focus,
+select:focus,
+select.form-control:focus {
+  box-shadow: inset 0 0 0 2px #1bc768;
+}
+
+button:focus,
+button.form-control:focus {
+  box-shadow: none;
+  border-color: transparent;
+}
+
+.field-icon {
+  color: #222;
+}
+
+label {
+  color: #111;
+}
+
+label.error {
+  color: #f33;
+}
+
+input.error,
+input.error:focus,
+textarea.error,
+textarea.error:focus,
+select.error,
+select.error:focus {
+  box-shadow: inset 0 0 0 2px #f33;
+}
+
+input[type="submit"],
+input[type="submit"].form-control,
+input[type="submit"],
+input[type="submit"].form-control {
+  color: #fff;
+  background-color: #1bc768;
+  box-shadow: none;
+}
+
+input[type="submit"]:focus,
+input[type="submit"].form-control:focus {
+  box-shadow: none;
+}
+
+.section-title.text-white h2 {
+  color: #fff;
+}
+
+.section-title.text-white p {
+  color: #eee;
+}
+
+.parallax-section {
+  background-color: #ccc;
+}
+
+.overlay-pattern {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.img-bg {
+  background-color: #ddd;
+}
+
+.img-bg .overlay {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.img-bg .overlay .overlay-inner .sub-title {
+  color: #1bc768;
+}
+
+.img-bg .overlay .overlay-inner h1,
+.img-bg .overlay .overlay-inner h2,
+.img-bg .overlay .overlay-inner h3,
+.img-bg .overlay .overlay-inner h4,
+.img-bg .overlay .overlay-inner h5,
+.img-bg .overlay .overlay-inner h6 {
+  color: #fff;
+}
+
+.video-preview:hover .video-btn i {
+  color: #fff;
+}
+
+.video-preview.vp-banner {
+  box-shadow: 0 5px 15px 10px rgba(17, 17, 17, 0.15);
+}
+
+.video-btn i {
+  color: #111;
+}
+
+.video-btn .title {
+  color: #fff;
+}
+
+.video-btn:hover i {
+  color: #fff;
+}
+
+.box-info.text-white {
+  color: #fff;
+}
+
+.box-info.text-white p {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.icon.white i {
+  color: #fff;
+}
+
+.icon.colorful i {
+  color: #1bc768;
+}
+
+.icon.spaced.colorful-bg {
+  background-color: #1bc768;
+  color: #1bc768;
+}
+
+.btn {
+  box-shadow: 0 3px 14px 4px rgba(27, 199, 104, 0.22);
+}
+
+.btn.colorful,
+.btn.hover-colorful:hover {
+  background-color: #1bc768;
+  color: #fff;
+  border-color: #1bc768;
+  box-shadow: 0 3px 14px 4px rgba(27, 199, 104, 0.22);
+}
+
+.btn.colorful-darken,
+.btn.hover-colorful-darken:hover {
+  background-color: #17ac5a;
+  color: #fff;
+  border-color: #17ac5a;
+  box-shadow: 0 3px 14px 4px rgba(23, 172, 90, 0.22);
+}
+
+.btn.transparent-colorful,
+.btn.hover-transparent-colorful:hover {
+  color: #1bc768;
+  border-color: #1bc768;
+  box-shadow: 0 3px 14px 4px rgba(27, 199, 104, 0.22);
+}
+
+.btn.dark,
+.btn.hover-dark:hover {
+  background-color: #111;
+  color: #fff;
+  border-color: #111;
+  box-shadow: 0 3px 14px 4px rgba(138, 148, 159, 0.22);
+}
+
+.btn.transparent-dark,
+.btn.hover-transparent-dark:hover {
+  color: #111;
+  border-color: #111;
+  box-shadow: 0 3px 14px 4px rgba(138, 148, 159, 0.22);
+}
+
+.btn.white,
+.btn.hover-white:hover {
+  background-color: #fff;
+  color: #111;
+  border-color: #fff;
+  box-shadow: 0 3px 14px 4px rgba(138, 148, 159, 0.22);
+}
+
+.btn.transparent-white,
+.btn.hover-transparent-white:hover {
+  color: #fff;
+  border-color: #fff;
+  box-shadow: 0 3px 14px 4px rgba(138, 148, 159, 0.22);
+}
+
+.social-icons.grey li a i:first-child {
+  color: #8a949f;
+}
+
+.social-icons.white li a i:first-child,
+.social-icons.hover-white li a i:last-child {
+  color: #fff;
+}
+
+.social-icons.hover-grey-dark li a i:last-child,
+.social-icons.hover-grey-dark:not(.animated) li a:hover i:first-child {
+  color: #999;
+}
+
+.social-icons.hover-colorful li a i:last-child,
+.social-icons.hover-colorful:not(.animated) li a:hover i:first-child {
+  color: #1bc768;
+}
+
+.testimonial-single-1.text-white {
+  color: #fff;
+}
+
+.testimonial-single-1 .ts-person {
+  background-color: #fff;
+}
+
+.testimonial-single-1 .ts-person span {
+  color: #8a949f;
+}
+
+#scroll-progress .scroll-progress {
+  background-color: #1bc768;
+}
+
+#scroll-progress .scroll-percent {
+  color: #fff;
+  background-color: #000;
+}
+
+#website-loading {
+  background-color: #fff;
+}
+
+.scroll-top-icon {
+  color: #fff;
+  background-color: #262626;
+}
+
+.scroll-top-icon:hover {
+  color: #fff;
+}
+
+.scroll-top-icon:focus {
+  color: #fff;
+}
+
+.logo.text-white h3,
+.logo.text-white span {
+  color: #fff;
+}
+
+.logo.logo-text h3 {
+  color: #fff;
+}
+
+.logo.logo-text h3 + span {
+  color: #fff;
+}
+
+.header-bar.is-sticky .header-bar-wrap {
+  background-color: #fff;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.header-bar .logo-header.logo-text h3 + span {
+  color: #8a949f;
+}
+
+.header-bar .menu-main > li > a {
+  color: #111;
+}
+
+.header-bar .menu-main > li > a.current,
+.header-bar .menu-main > li:hover > a,
+.header-bar .menu-main > li > a:hover,
+.header-bar .menu-main > li > a:focus {
+  color: #1bc768;
+}
+
+.header-bar .hamburger-inner,
+.header-bar .hamburger-inner::before,
+.header-bar .hamburger-inner::after {
+  background-color: #000;
+}
+
+#header-bar-1.text-white .header-bar-wrap {
+  background-color: #111;
+}
+
+#header-bar-1.text-white .logo.logo-text h3 + span {
+  color: #fff;
+}
+
+.banner-parallax {
+  background-color: #bbb;
+}
+
+.banner-center-box.text-white h1 {
+  color: #fff;
+}
+
+.banner-center-box.text-white .description {
+  color: white;
+}
+
+.color-theme {
+  color: #1bc768;
+}
+
+.color-bg-theme {
+  background-color: #1bc768;
+}
+
+.color-heading {
+  color: #292f35;
+}
+
+.color-bg-heading {
+  background-color: #292f35;
+}
+
+.color-dark {
+  color: #111;
+}
+
+.color-bg-dark {
+  background-color: #111;
+}
+
+.color-white {
+  color: #fff;
+}
+
+.color-bg-white {
+  background-color: #fff;
+}
+
+.color-grey {
+  color: #666;
+}
+
+.color-bg-grey {
+  color: #666;
+}
+
+body::after {
+  background-color: #333;
+}
+
+#content {
+  background-color: #fff;
+}
+
+#pricing-plans .section-content {
+  background-color: rgba(27, 199, 104, 0.03);
+}
+
+.pricing-table .pt-column.featured {
+  box-shadow: 0 5px 35px 9px rgba(138, 148, 159, 0.1);
+}
+
+.pricing-table .pt-column-header .title {
+  color: #1bc768;
+}
+
+.slider-testimonials .owl-nav [class*="owl-"] {
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.slider-testimonials .owl-nav [class*="owl-"]:hover {
+  background-color: #111;
+  color: #fff;
+}
+
+.slider-testimonials:hover .owl-nav .disabled {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.slider-testimonials .owl-dots .owl-dot:hover span {
+  background-color: #111;
+}
+
+.slider-testimonials .owl-dots .owl-dot.active span,
+.slider-testimonials .owl-dots .owl-dot.active:hover span {
+  border-color: #1bc768;
+  background-color: #1bc768;
+}
+
+.slider-testimonials .owl-dots .owl-dot span {
+  background-color: #111;
+}
+
+.box-form {
+  background-color: #fff;
+}
+
+.box-form .form-group label:first-child {
+  color: #777;
+}
+
+.cta-subscribe {
+  background-color: transparent;
+}
+
+.cta-subscribe.cta-subscribe-1 #form-cta-subscribe-1 input[type="text"] {
+  box-shadow: none;
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.cta-subscribe.cta-subscribe-1 #form-cta-subscribe-1 input[type="text"]:focus {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.cta-subscribe.cta-subscribe-1 #form-cta-subscribe-1 label.error {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.cta-subscribe.cta-subscribe-1 ::-webkit-input-placeholder {
+  color: #fff !important;
+}
+
+.cta-subscribe.cta-subscribe-1 ::-moz-placeholder {
+  color: #fff !important;
+}
+
+.cta-subscribe.cta-subscribe-1 :-ms-input-placeholder {
+  color: #fff !important;
+}
+
+.cta-subscribe.cta-subscribe-1 :-moz-placeholder {
+  color: #fff !important;
+}
+
+.cta-subscribe-2.cta-subscribe {
+  background-color: #fff;
+}
+
+.cta-subscribe-2.cta-subscribe .box-title {
+  color: #8a949f;
+}
+
+.cta-subscribe-2 #form-cta-subscribe-1 .form-group input.error,
+.cta-subscribe-2 #form-cta-subscribe-1 .form-group input.error:focus {
+  box-shadow: inset 0 0 0 2px #f33;
+}
+
+.cta-subscribe-2 #form-cta-subscribe-1 input[type="text"] {
+  box-shadow: none;
+  color: #8a949f;
+  background-color: rgba(24, 177, 92, 0.05);
+}
+
+.cta-subscribe-2 #form-cta-subscribe-1 input[type="text"]:focus {
+  box-shadow: inset 0 0 0 2px #1bc768;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+#form-cta-subscribe-1 input[type="submit"] {
+  box-shadow: 0 4px 16px 7px rgba(27, 199, 104, 0.2);
+}
+
+.cs-notifications a,
+.cs-notifications a {
+  color: #fff;
+}
+
+.cs-notifications a:hover,
+.cs-notifications a:hover {
+  color: #fff;
+}
+
+.cs-notifications-content,
+.cs-notifications-content {
+  color: #fff;
+  background-color: #ff3333;
+}
+
+.cs-notifications-content.sent,
+.cs-notifications-content.sent {
+  background-color: #3aae39;
+}
+
+.cs-error-icon,
+.cs-success-icon,
+.cs-error-icon,
+.cs-success-icon {
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+#cta-title-1.text-white {
+  color: #fff;
+}
+
+#footer {
+  background-color: #fff;
+}
+
+.box-widget .box-title {
+  color: #fff;
+}
+
+.style-switcher {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.style-switcher .btn.purchase-btn {
+  border-color: #82b440;
+}
+
+.style-switcher .btn.dark,
+.style-switcher .btn.hover-dark:hover {
+  border-color: #111;
+}
+
+.ss-icon {
+  color: #fff;
+  box-shadow: -2px 0 7px rgba(0, 0, 0, 0.2);
+}
+
+.ss-icon:hover,
+.ss-icon:focus {
+  color: #fff;
+}
+
+.colors-skins li button {
+  box-shadow: none;
+}
+
+.switch span.active {
+  color: #222;
+}
+
+.demos-preview li a {
+  color: #888;
+}
+
+.demos-preview li a h5 {
+  color: #425cbb;
+}
+
+.demos-preview li a:hover {
+  color: #222;
+}
+
+.dp-img {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
