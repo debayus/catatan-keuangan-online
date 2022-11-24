@@ -1,12 +1,1 @@
-1.0 
-1.0.1 bug input money
-1.0.2 setup title
-1.0.3 dynamicToDouble
-1.1.0 Helper.modalMenu
-1.1.1 Lookup bug
-1.1.2 Input Radio bug
-1.1.3 detail empty component
-1.1.4 setup page bug
-1.1.5 list bug
-1.1.6 colors
-1.1.7 update list
+1.0.0

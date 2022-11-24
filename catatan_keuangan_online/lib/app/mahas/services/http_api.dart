@@ -5,8 +5,17 @@ import '../models/api_result_model.dart';
 import 'package:http/http.dart' as http;
 
 class HttpApi {
+  static String? _apiToken;
+  static DateTime _apiTokenExpired = DateTime.now();
+
   static Future<String?> _token() async {
-    return await auth.currentUser?.getIdToken(true);
+    var now = DateTime.now();
+    if (_apiToken == null || _apiTokenExpired.isBefore(now)) {
+      _apiTokenExpired = DateTime(
+          now.year, now.month, now.day, now.hour, now.minute + 59, now.second);
+      _apiToken = await auth.currentUser?.getIdToken(true);
+    }
+    return _apiToken;
   }
 
   static String getUrl(String url) {
@@ -23,6 +32,7 @@ class HttpApi {
   }
 
   static ApiResultModel _getErrorResult(dynamic ex) {
+    _apiToken = null;
     return ApiResultModel.error("$ex");
   }
 
