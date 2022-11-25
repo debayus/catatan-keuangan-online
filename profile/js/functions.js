@@ -3,7 +3,7 @@
 "use strict";
 
 // *** On ready *** //
-$( document ).on( "ready" , function() {
+$(document).on( "ready" , function() {
 	responsiveClasses();
 	dataCustomOptions();
 	fullscreenSection();
@@ -14,8 +14,6 @@ $( document ).on( "ready" , function() {
 	lightboxGallery();
 	lightboxIframe();
 	scrollToAnchor();
-	bannerParallaxImageBG();
-	sectionParallaxImageBG();
 	sliderClients();
 	sliderBoxesFeatures1();
 	sliderBoxesFeatures2();
@@ -33,7 +31,7 @@ $( window ).on( "load" , function() {
 });
 
 // *** On resize *** //
-$( window ).on( "resize" , function() {
+$(window).on( "resize" , function() {
 	responsiveClasses();
 	fullscreenSection();
 	parallaxStellar();
@@ -292,31 +290,6 @@ function scrollToAnchor() {
         } , 1200 , "easeInOutExpo" );
     });    
 }
-
-
-// *** Banner Parallax Image BG *** //
-function bannerParallaxImageBG() {
-	var bannerParallax = $( ".banner-parallax" ),
-		imgSrc = bannerParallax.children( "img:first-child" ).attr( "src" );
-
-	bannerParallax.prepend( "<div class='bg-element'></div>" );
-	var bgElement = bannerParallax.find( "> .bg-element" );
-	bgElement.css( "background-image", "url('" + imgSrc + "')"  ).attr( "data-stellar-background-ratio" , 0.2 );
-}
-
-
-// *** Section Parallax Image BG *** //
-function sectionParallaxImageBG() {
-	$( ".parallax-section" ).each( function() {
-		var parallaxSection = $( this ),
-			imgSrc = parallaxSection.children( "img:first-child" ).attr( "src" );
-
-		parallaxSection.prepend( "<div class='bg-element'></div>" );
-		var bgElement = parallaxSection.find( "> .bg-element" );
-		bgElement.css( "background-image", "url('" + imgSrc + "')"  ).attr( "data-stellar-background-ratio" , 0.2 );
-	} );
-}
-
 
 // *** Slider Clients *** //
 function sliderClients() {

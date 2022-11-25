@@ -4961,3 +4961,19 @@ html.scroll-lock {
   -moz-user-select: none;
   -webkit-user-select: none;
   user-select: none; }
+
+  .hero img{
+    height: 200px;
+  }
+
+@media (max-width: 992px){
+  .hero{
+    display: block !important;
+    margin-left: auto;
+    margin-right: auto;
+  } 
+
+  .hero img{
+    height: 150px;
+  }
+}
