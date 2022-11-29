@@ -107,6 +107,12 @@ class MahasFormat {
     return int.tryParse(value);
   }
 
+  static TimeOfDay? dynamicToTimeOfDay(dynamic value) {
+    if (value == null) return null;
+    if (value is TimeOfDay) return value;
+    return value;
+  }
+
   static bool? dynamicToBool(dynamic value) {
     if (value == null) return null;
     if (value is int) {

@@ -141,6 +141,7 @@ class AuthController extends GetxController {
 
   Future signOut() async {
     await auth.signOut();
+    HttpApi.clearToken();
   }
 
   Future<void> deleteAccount() async {

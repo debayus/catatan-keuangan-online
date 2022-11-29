@@ -8,6 +8,10 @@ class HttpApi {
   static String? _apiToken;
   static DateTime _apiTokenExpired = DateTime.now();
 
+  static void clearToken() {
+    _apiToken = null;
+  }
+
   static Future<String?> _token() async {
     var now = DateTime.now();
     if (_apiToken == null || _apiTokenExpired.isBefore(now)) {
