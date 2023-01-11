@@ -67,6 +67,7 @@ class RekeningController extends Controller
 
             $model->nama = $request->nama;
             $model->icon = $request->icon;
+            $model->saldo = $request->saldo;
             $model->save();
 
             return response()->json(['id' => $model->id], 200);
