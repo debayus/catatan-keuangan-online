@@ -23,6 +23,12 @@ class PengaturanRekeningSetupView
           required: true,
           editable: controller.formCon.editable,
         ),
+        InputTextComponent(
+          label: 'Saldo',
+          controller: controller.saldoCon,
+          required: true,
+          editable: controller.formCon.editable,
+        ),
         Align(
           alignment: Alignment.topLeft,
           child: Column(
@@ -54,15 +60,6 @@ class PengaturanRekeningSetupView
           ),
         ),
         const Padding(padding: EdgeInsets.all(10)),
-        Visibility(
-          visible: controller.formCon.isState != SetupPageState.update,
-          child: InputTextComponent(
-            label: 'Saldo',
-            controller: controller.saldoCon,
-            required: true,
-            editable: controller.formCon.editable,
-          ),
-        ),
       ],
     );
   }
